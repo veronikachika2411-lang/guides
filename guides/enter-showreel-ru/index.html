@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Монтаж в такт. Кодом.</title>
+<style>
+  :root {
+    --dark: #0E0C0A; --cream: #F5F0E6; --accent: #D97757; --ink: #1A1A1A;
+    --micro: #8A8580; --amber: #FFC266; --paper: #F6F0E4; --line: rgba(26,26,26,.14);
+  }
+  @page { size: 150mm 250mm; margin: 0; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { margin: 0; background: #1b1917; color: var(--ink); font: 500 15.5px/1.6 Manrope, system-ui, sans-serif; }
+  .doc { width: 150mm; margin: 0 auto; background: var(--paper); }
+  section { padding: 15mm 12mm 14mm; break-before: page; position: relative; }
+  .step { break-inside: avoid; }
+  h2, h3, .eyebrow { break-after: avoid; }
+  .pagebreak { break-before: page; padding-top: 15mm; }
+  .mono { font-family: "JetBrains Mono", ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; font-size: 10.5px; font-weight: 700; }
+  .eyebrow { display: flex; justify-content: space-between; color: var(--ink); border-bottom: 2px solid var(--ink); padding-bottom: 8px; margin-bottom: 20px; }
+  .eyebrow b { color: var(--accent); }
+  h1, h2 { font-family: Oswald, Impact, sans-serif; font-weight: 700; text-transform: uppercase; line-height: .98; margin: 0; letter-spacing: -.01em; }
+  h2 { font-size: 46px; margin-bottom: 14px; }
+  h2 i { font-style: normal; color: var(--accent); }
+  h3 { font: 800 17px/1.3 Manrope, sans-serif; margin: 26px 0 8px; display: flex; gap: 10px; align-items: baseline; }
+  h3 .n { font: 800 12px "JetBrains Mono", monospace; color: #fff; background: var(--accent); padding: 3px 7px; border-radius: 4px; flex-shrink: 0; }
+  p { margin: 0 0 12px; }
+  .lead { font-size: 17px; font-weight: 600; line-height: 1.5; }
+  ul, ol { margin: 0 0 12px; padding-left: 20px; }
+  li { margin-bottom: 6px; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  a { color: var(--accent); font-weight: 700; text-decoration: none; }
+  code.i { font: 700 13px "JetBrains Mono", monospace; background: rgba(26,26,26,.08); padding: 1px 6px; border-radius: 4px; white-space: nowrap; }
+
+  /* блок для копирования */
+  .copy { background: var(--dark); border-radius: 14px; margin: 10px 0 16px; overflow: hidden; break-inside: avoid; }
+  .copy.long { break-inside: auto; }
+  .copy .bar { display: flex; justify-content: space-between; align-items: center; padding: 9px 14px; border-bottom: 1px solid rgba(240,232,216,.12); color: var(--micro); }
+  .copy .bar span::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); margin-right: 8px; }
+  .copy button { font: 800 10.5px "JetBrains Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--dark); background: var(--cream); border: 0; border-radius: 20px; padding: 6px 12px; cursor: pointer; }
+  .copy button.ok { background: var(--accent); color: #fff; }
+  .copy pre { margin: 0; padding: 14px; color: var(--cream); font: 500 12.5px/1.6 "JetBrains Mono", monospace; white-space: pre-wrap; word-break: break-word; }
+  .copy.prompt pre { font-size: 12px; }
+
+  .os { display: grid; grid-template-columns: 1fr; gap: 0; }
+  .tag { display: inline-block; font: 800 10.5px "JetBrains Mono", monospace; letter-spacing: .08em; text-transform: uppercase; padding: 4px 9px; border-radius: 4px; margin: 6px 0 2px; }
+  .tag.win { background: var(--ink); color: var(--cream); }
+  .tag.mac { background: var(--cream); color: var(--ink); border: 1.5px solid var(--ink); }
+  .note { border-left: 4px solid var(--accent); background: rgba(232,72,42,.09); padding: 12px 14px; border-radius: 0 10px 10px 0; margin: 12px 0 16px; font-size: 14.5px; break-inside: avoid; }
+  .note b { color: var(--accent); }
+  .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 14px 0; }
+  .card { background: #fff; border: 1.5px solid var(--line); border-radius: 12px; padding: 10px 10px; break-inside: avoid; }
+  .card .big { font: 700 30px/1 Oswald, sans-serif; color: var(--accent); }
+  .card .mono { color: var(--micro); display: block; margin-top: 6px; font-size: 8.5px; line-height: 1.4; }
+  .flowline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 16px 0; }
+  .flowline div { background: var(--dark); color: var(--cream); border-radius: 10px; padding: 10px 8px; font-size: 12.5px; line-height: 1.35; font-weight: 600; }
+  .flowline div b { display: block; font: 800 10px "JetBrains Mono", monospace; color: var(--accent); letter-spacing: .08em; margin-bottom: 4px; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0 16px; font-size: 14px; }
+  th { text-align: left; font: 800 10.5px "JetBrains Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--micro); padding: 6px 8px; border-bottom: 2px solid var(--ink); }
+  td { padding: 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  td.num { font: 700 20px Oswald, sans-serif; color: var(--accent); white-space: nowrap; }
+  .check li { list-style: none; position: relative; padding-left: 4px; }
+  .check { padding-left: 22px; }
+  .check li::before { content: ""; position: absolute; left: -22px; top: 4px; width: 13px; height: 13px; border: 2px solid var(--ink); border-radius: 3px; }
+
+  /* обложка */
+  .cover { background: var(--dark); color: var(--cream); min-height: 250mm; padding: 14mm 12mm; display: flex; flex-direction: column; break-before: auto; }
+  .cover .eyebrow { color: var(--micro); border-color: rgba(240,232,216,.22); }
+  .cover h1 { font-size: 92px; margin-top: 8mm; }
+  .cover h1 i { font-style: normal; color: var(--accent); }
+  .cover .sub { font-size: 17px; font-weight: 600; line-height: 1.45; max-width: 105mm; margin-top: 7mm; color: var(--cream); }
+  .frames { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: auto; }
+  .frames img { width: 100%; display: block; border-radius: 6px; }
+  .cover .foot { display: flex; justify-content: space-between; color: var(--micro); margin-top: 7mm; }
+  .cover .foot b { color: var(--cream); }
+  .end { background: var(--accent); color: var(--ink); border-radius: 16px; padding: 9mm 8mm 7mm; margin-top: 10mm; }
+  .end h2 { font-size: 54px; break-after: auto; }
+  .end .eyebrow { break-after: auto; }
+  .end .eyebrow { border-color: var(--ink); }
+  .end .eyebrow b { color: var(--ink); }
+  .end a { color: var(--ink); text-decoration: underline; }
+
+  @media screen {
+    .doc { margin: 24px auto; border-radius: 18px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.5); }
+    @media (max-width: 620px) { .doc { width: 100%; margin: 0; border-radius: 0; } .cover h1 { font-size: 21vw; } }
+  }
+  @media print { .copy button { display: none; } body { background: var(--paper); } }
+</style>
+<link href="../../fonts/fonts.css" rel="stylesheet"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%2309090B'/%3E%3Ctext x='30' y='46' font-family='Impact,sans-serif' font-size='40' text-anchor='middle' fill='%23F1E8D6'%3EV%3C/text%3E%3Ccircle cx='48' cy='44' r='6' fill='%23FF4A17'/%3E%3C/svg%3E">
+<style>
+  @media screen {
+    body { padding-top: 56px; }
+    .sitebar { position: fixed; top: 0; left: 0; right: 0; z-index: 50; height: 56px; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #09090B; border-bottom: 1px solid rgba(241,232,214,.16); font-family: Manrope, system-ui, sans-serif; }
+    .sitebar a { color: #F1E8D6; font-weight: 800; font-size: 14px; text-decoration: none; white-space: nowrap; }
+    .sitebar .back { font-family: "JetBrains Mono", monospace; font-weight: 700; }
+    .sitebar .back i { font-style: normal; color: #FF4A17; }
+    .sitebar .right { display: flex; gap: 8px; }
+    .sitebar .pill { display: inline-flex; align-items: center; height: 36px; padding: 0 14px; border-radius: 18px; border: 1.5px solid #F1E8D6; }
+    .sitebar .pill.fill { background: #FF4A17; border-color: #FF4A17; color: #09090B; }
+    .cover { min-height: min(250mm, calc(100vh - 56px)); }
+  }
+  @media screen and (max-width: 620px) {
+    section, .cover { padding: 28px 20px 32px; }
+    .cover h1 { font-size: 17vw; margin-top: 20px; }
+    h2 { font-size: 38px; }
+    .end h2 { font-size: 31px; }
+    .cards, .flowline { grid-template-columns: repeat(2, 1fr); }
+    table code.i, li code.i, p code.i { white-space: normal; word-break: break-word; }
+    table { font-size: 13.5px; }
+  }
+  @media print { .sitebar { display: none; } }
+</style>
+</head>
+<body>
+<div class="sitebar"><a class="back" href="../../ru/">← veroniixx<i>.ai</i></a><div class="right"><a class="pill" href="../../pdf/enter-showreel-guide-ru.pdf" target="_blank" rel="noopener">PDF</a><a class="pill fill" href="https://t.me/veronixai">Telegram</a></div></div>
+<div class="doc">
+
+<section class="cover">
+  <div class="mono eyebrow"><span>Гайд · 2026</span><span>@veroniixx.ai</span></div>
+  <h1>Монтаж<br>в такт.<br><i>Кодом.</i></h1>
+  <p class="sub">Как я собрала 18-секундный шоурил под музыкальный трек в Claude Code: стрелка пролетает сквозь слова, окно разлетается на дропе, камера гонится за ней. От установки до готового mp4. Windows и Mac.</p>
+  <div class="frames"><img src="img/f1.jpg" alt=""><img src="img/f2.jpg" alt=""><img src="img/f3.jpg" alt=""><img src="img/f4.jpg" alt=""><img src="img/f5.jpg" alt=""></div>
+  <div class="mono foot"><span>18 секунд · 540 кадров · 82 BPM</span><span>@veroniixx.ai</span></div>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>00</b> · Внутри</span><span>2 минуты чтения</span></div>
+  <h2>Что ты <i>получишь</i></h2>
+  <p class="lead">Вертикальный ролик 1080×1920, где каждое движение попадает в удар твоего трека. Ты описываешь словами, что хочешь. Claude пишет код, измеряет музыку, рендерит кадры и собирает файл.</p>
+  <div class="cards">
+    <div class="card"><div class="big">1</div><span class="mono">герой на весь ролик</span></div>
+    <div class="card"><div class="big">0</div><span class="mono">монтажных программ</span></div>
+    <div class="card"><div class="big">29</div><span class="mono">ударов, в которые попадает картинка</span></div>
+    <div class="card"><div class="big">5</div><span class="mono">версий до финала</span></div>
+  </div>
+  <h3>Что нужно</h3>
+  <ul>
+    <li>Компьютер с Windows 10/11 или macOS. Я рендерила на ноутбуке со встроенной графикой и 3 ГБ памяти: работает, просто медленно.</li>
+    <li>Тариф Claude, в который входит Claude Code.</li>
+    <li>Музыкальный трек, который тебе можно использовать. Про музыку есть заметка ниже.</li>
+  </ul>
+  <div class="note"><b>Честно про «никто не монтировал».</b> Я не открывала монтажную программу и не двигала руками ни одного кадра. Но это не один промпт: был бриф и пять раундов замечаний обычными словами. Первая версия была совсем не похожа на финал, и это нормально.</div>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>01</b> · Метод</span><span>Главная часть</span></div>
+  <h2>Три правила, которые <i>сработали</i></h2>
+  <div class="flowline">
+    <div><b>01 · Измерь музыку</b>Ничего не ставь на слух. Пусть Claude найдёт каждый удар баса и хлопок и запишет номера кадров в файл</div>
+    <div><b>02 · Один герой</b>Один объект вызывает каждый переход. Здесь это стрелка с кнопки отправки</div>
+    <div><b>03 · Каждое слово отвечает</b>Стрелка бьёт в слово, и слово что-то делает: крутится, падает, зачёркивается</div>
+  </div>
+  <h3>Зачем измерять удары</h3>
+  <p>Модель не слышит твой трек. Если сказать «поставь взрыв на дроп», она будет угадывать. Попроси её измерить звук: громкие всплески в нижней полосе это удары баса, резкие всплески в верхней это хлопки, участок тише −60 дБ это тишина. В моём треке тишина длилась 0,75 секунды, а дроп возвращался на кадре 189. Всё остальное держится на таких числах.</p>
+  <h3>Зачем один герой</h3>
+  <p>Склейка без причины выглядит как ошибка. Склейка, которую вызвало что-то в кадре, выглядит как фокус. Стрелка печатает промпт, становится кнопкой, её нажимают, она разбивает окно, летит сквозь слова и в конце возвращается на кнопку.</p>
+  <h3>В середине меньше значит лучше</h3>
+  <p>В моей четвёртой версии были шлейфы, летающие осколки, лишние предметы вокруг каждого слова. Получился перебор. Помогло убирать, пока не остались только стрелка и слово.</p>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>02</b> · Установка</span><span>15–20 минут</span></div>
+  <h2>Ставим <i>инструменты</i></h2>
+  <div class="step"><h3><span class="n">1</span>Открой терминал</h3>
+  <p><span class="tag win">Windows</span> Нажми Win, набери <code class="i">PowerShell</code>, открой.<br><span class="tag mac">Mac</span> Нажми Cmd + Пробел, набери <code class="i">Terminal</code>, открой.</p></div>
+  <div class="step"><h3><span class="n">2</span>Node.js, Git, Python и ffmpeg</h3>
+  <p><span class="tag win">Windows</span> Вставляй по одной строке. На вопросы отвечай <code class="i">Y</code>.</p>
+  <div class="copy"><div class="bar mono"><span>PowerShell</span><button>Копировать</button></div><pre>winget install -e --id OpenJS.NodeJS.LTS
+winget install -e --id Git.Git
+winget install -e --id Python.Python.3.13
+winget install -e --id Gyan.FFmpeg</pre></div>
+  <p><span class="tag mac">Mac</span> Сначала Homebrew, он спросит пароль от компьютера. В конце он напечатает две строки под «Next steps»: выполни их, потом вторую команду.</p>
+  <div class="copy"><div class="bar mono"><span>Terminal · шаг 1</span><button>Копировать</button></div><pre>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</pre></div>
+  <div class="copy"><div class="bar mono"><span>Terminal · шаг 2</span><button>Копировать</button></div><pre>brew install node git python ffmpeg</pre></div>
+  <div class="note"><b>Важно.</b> После установки закрой терминал и открой заново, иначе он не увидит новые программы.</div></div>
+  <div class="step"><h3><span class="n">3</span>Claude Code</h3>
+  <div class="copy"><div class="bar mono"><span>Терминал</span><button>Копировать</button></div><pre>npm install -g @anthropic-ai/claude-code</pre></div>
+  <p>Удобнее приложение, чем терминал? Поставь Claude с <a href="https://claude.ai/download">claude.ai/download</a>, в нём есть вкладка Code, которая делает то же самое.</p></div>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>03</b> · Проект</span><span>10 минут</span></div>
+  <h2>Папка и <i>первые</i> промпты</h2>
+  <div class="step"><h3><span class="n">1</span>Создай папку и запусти Claude</h3>
+  <div class="copy"><div class="bar mono"><span>Терминал</span><button>Копировать</button></div><pre>mkdir showreel
+cd showreel
+claude</pre></div></div>
+  <div class="step"><h3><span class="n">2</span>Подготовка</h3>
+  <div class="copy prompt"><div class="bar mono"><span>Промпт · подготовка</span><button>Копировать</button></div><pre>Подготовь в этой папке проект для моушн-графики.
+
+1. Установи Remotion (React 18 + TypeScript).
+2. Проверь, что в Python есть numpy и scipy. Чего не хватает, установи.
+3. Проверь, что ffmpeg запускается из терминала.
+4. Собери тестовую композицию 1080x1920, 30 кадров в секунду: одна карточка с 3D-поворотом и одна строка текста. Отрендери один кадр в PNG и покажи путь к файлу.
+
+Если чего-то не хватает, установи сам и скажи, что установил. Если что-то падает, не останавливайся: найди причину и почини.</pre></div></div>
+  <div class="step"><h3><span class="n">3</span>Измерь свой трек</h3>
+  <p>Положи mp3 в папку и отправь это. То, что в квадратных скобках, замени на своё.</p>
+  <div class="copy prompt"><div class="bar mono"><span>Промпт · удары</span><button>Копировать</button></div><pre>Я положила музыкальный трек сюда: [путь/к/треку.mp3]. Хочу ролик, смонтированный под него: с [6]-й секунды трека, длиной [18] секунд.
+
+Прежде чем что-то придумывать, измерь трек в Python (numpy + scipy, декодируй через ffmpeg):
+1. Темп в BPM и длину одной доли в кадрах при 30 кадрах в секунду.
+2. Каждый удар баса: полосовой фильтр 35-140 Гц, найди начала ударов, дай номера кадров.
+3. Каждый хлопок или малый барабан: полосовой фильтр 2500-9000 Гц, то же самое.
+4. Любую тишину длиннее 0,3 секунды и точный кадр, на котором звук возвращается.
+5. Громкость нижней полосы по кадрам, чтобы картинка могла пульсировать вместе с басом.
+
+Сохрани всё в beats.json и выведи короткую таблицу. Ни один тайминг не угадывай на слух: каждое событие в ролике будет стоять на этих номерах кадров.</pre></div></div>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>04</b> · Бриф</span><span>Копируй целиком</span></div>
+  <h2>Бриф <i>ролика</i></h2>
+  <p>То, что в квадратных скобках, замени на свои слова, цвета и ник. Остальное можно оставить. Слова в кадре у меня английские, свои пиши на любом языке.</p>
+  <div class="copy prompt"><div class="bar mono"><span>Промпт · бриф шоурила</span><button>Копировать</button></div><pre>Собери шоурил, смонтированный под мой трек. 18 секунд, 540 кадров, 30 кадров в секунду, 1080x1920, H.264 CRF 18, yuv420p. Весь текст в кадре на [английском]. Для каждого события бери номера кадров из beats.json.
+
+ИДЕЯ
+Я печатаю промпт в [Claude Code], нажимаю «отправить», и промпт превращается в фильм.
+
+ОДИН ГЕРОЙ
+Стрелка с кнопки отправки. Она есть в каждой части и вызывает каждый переход.
+
+ЧАСТИ
+1. ВНУТРИ ПРОМПТА (от начала до последнего удара баса перед тишиной). Камера внутри поля ввода, сверхкрупный план, наклон в 3D. На каждый удар баса стрелка пролетает сквозь следующее слово фразы "[Make me a showreel you can't stop watching]".
+2. РАСКРЫТИЕ (тишина в треке). Камера отъезжает до конца: всё это время это было окно [Claude Code]. Стрелка встаёт на место кнопки отправки. Курсор мыши подлетает по дуге и нажимает её на последнем кадре тишины.
+3. РАЗЛОМ (дроп). Окно разлетается примерно на 70 треугольных осколков, они летят от кнопки в 3D, кнопка ломается на клинья, искры, одна ударная волна. Стрелка вылетает из неё.
+4. ПОГОНЯ (от дропа до последнего хлопка второго такта). Тёмное тёплое пространство. Стрелка летит по траектории и на каждый хлопок пробивает одно огромное слово: [THIS / REEL / WAS / NEVER / EDITED / NO CAMERA / NO TIMELINE / NO KEYFRAMES / JUST / CODE]. Слова стоят под разными углами, некоторые вертикально. Камера гонится за стрелкой и поворачивается под каждое слово. Каждое слово отвечает на удар своим движением: одно крутится, одно опрокидывается, одно зачёркивается красным, одно режется на полосы, одно переворачивается, одно падает плашмя, одно подпрыгивает, последнее перебирает символы кода и собирается. Свет по пути теплеет от глиняного к золотому. Один яркий кадр на каждый хлопок.
+5. КАРУСЕЛЬ (третий такт). Слово [CODE] стоит на месте. Вокруг него в настоящей 3D-глубине летают карточки, проходя перед ним и за ним. Фон меняется четыре раза в секунду.
+6. ОТВЕТ (до конца). Осколки летят обратно и собирают окно: взрыв, проигранный задом наперёд. Ассистент отвечает "[Done.]".
+
+ПРАВИЛА ДЛЯ ТЕКСТА
+На тексте никакого размытия и тряски. Слово должно быть целым и читаемым хотя бы треть секунды. Ни одна буква не обрезается краем кадра: длинные слова уменьшай. Единственный мелкий текст это "[@мой_ник]" сверху.
+
+ВИД
+Тёмный тёплый фон, кремовый шрифт, один акцентный цвет [#D97757]. Свет, свечение и градиенты вместо плоских заливок. Поверх всего плёночное зерно и мягкая виньетка.
+
+РЕЗКОСТЬ
+Текст, на который наезжает камера, рисуй в пять раз крупнее и уменьшай масштабом. Иначе браузер растягивает маленькую картинку, и буквы выходят зубчатыми.
+
+ПОРЯДОК РАБОТЫ
+1. Создай файлы. Проверка типов должна проходить.
+2. Отрендери около 50 ключевых кадров в один контактный лист и посмотри на него сам.
+3. Сам проверь каждую часть и каждый стык: обрезанные буквы, текст за кадром, чёрные кадры, нечитаемые слова. Исправь и отрендери заново.
+4. Отрендери финальный mp4 с треком и копию без звука.
+5. Проверь готовый файл: длительность, число кадров, и вырежи два крупных кадра в полный размер, чтобы проверить резкость.
+6. Напиши мне одним сообщением: путь к файлу, размер, что ты проверил и что проверить не смог.
+
+Не останавливайся, пока не будет готового mp4.</pre></div>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>05</b> · Замечания</span><span>Обычными словами</span></div>
+  <h2>Как доводить <i>замечаниями</i></h2>
+  <p>Первый рендер никогда не бывает финальным. Посмотри его и скажи, что не так. Это близко к тому, что отправляла я:</p>
+  <div class="copy prompt"><div class="bar mono"><span>Начало скучное</span><button>Копировать</button></div><pre>Первая часть не динамичная, не в такт и тянется. Пусть стрелка пролетает сквозь слова как пульс, а камера идёт за ней.</pre></div>
+  <div class="copy prompt"><div class="bar mono"><span>Взрыв слабый</span><button>Копировать</button></div><pre>Разлом на клике недостаточно эпичный, и не видно, как ломается кнопка. Разбей всё окно на куски от кнопки.</pre></div>
+  <div class="copy prompt"><div class="bar mono"><span>Выглядит дёшево</span><button>Копировать</button></div><pre>Плоский жёлтый выглядит дёшево. Сохрани вид первой части: тёмный, тёплый, свет и свечение вместо заливок.</pre></div>
+  <div class="copy prompt"><div class="bar mono"><span>Чего-то не хватает</span><button>Копировать</button></div><pre>Середине нужна идея, а не ещё эффекты. Пусть каждое слово отвечает на удар по-своему.</pre></div>
+  <div class="copy prompt"><div class="bar mono"><span>Теперь перебор</span><button>Копировать</button></div><pre>Слишком много всего сразу. Убери шлейф и летающие фигуры. Только стрелка и слова, которые крутятся или падают. Вспышки оставь.</pre></div>
+  <div class="copy prompt"><div class="bar mono"><span>Не могу прочитать слово</span><button>Копировать</button></div><pre>Некоторые слова не читаются: они быстрые и разрезаны пополам. Каждое слово должно быть целым хотя бы треть секунды.</pre></div>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>06</b> · Честно</span><span>Что учесть</span></div>
+  <h2>Что у меня <i>ломалось</i></h2>
+  <ul>
+    <li><b>Мутные крупные планы.</b> Когда камера наезжала на мелкий текст, буквы выходили зубчатыми: браузер растягивал маленькую картинку. Решение есть в брифе: рисовать такой текст в пять раз крупнее и уменьшать.</li>
+    <li><b>Тёмная полоса через каждое слово.</b> Две половины разрезанного слова не сходились на 30 пикселей. Это пережило четыре версии, потому что выглядело как задумка. Вырежи кадр в полный размер и посмотри.</li>
+    <li><b>Чёрные кадры в сценах с шейдерами.</b> На встроенной графике тяжёлые шейдеры не успевали, и рендер терял 3D. Помог рендер этих сцен в половинном разрешении.</li>
+    <li><b>Claude не слышит звук и не видит движение.</b> Он проверяет отдельные кадры и числа. Как ролик ощущается под музыку, оцениваешь ты, так что будет несколько раундов.</li>
+    <li><b>Медленный рендер.</b> Десять-пятнадцать минут на 18 секунд на слабом ноутбуке.</li>
+  </ul>
+  <h3>Про музыку</h3>
+  <p>Если твой трек это коммерческая песня, не вшивай его в файл, который публикуешь. Площадка может отключить звук или урезать охват. Собери ролик под трек, выгрузи копию без звука и добавь тот же трек из музыкальной библиотеки самой площадки с той же секунды. Если трек твой или с лицензией, вшивай.</p>
+  <div class="mono eyebrow" style="margin-top:34px"><span><b>07</b> · Вопросы</span><span>Коротко</span></div>
+  <h2>Частые <i>вопросы</i></h2>
+  <div class="step"><h3>У меня получится такой же ролик?</h3>
+  <p>Похожий по структуре, но не кадр в кадр: Claude каждый раз пишет код с нуля. Поменяй слова, цвета и трек, чтобы ролик стал твоим.</p></div>
+  <div class="step"><h3>В терминале красная ошибка. Что делать?</h3>
+  <p>Скопируй её и вставь Claude со словами «вот ошибка, исправь и продолжай».</p></div>
+  <div class="step"><h3>Нужны ли 3D-карусель и шейдеры?</h3>
+  <p>Нет. Убери из брифа часть 5 и переходи от погони сразу к ответу. Первые две трети это обычная веб-вёрстка в 3D, она рендерится на чём угодно.</p></div>
+  <div class="end">
+    <div class="mono eyebrow"><span><b>08</b> · Дальше</span><span>@veroniixx.ai</span></div>
+    <h2>Получился свой? Покажи</h2>
+    <p class="lead">Отметь <a href="https://instagram.com/veroniixx.ai">@veroniixx.ai</a>, покажу в сторис.</p>
+  </div>
+</section>
+
+</div>
+<script>
+  document.querySelectorAll('.copy button').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = btn.closest('.copy').querySelector('pre').innerText;
+      var done = function () {
+        btn.textContent = 'Скопировано';
+        btn.classList.add('ok');
+        setTimeout(function () { btn.textContent = 'Копировать'; btn.classList.remove('ok'); }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () {});
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch (e) {}
+        document.body.removeChild(ta);
+      }
+    });
+  });
+</script>
+</body>
+</html>
