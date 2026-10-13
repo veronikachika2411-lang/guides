@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy · veroniixx.ai</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#09090B">
+<link href="../fonts/fonts.css" rel="stylesheet"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%2309090B'/%3E%3Ctext x='30' y='46' font-family='Impact,sans-serif' font-size='40' text-anchor='middle' fill='%23F1E8D6'%3EV%3C/text%3E%3Ccircle cx='48' cy='44' r='6' fill='%23FF4A17'/%3E%3C/svg%3E">
+<style>
+:root{--black:#09090B;--cream:#F1E8D6;--ink:#17130F;--orange:#FF4A17;--muted:#A39B8C;--soft:#D9D0BE;--card:#1A1715;--line:rgba(241,232,214,.16)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--black);color:var(--cream);font-family:Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 32px}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:14px}
+header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:28px 0;border-bottom:1px solid var(--line)}
+.logo{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:18px;letter-spacing:.04em}
+.logo span{color:var(--orange)}
+nav{display:flex;flex-wrap:wrap;gap:28px;font-weight:700;font-size:16px}
+nav a{padding:12px 0;transition:color .15s}
+nav a:hover{color:var(--orange)}
+.tg-pill{display:none;align-items:center;min-height:44px;padding:0 18px;border-radius:22px;border:1.5px solid var(--cream);font-weight:800;font-size:14px}
+.hero{padding:88px 0 72px;display:flex;flex-wrap:wrap;gap:48px;align-items:flex-end}
+.hero-l{flex:999 1 520px;min-width:0}
+.hero-l .mono{color:var(--muted)}
+h1{margin:18px 0 0;font-family:Oswald,Impact,sans-serif;font-weight:700;font-size:clamp(58px,11vw,148px);line-height:.94;text-transform:uppercase;letter-spacing:-.01em}
+h1 span{color:var(--orange)}
+.hero-r{flex:1 1 300px;min-width:0;font-size:19px;line-height:1.5;font-weight:600;color:var(--soft)}
+.hero-r p{margin:0 0 22px}
+.btn{display:inline-flex;align-items:center;min-height:48px;padding:0 22px;border-radius:24px;font-weight:800;transition:transform .15s,background .15s,color .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.cta{min-height:52px;padding:0 28px;border-radius:26px;background:var(--orange);color:var(--black);font-size:17px}
+section{padding-bottom:88px}
+.shead{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--cream);padding-bottom:12px;margin-bottom:28px}
+.shead h2{margin:0}
+.shead h2 b{color:var(--orange)}
+.shead span{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.guide{border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:14px;min-height:300px}
+.guide.cream{background:var(--cream);color:var(--ink)}
+.guide.orange{background:var(--orange);color:var(--ink)}
+.guide.dark{background:var(--card);color:var(--cream);border:1px solid rgba(241,232,214,.18)}
+.tags{display:flex;gap:8px;flex-wrap:wrap}
+.tag{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:6px;background:var(--ink);color:var(--cream)}
+.tag.line{background:none;color:inherit;border:1.5px solid currentColor;padding:4px 10px}
+.dark .tag{background:var(--cream);color:var(--ink)}
+.dark .tag.line{background:none;color:var(--cream)}
+.guide h3{margin:0;font-family:Oswald,sans-serif;font-weight:700;font-size:44px;line-height:1;text-transform:uppercase}
+.guide p{margin:0;font-size:17px;line-height:1.45;font-weight:600}
+.cream p{color:#4A4238}.orange p{font-weight:700}.dark p{color:var(--soft)}
+.actions{margin-top:auto;display:flex;gap:10px;flex-wrap:wrap}
+.actions .btn{background:var(--ink);color:var(--cream)}
+.actions .btn.ghost{background:none;color:inherit;border:2px solid currentColor}
+.actions .soon{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:var(--muted);padding:14px 0}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.step{display:flex;flex-direction:column;gap:10px}
+.step .n{font-family:Oswald,sans-serif;font-weight:700;font-size:72px;line-height:1;color:var(--orange)}
+.step .t{font-weight:800;font-size:22px}
+.step .d{font-size:17px;line-height:1.5;color:var(--soft)}
+.banner{margin-bottom:72px;padding:44px 40px;background:var(--orange);color:var(--ink);border-radius:28px;display:flex;flex-wrap:wrap;gap:28px;align-items:center;justify-content:space-between}
+.banner div{flex:999 1 420px;min-width:0}
+.banner h2{margin:0;font-family:Oswald,sans-serif;font-weight:700;font-size:clamp(38px,6vw,68px);line-height:.98;text-transform:uppercase}
+.banner p{margin:14px 0 0;font-size:18px;line-height:1.5;font-weight:700}
+.banner .btn{min-height:56px;padding:0 30px;border-radius:28px;background:var(--ink);color:var(--cream);font-size:18px}
+footer{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;padding:28px 0 44px;border-top:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--muted)}
+@media (max-width:640px){
+  .wrap{padding:0 20px}
+  header{padding:20px 0;border-bottom:0}
+  .logo{font-size:16px}
+  nav{display:none}
+  .tg-pill{display:inline-flex}
+  .hero{padding:16px 0 44px;gap:18px}
+  .hero-l .mono,.shead .mono{font-size:12px}
+  h1{font-size:clamp(46px,16vw,66px);margin-top:12px}
+  .hero-r{font-size:16px;line-height:1.45}
+  section{padding-bottom:56px}
+  .grid{grid-template-columns:1fr;gap:14px}
+  .guide{border-radius:22px;padding:22px;min-height:0;gap:12px}
+  .guide h3{font-size:36px}
+  .guide p{font-size:15px;line-height:1.4}
+  .tag{font-size:11px}
+  .banner{padding:28px 22px;border-radius:22px;margin-bottom:48px}
+  footer{font-size:12px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}.btn:hover{transform:none}}
+
+.doc{max-width:760px;padding:56px 0 72px}
+.doc h1{font-size:clamp(46px,8vw,88px)}
+.doc h2{margin:40px 0 0;font-family:Oswald,sans-serif;font-weight:700;font-size:30px;text-transform:uppercase}
+.doc p,.doc li{font-size:18px;line-height:1.6;color:var(--soft);font-weight:500}
+.doc p{margin:14px 0 0}
+.doc ul{margin:14px 0 0;padding-left:22px}
+.doc a{color:var(--orange);text-decoration:underline}
+.doc .mono{color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<a class="logo" href="../">veroniixx<span>.ai</span></a>
+<nav><a href="../#work">Work</a><a href="../#guides">Guides</a><a href="../#hire">Hire me</a></nav>
+<a class="tg-pill" href="../">Home</a>
+</header>
+<div class="doc">
+<div class="mono">last updated: October 14, 2026</div>
+<h1>Privacy</h1>
+<p>This is a personal site run by Veronika, the author of the Instagram account <a href="https://instagram.com/veroniixx.ai">@veroniixx.ai</a>. The short version: the site does not track you.</p>
+<h2>What this site collects</h2>
+<ul>
+<li>No cookies.</li>
+<li>No analytics, ad pixels or tracking scripts.</li>
+<li>No accounts and no forms. The site does not ask for your name or email.</li>
+<li>Fonts, videos and PDF files are served from this site, not from third parties.</li>
+</ul>
+<h2>Hosting</h2>
+<p>The site is hosted on GitHub Pages. Like any web host, GitHub receives your IP address and basic technical data when your browser loads a page, and may keep it in server logs for security. I do not have access to those logs. See the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">GitHub privacy statement</a>.</p>
+<h2>Links to other services</h2>
+<p>Buttons that lead to Instagram, Telegram or other sites open those services, and their own privacy policies apply from there. If you message me, I use what you send only to reply to you.</p>
+<h2>Changes</h2>
+<p>If the site starts collecting anything, for example an email address for a newsletter, this page will say so before it happens.</p>
+<h2>Contact</h2>
+<p>Questions about this page: message <a href="https://ig.me/m/veroniixx.ai" rel="noopener">@veroniixx.ai on Instagram</a>.</p>
+</div>
+<footer><span>veroniixx.ai · 2026</span><span><a href="../">Home</a></span></footer>
+</div>
+</body>
+</html>
