@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>veroniixx.ai · гайды, которые можно повторить</title>
-<meta name="description" content="Дневник вайб-кодера: ролики, боты и агенты, собранные кодом в Claude Code. Гайды по шагам для Windows и Mac.">
-<meta property="og:title" content="Гайды, которые можно повторить">
-<meta property="og:description" content="Ролики, боты и агенты, собранные кодом в Claude Code. По шагам, с командами для копирования.">
+<title>veroniixx.ai · гайды из моих роликов</title>
+<meta name="description" content="Гайды по шагам из моих роликов: видео, боты и агенты, собранные текстом в Claude Code.">
+<meta property="og:title" content="veroniixx.ai · гайды из моих роликов">
+<meta property="og:description" content="Гайды по шагам из моих роликов: видео, боты и агенты, собранные текстом в Claude Code.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#09090B">
 <link href="../fonts/fonts.css" rel="stylesheet"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%2309090B'/%3E%3Ctext x='30' y='46' font-family='Impact,sans-serif' font-size='40' text-anchor='middle' fill='%23F1E8D6'%3EV%3C/text%3E%3Ccircle cx='48' cy='44' r='6' fill='%23FF4A17'/%3E%3C/svg%3E">
@@ -88,46 +88,101 @@ footer{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;paddin
   footer{font-size:12px}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}.btn:hover{transform:none}}
+
+.top{padding:48px 0 36px}
+.top h1{margin:0;font-size:clamp(44px,8vw,96px)}
+.top p{margin:18px 0 0;max-width:640px;font-size:20px;line-height:1.5;font-weight:600;color:var(--soft)}
+h2.big{margin:0 0 20px;font-family:Oswald,sans-serif;font-weight:700;font-size:clamp(34px,5vw,52px);line-height:1;text-transform:uppercase}
+.glist{display:flex;flex-direction:column;gap:16px}
+.g{display:flex;gap:24px;padding:20px;border-radius:24px;background:var(--cream);color:var(--ink)}
+.g.off{background:var(--card);color:var(--cream);border:1px solid rgba(241,232,214,.18)}
+.g img{flex:0 0 140px;width:140px;aspect-ratio:9/16;object-fit:cover;border-radius:14px;display:block;background:#000}
+.g .b{flex:1;min-width:0;display:flex;flex-direction:column;gap:10px;justify-content:center}
+.g .from{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#6B6257}
+.g.off .from{color:var(--muted)}
+.g .from b{color:var(--orange)}
+.g h3{margin:0;font-family:Oswald,sans-serif;font-weight:700;font-size:clamp(30px,4vw,44px);line-height:1;text-transform:uppercase}
+.g p{margin:0;font-size:17px;line-height:1.45;font-weight:600;color:#4A4238;max-width:640px}
+.g.off p{color:var(--soft)}
+.g .actions{margin-top:6px;display:flex;gap:10px;flex-wrap:wrap}
+.g .actions .btn{background:var(--orange);color:var(--ink);font-size:17px;min-height:52px;padding:0 26px;border-radius:26px}
+.g .actions .btn.ghost{background:none;color:var(--ink);border:2px solid var(--ink)}
+.g .soon{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:var(--orange)}
+.me{display:flex;gap:28px;align-items:center;flex-wrap:wrap}
+.me img{flex:0 0 200px;width:200px;height:200px;border-radius:50%;object-fit:cover;display:block}
+.me .b{flex:1 1 320px;min-width:0}
+.me p{margin:0 0 16px;font-size:19px;line-height:1.55;font-weight:600;color:var(--soft);max-width:640px}
+.me .btns{display:flex;gap:10px;flex-wrap:wrap}
+.btn.line{border:2px solid var(--cream)}
+.btn.fill{background:var(--cream);color:var(--ink)}
+.vids{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;align-items:start}
+.vid video{width:100%;border-radius:16px;background:#000;display:block}
+.vid.v video{aspect-ratio:9/16}
+.vid.h video{aspect-ratio:16/9}
+.vid.h{grid-column:span 2}
+.vid h3{margin:12px 0 0;font-weight:800;font-size:20px}
+.vid p{margin:6px 0 0;font-size:16px;line-height:1.45;color:var(--soft)}
+.hire{margin-bottom:72px;padding:36px;background:var(--cream);color:var(--ink);border-radius:28px}
+.hire h2{margin:0;font-family:Oswald,sans-serif;font-weight:700;font-size:clamp(32px,5vw,52px);line-height:1;text-transform:uppercase}
+.hire p{margin:14px 0 20px;max-width:640px;font-size:18px;line-height:1.5;font-weight:600;color:#4A4238}
+.hire .btns{display:flex;gap:10px;flex-wrap:wrap}
+.hire .btn{min-height:52px;padding:0 26px;border-radius:26px;background:var(--ink);color:var(--cream);font-size:17px}
+.hire .btn.ghost{background:none;color:var(--ink);border:2px solid var(--ink)}
+.signup form{display:flex;gap:10px;flex-wrap:wrap}
+.signup input{min-height:56px;padding:0 20px;border-radius:28px;border:2px solid var(--ink);background:var(--cream);color:var(--ink);font:700 17px Manrope,sans-serif;min-width:240px}
+.signup button{cursor:pointer;border:0;font-family:inherit}
+@media (max-width:640px){
+  .top{padding:20px 0 28px}
+  .top p{font-size:17px}
+  .g{gap:14px;padding:14px;border-radius:20px}
+  .g img{flex-basis:96px;width:96px;align-self:flex-start}
+  .g p{font-size:15px}
+  .g .actions .btn{min-height:48px;padding:0 20px;font-size:16px}
+  .me img{flex-basis:120px;width:120px;height:120px}
+  .me p{font-size:17px}
+  .vids{grid-template-columns:1fr 1fr;gap:14px}
+  .vid h3{font-size:17px}
+  .vid p{font-size:14px}
+  .hire{padding:24px 20px;border-radius:22px;margin-bottom:48px}
+  .hire p{font-size:16px}
+}
 </style>
 </head>
 <body>
 <div class="wrap" id="top">
 <header>
 <a class="logo" href="#top">veroniixx<span>.ai</span></a>
-<nav><a href="../">English</a><a href="#guides">Гайды</a><a href="#start">С чего начать</a><a href="https://t.me/veronixai">Telegram</a><a href="https://instagram.com/veroniixx.ai">Instagram</a></nav>
-<a class="tg-pill" href="https://t.me/veronixai">Telegram</a>
+<nav><a href="#guides">Гайды</a><a href="#me">Обо мне</a><a href="../">EN</a></nav>
+<a class="tg-pill" href="../">EN</a>
 </header>
 
-<div class="hero">
-<div class="hero-l"><div class="mono">дневник вайб-кодера</div><h1>Гайды,<br>которые можно <span>повторить.</span></h1></div>
-<div class="hero-r"><p>Ролики, боты и агенты, собранные кодом в Claude Code. Каждый гайд по шагам, для Windows и Mac, с командами, которые копируются одной кнопкой.</p><a class="btn cta" href="#guides">Смотреть гайды</a></div>
+<div class="top">
+<h1>Гайды из<br>моих <span>роликов.</span></h1>
+<p>Увидела ролик и пришла за гайдом? Он прямо ниже. Каждый гайд по шагам, для Windows и Mac, команды копируются одной кнопкой.</p>
 </div>
 
 <section id="guides">
-<div class="shead"><h2 class="mono"><b>01</b> · Все гайды</h2><span>3 гайда</span></div>
-<div class="grid">
-<article class="guide orange"><div class="tags"><span class="tag">плагин с github</span></div><h3>Сначала думай, потом код</h3><p>Superpowers: Claude Code сначала задаёт вопросы и пишет план. Установка, готовые фразы и честный раздел «что учесть».</p><div class="actions"><a class="btn" href="../guides/superpowers/">Открыть гайд</a><a class="btn ghost" href="../pdf/superpowers-guide.pdf" target="_blank" rel="noopener">PDF</a></div></article>
-<article class="guide cream"><div class="tags"><span class="tag">шоурил</span><span class="tag line">ru · en</span></div><h3>Шоурил без монтажа</h3><p>Зацикленный ролик с музыкой: слова в такт, маятник, лампа, кубики. Бриф целиком и замечания, которыми он доведён до финала.</p><div class="actions"><a class="btn" href="../guides/opus-showreel/">Открыть гайд</a><a class="btn ghost" href="../guides/opus-showreel-en/">English</a><a class="btn ghost" href="../pdf/opus-showreel-guide-ru.pdf" target="_blank" rel="noopener">PDF</a></div></article>
-<article class="guide cream"><div class="tags"><span class="tag">шоурил</span></div><h3>Шоурил одним промптом</h3><p>Первый ролик, собранный текстом: бриф, правило 15 кадров и пять багов, которые Claude нашёл сам.</p><div class="actions"><a class="btn" href="../guides/showreel/">Открыть гайд</a><a class="btn ghost" href="../pdf/claude-showreel-guide.pdf" target="_blank" rel="noopener">PDF</a></div></article>
-<article class="guide dark"><div class="tags"><span class="tag">плагин с github</span><span class="tag line">обновляю</span></div><h3>Память для Claude Code</h3><p>claude-mem: чтобы не объяснять проект заново в каждом новом чате. Установщик плагина изменился, переписываю гайд под новую версию.</p><div class="actions"><span class="soon">скоро вернётся · следи в Telegram</span></div></article>
+<h2 class="big">Выбери гайд</h2>
+<div class="glist">
+<article class="g"><img src="../media/c-opus.jpg" alt="" loading="lazy"><div class="b"><div class="from">Из ролика с маятником · кодовое слово <b>OPUS</b></div><h3>Шоурил без монтажа</h3><p>Как собрать зацикленный ролик с музыкой одним текстом в Claude Code. Внутри мой бриф целиком и замечания, которыми я довела ролик до финала.</p><div class="actions"><a class="btn" href="../guides/opus-showreel/">Открыть гайд</a><a class="btn ghost" href="../guides/opus-showreel-en/">English</a><a class="btn ghost" href="../pdf/opus-showreel-guide-ru.pdf" target="_blank" rel="noopener">PDF</a></div></div></article>
+<article class="g"><img src="../media/c-super.jpg" alt="" loading="lazy"><div class="b"><div class="from">Из ролика «Claude, сначала думай»</div><h3>Сначала думай, потом код</h3><p>Плагин Superpowers: Claude Code сначала задаёт вопросы и пишет план, а потом трогает файлы. Установка по шагам и готовые фразы.</p><div class="actions"><a class="btn" href="../guides/superpowers/">Открыть гайд</a><a class="btn ghost" href="../pdf/superpowers-guide.pdf" target="_blank" rel="noopener">PDF</a></div></div></article>
+<article class="g"><img src="../media/c-showreel.jpg" alt="" loading="lazy"><div class="b"><div class="from">Из ролика «Этот ролик никто не монтировал»</div><h3>Шоурил одним промптом</h3><p>Мой первый ролик, собранный текстом: бриф, правило 15 кадров и пять багов, которые Claude нашёл сам.</p><div class="actions"><a class="btn" href="../guides/showreel/">Открыть гайд</a><a class="btn ghost" href="../pdf/claude-showreel-guide.pdf" target="_blank" rel="noopener">PDF</a></div></div></article>
+<article class="g off"><img src="../media/c-mem.jpg" alt="" loading="lazy"><div class="b"><div class="from">Из ролика «Память для Claude Code»</div><h3>Память для Claude Code</h3><p>Плагин claude-mem: чтобы не объяснять проект заново в каждом новом чате.</p><div class="soon">Переписываю под новую версию плагина. Скоро вернётся.</div></div></article>
 </div>
 </section>
 
-<section id="start">
-<div class="shead"><h2 class="mono"><b>02</b> · С чего начать</h2></div>
-<div class="steps">
-<div class="step"><div class="n">1</div><div class="t">Поставь Claude Code</div><div class="d">В каждом гайде есть раздел с установкой по шагам. Опыт в коде не нужен.</div></div>
-<div class="step"><div class="n">2</div><div class="t">Выбери гайд</div><div class="d">Хочешь ролик, бери шоурил. Хочешь, чтобы Claude работал умнее, бери плагины.</div></div>
-<div class="step"><div class="n">3</div><div class="t">Покажи, что получилось</div><div class="d">Отметь @veroniixx.ai или напиши в комментариях в Telegram. Лучшее покажу.</div></div>
-</div>
+<section id="me">
+<h2 class="big">Кто это делает</h2>
+<div class="me"><img src="../media/veronika.jpg" alt="Veronika"><div class="b"><p>Привет, я Вероника. Собираю ролики, ботов и ИИ-агентов текстом в Claude Code, без монтажных программ. Что получилось, записываю в гайд, чтобы можно было повторить.</p><div class="btns"><a class="btn fill" href="https://instagram.com/veroniixx.ai" target="_blank" rel="noopener">Instagram</a><a class="btn line" href="https://t.me/veronixai" target="_blank" rel="noopener">Telegram</a></div></div></div>
 </section>
 
-<div class="banner">
-<div><h2>Новые гайды сначала в Telegram</h2><p>Там же: что пробую сейчас, что не получилось и что строю на работе.</p></div>
-<a class="btn" href="https://t.me/veronixai">Открыть канал</a>
-</div>
 
-<footer><span>veroniixx.ai · 2026</span><span>работаю с ИИ-агентами для бизнеса в neirohost</span></footer>
+
+
+
+
+
+<footer><span>veroniixx.ai · 2026</span><span><a href="../privacy/">Privacy</a> · <a href="../">English version</a></span></footer>
 </div>
 </body>
 </html>
