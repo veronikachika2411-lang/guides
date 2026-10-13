@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cut to the beat. By code.</title>
+<style>
+  :root {
+    --dark: #0E0C0A; --cream: #F5F0E6; --accent: #D97757; --ink: #1A1A1A;
+    --micro: #8A8580; --amber: #FFC266; --paper: #F6F0E4; --line: rgba(26,26,26,.14);
+  }
+  @page { size: 150mm 250mm; margin: 0; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { margin: 0; background: #1b1917; color: var(--ink); font: 500 15.5px/1.6 Manrope, system-ui, sans-serif; }
+  .doc { width: 150mm; margin: 0 auto; background: var(--paper); }
+  section { padding: 15mm 12mm 14mm; break-before: page; position: relative; }
+  .step { break-inside: avoid; }
+  h2, h3, .eyebrow { break-after: avoid; }
+  .pagebreak { break-before: page; padding-top: 15mm; }
+  .mono { font-family: "JetBrains Mono", ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; font-size: 10.5px; font-weight: 700; }
+  .eyebrow { display: flex; justify-content: space-between; color: var(--ink); border-bottom: 2px solid var(--ink); padding-bottom: 8px; margin-bottom: 20px; }
+  .eyebrow b { color: var(--accent); }
+  h1, h2 { font-family: Oswald, Impact, sans-serif; font-weight: 700; text-transform: uppercase; line-height: .98; margin: 0; letter-spacing: -.01em; }
+  h2 { font-size: 46px; margin-bottom: 14px; }
+  h2 i { font-style: normal; color: var(--accent); }
+  h3 { font: 800 17px/1.3 Manrope, sans-serif; margin: 26px 0 8px; display: flex; gap: 10px; align-items: baseline; }
+  h3 .n { font: 800 12px "JetBrains Mono", monospace; color: #fff; background: var(--accent); padding: 3px 7px; border-radius: 4px; flex-shrink: 0; }
+  p { margin: 0 0 12px; }
+  .lead { font-size: 17px; font-weight: 600; line-height: 1.5; }
+  ul, ol { margin: 0 0 12px; padding-left: 20px; }
+  li { margin-bottom: 6px; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  a { color: var(--accent); font-weight: 700; text-decoration: none; }
+  code.i { font: 700 13px "JetBrains Mono", monospace; background: rgba(26,26,26,.08); padding: 1px 6px; border-radius: 4px; white-space: nowrap; }
+
+  /* блок для копирования */
+  .copy { background: var(--dark); border-radius: 14px; margin: 10px 0 16px; overflow: hidden; break-inside: avoid; }
+  .copy.long { break-inside: auto; }
+  .copy .bar { display: flex; justify-content: space-between; align-items: center; padding: 9px 14px; border-bottom: 1px solid rgba(240,232,216,.12); color: var(--micro); }
+  .copy .bar span::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); margin-right: 8px; }
+  .copy button { font: 800 10.5px "JetBrains Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--dark); background: var(--cream); border: 0; border-radius: 20px; padding: 6px 12px; cursor: pointer; }
+  .copy button.ok { background: var(--accent); color: #fff; }
+  .copy pre { margin: 0; padding: 14px; color: var(--cream); font: 500 12.5px/1.6 "JetBrains Mono", monospace; white-space: pre-wrap; word-break: break-word; }
+  .copy.prompt pre { font-size: 12px; }
+
+  .os { display: grid; grid-template-columns: 1fr; gap: 0; }
+  .tag { display: inline-block; font: 800 10.5px "JetBrains Mono", monospace; letter-spacing: .08em; text-transform: uppercase; padding: 4px 9px; border-radius: 4px; margin: 6px 0 2px; }
+  .tag.win { background: var(--ink); color: var(--cream); }
+  .tag.mac { background: var(--cream); color: var(--ink); border: 1.5px solid var(--ink); }
+  .note { border-left: 4px solid var(--accent); background: rgba(232,72,42,.09); padding: 12px 14px; border-radius: 0 10px 10px 0; margin: 12px 0 16px; font-size: 14.5px; break-inside: avoid; }
+  .note b { color: var(--accent); }
+  .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 14px 0; }
+  .card { background: #fff; border: 1.5px solid var(--line); border-radius: 12px; padding: 10px 10px; break-inside: avoid; }
+  .card .big { font: 700 30px/1 Oswald, sans-serif; color: var(--accent); }
+  .card .mono { color: var(--micro); display: block; margin-top: 6px; font-size: 8.5px; line-height: 1.4; }
+  .flowline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 16px 0; }
+  .flowline div { background: var(--dark); color: var(--cream); border-radius: 10px; padding: 10px 8px; font-size: 12.5px; line-height: 1.35; font-weight: 600; }
+  .flowline div b { display: block; font: 800 10px "JetBrains Mono", monospace; color: var(--accent); letter-spacing: .08em; margin-bottom: 4px; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0 16px; font-size: 14px; }
+  th { text-align: left; font: 800 10.5px "JetBrains Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--micro); padding: 6px 8px; border-bottom: 2px solid var(--ink); }
+  td { padding: 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  td.num { font: 700 20px Oswald, sans-serif; color: var(--accent); white-space: nowrap; }
+  .check li { list-style: none; position: relative; padding-left: 4px; }
+  .check { padding-left: 22px; }
+  .check li::before { content: ""; position: absolute; left: -22px; top: 4px; width: 13px; height: 13px; border: 2px solid var(--ink); border-radius: 3px; }
+
+  /* обложка */
+  .cover { background: var(--dark); color: var(--cream); min-height: 250mm; padding: 14mm 12mm; display: flex; flex-direction: column; break-before: auto; }
+  .cover .eyebrow { color: var(--micro); border-color: rgba(240,232,216,.22); }
+  .cover h1 { font-size: 92px; margin-top: 8mm; }
+  .cover h1 i { font-style: normal; color: var(--accent); }
+  .cover .sub { font-size: 17px; font-weight: 600; line-height: 1.45; max-width: 105mm; margin-top: 7mm; color: var(--cream); }
+  .frames { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: auto; }
+  .frames img { width: 100%; display: block; border-radius: 6px; }
+  .cover .foot { display: flex; justify-content: space-between; color: var(--micro); margin-top: 7mm; }
+  .cover .foot b { color: var(--cream); }
+  .end { background: var(--accent); color: var(--ink); border-radius: 16px; padding: 9mm 8mm 7mm; margin-top: 10mm; }
+  .end h2 { font-size: 54px; break-after: auto; }
+  .end .eyebrow { break-after: auto; }
+  .end .eyebrow { border-color: var(--ink); }
+  .end .eyebrow b { color: var(--ink); }
+  .end a { color: var(--ink); text-decoration: underline; }
+
+  @media screen {
+    .doc { margin: 24px auto; border-radius: 18px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.5); }
+    @media (max-width: 620px) { .doc { width: 100%; margin: 0; border-radius: 0; } .cover h1 { font-size: 21vw; } }
+  }
+  @media print { .copy button { display: none; } body { background: var(--paper); } }
+</style>
+<link href="../../fonts/fonts.css" rel="stylesheet"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%2309090B'/%3E%3Ctext x='30' y='46' font-family='Impact,sans-serif' font-size='40' text-anchor='middle' fill='%23F1E8D6'%3EV%3C/text%3E%3Ccircle cx='48' cy='44' r='6' fill='%23FF4A17'/%3E%3C/svg%3E">
+<style>
+  @media screen {
+    body { padding-top: 56px; }
+    .sitebar { position: fixed; top: 0; left: 0; right: 0; z-index: 50; height: 56px; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #09090B; border-bottom: 1px solid rgba(241,232,214,.16); font-family: Manrope, system-ui, sans-serif; }
+    .sitebar a { color: #F1E8D6; font-weight: 800; font-size: 14px; text-decoration: none; white-space: nowrap; }
+    .sitebar .back { font-family: "JetBrains Mono", monospace; font-weight: 700; }
+    .sitebar .back i { font-style: normal; color: #FF4A17; }
+    .sitebar .right { display: flex; gap: 8px; }
+    .sitebar .pill { display: inline-flex; align-items: center; height: 36px; padding: 0 14px; border-radius: 18px; border: 1.5px solid #F1E8D6; }
+    .sitebar .pill.fill { background: #FF4A17; border-color: #FF4A17; color: #09090B; }
+    .cover { min-height: min(250mm, calc(100vh - 56px)); }
+  }
+  @media screen and (max-width: 620px) {
+    section, .cover { padding: 28px 20px 32px; }
+    .cover h1 { font-size: 17vw; margin-top: 20px; }
+    h2 { font-size: 38px; }
+    .end h2 { font-size: 31px; }
+    .cards, .flowline { grid-template-columns: repeat(2, 1fr); }
+    table code.i, li code.i, p code.i { white-space: normal; word-break: break-word; }
+    table { font-size: 13.5px; }
+  }
+  @media print { .sitebar { display: none; } }
+</style>
+</head>
+<body>
+<div class="sitebar"><a class="back" href="../../">← veroniixx<i>.ai</i></a><div class="right"><a class="pill" href="../../pdf/enter-showreel-guide.pdf" target="_blank" rel="noopener">PDF</a><a class="pill fill" href="https://instagram.com/veroniixx.ai">Instagram</a></div></div>
+<div class="doc">
+
+<section class="cover">
+  <div class="mono eyebrow"><span>Guide · 2026</span><span>@veroniixx.ai</span></div>
+  <h1>Cut to<br>the beat.<br>By <i>code.</i></h1>
+  <p class="sub">How I built an 18-second showreel to a music track in Claude Code: the arrow that shoots through words, the window that shatters on the drop, the camera that chases it. From install to a finished mp4. Windows and Mac.</p>
+  <div class="frames"><img src="img/f1.jpg" alt=""><img src="img/f2.jpg" alt=""><img src="img/f3.jpg" alt=""><img src="img/f4.jpg" alt=""><img src="img/f5.jpg" alt=""></div>
+  <div class="mono foot"><span>18 seconds · 540 frames · 82 BPM</span><span>@veroniixx.ai</span></div>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>00</b> · Inside</span><span>2 min read</span></div>
+  <h2>What you <i>get</i></h2>
+  <p class="lead">A vertical 1080×1920 reel where every move lands on a hit in your own track. You describe what you want in words. Claude writes the code, measures the music, renders the frames and assembles the file.</p>
+  <div class="cards">
+    <div class="card"><div class="big">1</div><span class="mono">hero for the whole reel</span></div>
+    <div class="card"><div class="big">0</div><span class="mono">editing apps opened</span></div>
+    <div class="card"><div class="big">29</div><span class="mono">hits the picture lands on</span></div>
+    <div class="card"><div class="big">5</div><span class="mono">versions to get here</span></div>
+  </div>
+  <h3>What you need</h3>
+  <ul>
+    <li>A Windows 10/11 or macOS computer. I rendered this on a laptop with integrated graphics and 3 GB of memory: it works, it is just slow.</li>
+    <li>A Claude plan that includes Claude Code.</li>
+    <li>A music track you are allowed to use. See the note on music below.</li>
+  </ul>
+  <div class="note"><b>Honest about “never edited”.</b> I did not open an editing app or move a single frame by hand. But this is not one prompt: there was a brief and five rounds of notes in plain words. The first version looked nothing like the final one, and that is normal.</div>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>01</b> · The method</span><span>The main part</span></div>
+  <h2>Three rules that <i>made</i> it</h2>
+  <div class="flowline">
+    <div><b>01 · Measure the music</b>Do not time anything by ear. Have Claude find every bass hit and clap and write the frame numbers to a file</div>
+    <div><b>02 · One hero</b>One object causes every transition. Here it is the arrow from the send button</div>
+    <div><b>03 · Each word reacts</b>The arrow hits a word and the word does something: spins, falls, gets struck through</div>
+  </div>
+  <h3>Why measuring beats matters</h3>
+  <p>A model cannot hear your track. If you say “put the explosion on the drop”, it will guess. Ask it to measure the audio instead: loud low-band onsets are bass hits, sharp high-band onsets are claps, a stretch below −60 dB is silence. In my track the silence lasted 0.75 seconds and the drop came back at frame 189. Everything else hangs on numbers like that.</p>
+  <h3>Why one hero</h3>
+  <p>A cut without a cause looks like a mistake. A cut caused by something on screen looks like a trick. The arrow types the prompt, becomes the button, gets clicked, breaks the window, flies through the words and returns to the button at the end.</p>
+  <h3>Less is more in the middle</h3>
+  <p>My fourth version had trails, floating shards, extra props around every word. It was too much. The fix was to remove things until only the arrow and the word were left.</p>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>02</b> · Install</span><span>15–20 minutes</span></div>
+  <h2>Install the <i>tools</i></h2>
+  <div class="step"><h3><span class="n">1</span>Open a terminal</h3>
+  <p><span class="tag win">Windows</span> Press Win, type <code class="i">PowerShell</code>, open it.<br><span class="tag mac">Mac</span> Press Cmd + Space, type <code class="i">Terminal</code>, open it.</p></div>
+  <div class="step"><h3><span class="n">2</span>Node.js, Git, Python and ffmpeg</h3>
+  <p><span class="tag win">Windows</span> Paste one line at a time. Answer <code class="i">Y</code> when asked.</p>
+  <div class="copy"><div class="bar mono"><span>PowerShell</span><button>Copy</button></div><pre>winget install -e --id OpenJS.NodeJS.LTS
+winget install -e --id Git.Git
+winget install -e --id Python.Python.3.13
+winget install -e --id Gyan.FFmpeg</pre></div>
+  <p><span class="tag mac">Mac</span> Homebrew first, it will ask for your password. At the end it prints two lines under “Next steps”: run them, then run the second command.</p>
+  <div class="copy"><div class="bar mono"><span>Terminal · step 1</span><button>Copy</button></div><pre>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</pre></div>
+  <div class="copy"><div class="bar mono"><span>Terminal · step 2</span><button>Copy</button></div><pre>brew install node git python ffmpeg</pre></div>
+  <div class="note"><b>Important.</b> Close the terminal and open it again after installing, or it will not see the new programs.</div></div>
+  <div class="step"><h3><span class="n">3</span>Claude Code</h3>
+  <div class="copy"><div class="bar mono"><span>Terminal</span><button>Copy</button></div><pre>npm install -g @anthropic-ai/claude-code</pre></div>
+  <p>Prefer an app to a terminal? Install Claude from <a href="https://claude.ai/download">claude.ai/download</a>, it has a Code tab that does the same thing.</p></div>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>03</b> · Project</span><span>10 minutes</span></div>
+  <h2>Folder and <i>first</i> prompts</h2>
+  <div class="step"><h3><span class="n">1</span>Create a folder and start Claude</h3>
+  <div class="copy"><div class="bar mono"><span>Terminal</span><button>Copy</button></div><pre>mkdir showreel
+cd showreel
+claude</pre></div></div>
+  <div class="step"><h3><span class="n">2</span>Setup</h3>
+  <div class="copy prompt"><div class="bar mono"><span>Prompt · setup</span><button>Copy</button></div><pre>Set up a motion-graphics project in this folder.
+
+1. Install Remotion (React 18 + TypeScript).
+2. Check that Python has numpy and scipy. Install what is missing.
+3. Check that ffmpeg works from the terminal.
+4. Build a test composition, 1080x1920, 30 fps, with one 3D-transformed card and one line of text. Render a single frame to PNG and show me the path.
+
+If something is missing, install it yourself and tell me what you installed. If something fails, do not stop: find the cause and fix it.</pre></div></div>
+  <div class="step"><h3><span class="n">3</span>Measure your track</h3>
+  <p>Put the mp3 in the folder and send this. Replace what is in square brackets.</p>
+  <div class="copy prompt"><div class="bar mono"><span>Prompt · beats</span><button>Copy</button></div><pre>I put a music track at [path/to/track.mp3]. I want a reel cut to it, starting at second [6] of the track and running for [18] seconds.
+
+Before you design anything, measure the track with Python (numpy + scipy, decode with ffmpeg):
+1. Tempo in BPM and the length of one beat in frames at 30 fps.
+2. Every bass hit: band-pass 35-140 Hz, find the onsets, give me frame numbers.
+3. Every clap or snare: band-pass 2500-9000 Hz, same thing.
+4. Any silence longer than 0.3 s and the exact frame where the sound comes back.
+5. Per-frame loudness of the low band, so the picture can pulse with the bass.
+
+Save all of it to beats.json and print a short table. Do not guess any timing by ear: every event in the reel will use these frame numbers.</pre></div></div>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>04</b> · The brief</span><span>Copy all of it</span></div>
+  <h2>The reel <i>brief</i></h2>
+  <p>Replace what is in square brackets with your own words, colours and handle. The rest can stay.</p>
+  <div class="copy prompt"><div class="bar mono"><span>Prompt · showreel brief</span><button>Copy</button></div><pre>Build a showreel cut to my track. 18 seconds, 540 frames, 30 fps, 1080x1920, H.264 CRF 18, yuv420p. All on-screen text in English. Use the frame numbers from beats.json for every event.
+
+IDEA
+I type a prompt into [Claude Code], hit send, and the prompt becomes the film.
+
+ONE HERO
+The arrow from the send button. It is in every part and it causes every transition.
+
+PARTS
+1. INSIDE THE PROMPT (start to the last bass hit before the silence). The camera is inside the input field, extreme close-up, tilted in 3D. On every bass hit the arrow shoots through the next word of "[Make me a showreel you can't stop watching]" from left to right. The word is revealed by the arrow, splits in half along the path, flashes and closes again. The camera whips to follow the arrow and keeps drifting between hits so the frame never stands still.
+2. THE REVEAL (the silence in the track). The camera pulls all the way back: it was a [Claude Code] window the whole time. The arrow docks as the send button. A mouse cursor arcs in and clicks it on the last frame of silence.
+3. THE BREAK (the drop). The window shatters into about 70 triangular shards flying away from the button in 3D, the button breaks into wedges, sparks, one shockwave. The arrow launches out of it.
+4. THE CHASE (drop until the last clap of the second bar). Dark warm space. The arrow flies along a path and on every clap it pierces one giant word: [THIS / REEL / WAS / NEVER / EDITED / NO CAMERA / NO TIMELINE / NO KEYFRAMES / JUST / CODE]. Words sit at different angles, some stand upright. The camera chases the arrow and rolls to align with each word. Every word answers the hit with its own move: one spins, one tips over, one is struck through in red, one is cut into strips, one flips, one falls flat, one jumps, the last one scrambles through code symbols and resolves. The light warms from clay to gold along the way. One bright frame on every clap.
+5. THE CAROUSEL (third bar). The word [CODE] stays still. Cards orbit it in real 3D depth, passing in front of and behind it. The background changes four times a second.
+6. THE ANSWER (to the end). The shards fly back and rebuild the window: the explosion played in reverse. The assistant answers "[Done.]".
+
+RULES FOR TEXT
+No blur, no shake on text. A word must be whole and readable for at least a third of a second. No letter may be cut by the frame edge: shrink long words. The only small text is "[@my_handle]" at the top.
+
+LOOK
+Dark warm background, cream type, one accent [#D97757]. Light, glow and gradients instead of flat fills. Film grain and a soft vignette over everything.
+
+SHARPNESS
+Text that the camera zooms into must be drawn at five times its size and scaled down, otherwise the browser stretches a small bitmap and letters come out jagged.
+
+WORKFLOW
+1. Create the files. Type-check must pass.
+2. Render about 50 key frames into one contact sheet and look at it yourself.
+3. Self-QA every part and every join: cut letters, text off frame, black frames, words that are unreadable. Fix and re-render.
+4. Render the final mp4 with the track, plus a copy without sound.
+5. Check the finished file: duration, frame count, and crop two close-up frames at full size to check sharpness.
+6. Tell me in one message: file path, size, what you checked and what you could not check.
+
+Do not stop until there is a finished mp4.</pre></div>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>05</b> · Notes</span><span>In plain words</span></div>
+  <h2>How to fix it with <i>notes</i></h2>
+  <p>The first render is never the final one. Watch it and say what is wrong. These are close to the notes I actually sent:</p>
+  <div class="copy prompt"><div class="bar mono"><span>The opening is boring</span><button>Copy</button></div><pre>The first part is not dynamic, not on the beat, and it drags. Make the arrow shoot through the words like a pulse and let the camera follow it.</pre></div>
+  <div class="copy prompt"><div class="bar mono"><span>The explosion is weak</span><button>Copy</button></div><pre>The break on the click is not epic enough and I cannot see the button breaking. Shatter the whole window into pieces from the button.</pre></div>
+  <div class="copy prompt"><div class="bar mono"><span>It looks cheap</span><button>Copy</button></div><pre>The flat yellow looks cheap. Keep the look of the first part: dark, warm, light and glow instead of fills.</pre></div>
+  <div class="copy prompt"><div class="bar mono"><span>Something is missing</span><button>Copy</button></div><pre>The middle needs an idea, not more effects. Make every word react to the hit in its own way.</pre></div>
+  <div class="copy prompt"><div class="bar mono"><span>Now it is too much</span><button>Copy</button></div><pre>Too many things at once. Remove the trail and the floating shapes. Just the arrow and words that spin or fall. Keep the flashes.</pre></div>
+  <div class="copy prompt"><div class="bar mono"><span>I cannot read a word</span><button>Copy</button></div><pre>Some words are unreadable because they are fast and split in two. Each word must be whole for at least a third of a second.</pre></div>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>06</b> · Honest</span><span>What to know</span></div>
+  <h2>What <i>broke</i> for me</h2>
+  <ul>
+    <li><b>Blurry close-ups.</b> When the camera zoomed into small text, letters came out jagged: the browser was stretching a small bitmap. The fix is in the brief: draw that text five times larger and scale it down.</li>
+    <li><b>A dark bar through every word.</b> The two halves of a split word did not meet by 30 pixels. It survived four versions because it looked like a design choice. Crop a frame at full size and look.</li>
+    <li><b>Black frames in the shader shots.</b> On integrated graphics the heavy shaders did not finish in time and the renderer lost 3D. Rendering them at half resolution fixed it.</li>
+    <li><b>Claude cannot hear or see motion.</b> It checks still frames and numbers. How the reel feels to the music is yours to judge, so expect several rounds.</li>
+    <li><b>Slow render.</b> About ten to fifteen minutes for 18 seconds on a weak laptop.</li>
+  </ul>
+  <h3>A note on music</h3>
+  <p>If your track is a commercial song, do not bake it into the file you post. Platforms can mute it or limit reach. Build the reel to the track, export a copy without sound, and add the same track from the platform's own music library at the same second. If you have a licensed or original track, bake it in.</p>
+  <div class="mono eyebrow" style="margin-top:34px"><span><b>07</b> · Questions</span><span>Short</span></div>
+  <h2>Common <i>questions</i></h2>
+  <div class="step"><h3>Will I get the same reel?</h3>
+  <p>Similar in structure, not frame for frame: Claude writes the code from scratch each time. Change the words, the colours and the track to make it yours.</p></div>
+  <div class="step"><h3>The terminal shows a red error. Now what?</h3>
+  <p>Copy it and paste it to Claude with the words “here is the error, fix it and continue”.</p></div>
+  <div class="step"><h3>Do I need the 3D carousel and shaders?</h3>
+  <p>No. Remove part 5 from the brief and go from the chase straight to the answer. The first two thirds are plain web layout in 3D and render on anything.</p></div>
+  <div class="end">
+    <div class="mono eyebrow"><span><b>08</b> · Next</span><span>@veroniixx.ai</span></div>
+    <h2>Built yours? Show me</h2>
+    <p class="lead">Tag <a href="https://instagram.com/veroniixx.ai">@veroniixx.ai</a> and I will share it in stories.</p>
+  </div>
+</section>
+
+</div>
+<script>
+  document.querySelectorAll('.copy button').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = btn.closest('.copy').querySelector('pre').innerText;
+      var done = function () {
+        btn.textContent = 'Copied';
+        btn.classList.add('ok');
+        setTimeout(function () { btn.textContent = 'Copy'; btn.classList.remove('ok'); }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () {});
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch (e) {}
+        document.body.removeChild(ta);
+      }
+    });
+  });
+</script>
+</body>
+</html>

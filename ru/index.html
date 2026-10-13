@@ -115,13 +115,17 @@ h2.big{margin:0 0 20px;font-family:Oswald,sans-serif;font-weight:700;font-size:c
 .me .btns{display:flex;gap:10px;flex-wrap:wrap}
 .btn.line{border:2px solid var(--cream)}
 .btn.fill{background:var(--cream);color:var(--ink)}
-.vids{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;align-items:start}
+.vrow{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .vid video{width:100%;border-radius:16px;background:#000;display:block}
 .vid.v video{aspect-ratio:9/16}
 .vid.h video{aspect-ratio:16/9}
-.vid.h{grid-column:span 2}
+.vid.h{margin-top:28px}
 .vid h3{margin:12px 0 0;font-weight:800;font-size:20px}
 .vid p{margin:6px 0 0;font-size:16px;line-height:1.45;color:var(--soft)}
+.team{padding:28px;border-radius:24px;background:var(--card);border:1px solid rgba(241,232,214,.18)}
+.team p{margin:0 0 12px;font-size:18px;line-height:1.55;font-weight:600;color:var(--soft);max-width:720px}
+.team ul{margin:0 0 18px;padding-left:22px;max-width:720px}
+.team li{font-size:17px;line-height:1.5;color:var(--soft);font-weight:600;margin-bottom:6px}
 .hire{margin-bottom:72px;padding:36px;background:var(--cream);color:var(--ink);border-radius:28px}
 .hire h2{margin:0;font-family:Oswald,sans-serif;font-weight:700;font-size:clamp(32px,5vw,52px);line-height:1;text-transform:uppercase}
 .hire p{margin:14px 0 20px;max-width:640px;font-size:18px;line-height:1.5;font-weight:600;color:#4A4238}
@@ -140,7 +144,8 @@ h2.big{margin:0 0 20px;font-family:Oswald,sans-serif;font-weight:700;font-size:c
   .g .actions .btn{min-height:48px;padding:0 20px;font-size:16px}
   .me img{flex-basis:120px;width:120px;height:120px}
   .me p{font-size:17px}
-  .vids{grid-template-columns:1fr 1fr;gap:14px}
+  .vrow{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -20px;padding:0 20px 8px}
+  .vrow .vid{flex:0 0 64%;scroll-snap-align:center}
   .vid h3{font-size:17px}
   .vid p{font-size:14px}
   .hire{padding:24px 20px;border-radius:22px;margin-bottom:48px}
@@ -165,6 +170,7 @@ h2.big{margin:0 0 20px;font-family:Oswald,sans-serif;font-weight:700;font-size:c
 <h2 class="big">Выбери гайд</h2>
 <div class="glist">
 <article class="g"><img src="../media/c-opus.jpg" alt="" loading="lazy"><div class="b"><div class="from">Из ролика с маятником · кодовое слово <b>OPUS</b></div><h3>Шоурил без монтажа</h3><p>Как собрать зацикленный ролик с музыкой одним текстом в Claude Code. Внутри мой бриф целиком и замечания, которыми я довела ролик до финала.</p><div class="actions"><a class="btn" href="../guides/opus-showreel/">Открыть гайд</a><a class="btn ghost" href="../guides/opus-showreel-en/">English</a><a class="btn ghost" href="../pdf/opus-showreel-guide-ru.pdf" target="_blank" rel="noopener">PDF</a></div></div></article>
+<article class="g"><img src="../media/c-enter.jpg" alt="" loading="lazy"><div class="b"><div class="from">Из ролика «Enter», чёрно-жёлтый · кодовое слово <b>ENTER</b></div><h3>Монтаж в такт. Кодом.</h3><p>Как собран ролик Enter: трек размечен по кадрам, каждый удар попадает в музыку. Мой бриф целиком и пять раундов замечаний. Гайд на английском.</p><div class="actions"><a class="btn" href="../guides/enter-showreel/">Открыть гайд (англ.)</a><a class="btn ghost" href="../pdf/enter-showreel-guide.pdf" target="_blank" rel="noopener">PDF</a></div></div></article>
 <article class="g"><img src="../media/c-super.jpg" alt="" loading="lazy"><div class="b"><div class="from">Из ролика «Claude, сначала думай»</div><h3>Сначала думай, потом код</h3><p>Плагин Superpowers: Claude Code сначала задаёт вопросы и пишет план, а потом трогает файлы. Установка по шагам и готовые фразы.</p><div class="actions"><a class="btn" href="../guides/superpowers/">Открыть гайд</a><a class="btn ghost" href="../pdf/superpowers-guide.pdf" target="_blank" rel="noopener">PDF</a></div></div></article>
 <article class="g"><img src="../media/c-showreel.jpg" alt="" loading="lazy"><div class="b"><div class="from">Из ролика «Этот ролик никто не монтировал»</div><h3>Шоурил одним промптом</h3><p>Мой первый ролик, собранный текстом: бриф, правило 15 кадров и пять багов, которые Claude нашёл сам.</p><div class="actions"><a class="btn" href="../guides/showreel/">Открыть гайд</a><a class="btn ghost" href="../pdf/claude-showreel-guide.pdf" target="_blank" rel="noopener">PDF</a></div></div></article>
 <article class="g off"><img src="../media/c-mem.jpg" alt="" loading="lazy"><div class="b"><div class="from">Из ролика «Память для Claude Code»</div><h3>Память для Claude Code</h3><p>Плагин claude-mem: чтобы не объяснять проект заново в каждом новом чате.</p><div class="soon">Переписываю под новую версию плагина. Скоро вернётся.</div></div></article>
@@ -178,7 +184,9 @@ h2.big{margin:0 0 20px;font-family:Oswald,sans-serif;font-weight:700;font-size:c
 
 
 
+<div class="hire" id="hire"><h2>Нужен такой ролик для вашего продукта?</h2><p>Делаю короткие анимационные ролики для приложений, сервисов и ИИ-продуктов. Пришлите ссылку на продукт и напишите, что зритель должен запомнить. В ответ расскажу, как бы я это показала.</p><div class="btns"><a class="btn" href="https://ig.me/m/veroniixx.ai" target="_blank" rel="noopener">Написать в Instagram</a><a class="btn ghost" href="mailto:veronikachikka24@gmail.com" translate="no">veronikachikka24@gmail.com</a></div></div>
 
+<section id="team"><h2 class="big">ИИ-агенты для бизнеса</h2><div class="team"><p>Ещё я работаю в команде neirohost: мы внедряем ИИ-агентов в бизнес. Агент это цифровой сотрудник: он забирает рутину, а контроль остаётся у вас.</p><ul><li>Разбирает почту, документы и заявки, отвечает клиентам, собирает данные.</li><li>Подключается к тому, чем вы уже пользуетесь: Google Workspace, AmoCRM, 1С, Ozon, WB, Telegram.</li><li>Работает в изолированном облаке: ваши данные остаются вашими.</li><li>Более 1000 агентов уже работают на neirohost.</li></ul><a class="btn fill" href="https://neirohost.ru" target="_blank" rel="noopener">Посмотреть neirohost.ru</a></div></section>
 
 
 
