@@ -3,182 +3,353 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>veroniixx.ai · guides from my reels</title>
-<meta name="description" content="Step-by-step guides from my Instagram reels: videos, bots and agents built by writing text in Claude Code.">
-<meta property="og:title" content="veroniixx.ai · guides from my reels">
-<meta property="og:description" content="Step-by-step guides from my Instagram reels: videos, bots and agents built by writing text in Claude Code.">
+<title>veroniixx.ai · reels made with Claude Code</title>
+<meta name="description" content="Motion reels that look expensive, made by talking to Claude Code. Free guides and the Made by Code Kit.">
+<meta property="og:title" content="veroniixx.ai · reels made with Claude Code">
+<meta property="og:description" content="Motion reels that look expensive, made by talking to Claude Code. Free guides and the Made by Code Kit.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#FFFFFF">
+<meta name="theme-color" content="#060708">
 <link href="fonts/fonts.css" rel="stylesheet"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%2309090B'/%3E%3Ctext x='30' y='46' font-family='Impact,sans-serif' font-size='40' text-anchor='middle' fill='%23F1E8D6'%3EV%3C/text%3E%3Ccircle cx='48' cy='44' r='6' fill='%23FF4A17'/%3E%3C/svg%3E">
 <style>
-:root{--bg:#FFFFFF;--ink:#0A0A0A;--soft:#3A3A3A;--muted:#5C5C5C;--line:#E4E4E4;--panel:#F2F2F2;--accent:#FF4A17;--accent-text:#C2360A}
+:root{--bg:#060708;--bg2:#0B0D0F;--ink:#F2F4EC;--soft:#C3C8C2;--muted:#8B9290;--line:rgba(255,255,255,.09);--glass:rgba(255,255,255,.035);
+--lime:#C8FF3D;--lime-d:#9BD10F;--cyan:#55E8FF;--radius:26px}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;background:var(--bg);overflow-x:clip}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}
 a{color:inherit;text-decoration:none}
-.wrap{max-width:1160px;margin:0 auto;padding:0 32px}
-.serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400}
-.mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:500;letter-spacing:.12em;text-transform:uppercase;font-size:13px;color:var(--muted)}
-header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:26px 0;border-bottom:1px solid var(--line)}
-.logo{font-family:'Instrument Serif',Georgia,serif;font-size:32px;line-height:1}
-.logo span{color:var(--accent-text)}
-nav{display:flex;flex-wrap:wrap;align-items:center;gap:28px;font-weight:600;font-size:15px}
-nav a{padding:12px 0;transition:color .15s}
-nav a:hover{color:var(--accent-text)}
-nav a.pill{padding:11px 19px;border:1.5px solid var(--ink);border-radius:999px}
-nav a.pill:hover{background:var(--ink);color:var(--bg)}
-.tg-pill{display:none;align-items:center;min-height:44px;padding:0 18px;border-radius:22px;border:1.5px solid var(--ink);font-weight:700;font-size:14px}
-h1{margin:0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(56px,9vw,116px);line-height:.95;letter-spacing:-.02em}
-h1 i{font-style:italic}
-.btn{display:inline-flex;align-items:center;min-height:52px;padding:0 26px;border-radius:999px;font-weight:700;font-size:16px;border:1.5px solid var(--ink);transition:transform .15s,background .15s,color .15s}
-.btn:hover{transform:translateY(-2px)}
-.btn.fill{background:var(--ink);color:var(--bg)}
-.btn.line,.btn.ghost{background:none;color:var(--ink)}
-section{padding-bottom:96px}
-.banner{margin-bottom:72px;padding:44px 40px;background:var(--panel);border-radius:28px;display:flex;flex-wrap:wrap;gap:28px;align-items:center;justify-content:space-between}
-.banner div{flex:999 1 420px;min-width:0}
-.banner h2{margin:0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(40px,6vw,64px);line-height:1}
-.banner p{margin:14px 0 0;font-size:18px;line-height:1.5;color:var(--soft)}
-footer{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;padding:32px 0 48px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
-footer a:hover{color:var(--ink)}
-@media (max-width:640px){
-  .wrap{padding:0 20px}
-  header{padding:18px 0}
-  .logo{font-size:28px}
-  nav{display:none}
-  .tg-pill{display:inline-flex}
-  h1{font-size:clamp(46px,14vw,64px)}
-  section{padding-bottom:64px}
-  .banner{padding:28px 22px;border-radius:22px;margin-bottom:48px}
-  footer{font-size:13px}
-}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}.btn:hover{transform:none}}
+img,video{display:block;max-width:100%}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px;position:relative;z-index:2}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:500;letter-spacing:.14em;text-transform:uppercase;font-size:12px;color:var(--muted)}
+.chrome{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:0;
+ background:linear-gradient(180deg,#FFFFFF 0%,#C9D1D6 38%,#6E777E 52%,#E9EEF1 70%,#9EA7AE 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.neon{color:var(--lime);text-shadow:0 0 18px rgba(200,255,61,.55),0 0 42px rgba(200,255,61,.25)}
 
-.top{padding:72px 0 88px;display:flex;flex-wrap:wrap;gap:56px;align-items:center}
-.top-l{flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:26px}
-.top-l p{margin:0;max-width:580px;font-size:20px;line-height:1.55;color:var(--soft)}
-.top .btns{display:flex;gap:12px;flex-wrap:wrap}
-.proof{display:flex;flex-wrap:wrap;gap:10px 28px;font-size:14px;color:var(--muted)}
-.proof b{color:var(--ink)}
-.top-r{flex:1 1 260px;max-width:320px;min-width:0}
-.top-r video{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:28px;background:var(--ink);display:block}
-h2.big{margin:0 0 28px;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(44px,6vw,68px);line-height:1}
-.glist{display:flex;flex-direction:column;border-top:1px solid var(--line)}
-.g{display:flex;gap:28px;padding:24px 0;border-bottom:1px solid var(--line)}
-.g img{flex:0 0 132px;width:132px;aspect-ratio:9/16;object-fit:cover;border-radius:16px;display:block;background:var(--ink)}
-.g .b{flex:1;min-width:0;display:flex;flex-direction:column;gap:10px;justify-content:center}
-.g .from{font-family:'JetBrains Mono',monospace;font-weight:500;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.g .from b{color:var(--accent-text);font-weight:700}
-.g h3{margin:0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(32px,4vw,46px);line-height:1}
-.g p{margin:0;font-size:17px;line-height:1.5;color:var(--soft);max-width:640px}
-.g .actions{margin-top:6px;display:flex;gap:10px;flex-wrap:wrap}
-.g .actions .btn{background:var(--ink);color:var(--bg)}
-.g .actions .btn.ghost{background:none;color:var(--ink)}
-.g .soon{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent-text)}
-.g.off img{opacity:.55}
-.me{display:flex;gap:32px;align-items:center;flex-wrap:wrap}
-.me img{flex:0 0 200px;width:200px;height:200px;border-radius:50%;object-fit:cover;display:block}
-.me .b{flex:1 1 320px;min-width:0}
-.me p{margin:0 0 16px;font-size:19px;line-height:1.55;color:var(--soft);max-width:640px}
-.me .btns{display:flex;gap:10px;flex-wrap:wrap}
-.vrow{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.vid video{width:100%;border-radius:18px;background:var(--ink);display:block}
-.vid.v video{aspect-ratio:9/16}
-.vid.h video{aspect-ratio:16/9}
-.vid.h{margin-top:28px}
-.vid h3{margin:12px 0 0;font-weight:800;font-size:19px}
-.vid p{margin:6px 0 0;font-size:15px;line-height:1.45;color:var(--muted)}
-.kit{margin-bottom:96px;padding:44px;background:var(--panel);border-radius:28px;display:flex;flex-direction:column;gap:14px}
-.kit .mono{color:var(--accent-text)}
-.kit h2{margin:0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(40px,6vw,60px);line-height:1}
-.kit p{margin:0;max-width:620px;font-size:18px;line-height:1.55;color:var(--soft)}
-.team{padding:32px;border-radius:24px;background:var(--panel)}
-.team p{margin:0 0 12px;font-size:18px;line-height:1.55;color:var(--soft);max-width:720px}
-.team ul{margin:0 0 18px;padding-left:22px;max-width:720px}
-.team li{font-size:17px;line-height:1.5;color:var(--soft);margin-bottom:6px}
-.hire{margin-bottom:72px;padding:48px;background:var(--ink);color:var(--bg);border-radius:28px}
-.hire h2{margin:0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(40px,6vw,64px);line-height:1}
-.hire p{margin:16px 0 24px;max-width:640px;font-size:18px;line-height:1.55;color:#D4D4D4}
-.hire .btns{display:flex;gap:10px;flex-wrap:wrap}
-.hire .btn{background:var(--bg);color:var(--ink);border-color:var(--bg)}
-.hire .btn.ghost{background:none;color:var(--bg)}
-.signup form{display:flex;gap:10px;flex-wrap:wrap}
-.signup input{min-height:52px;padding:0 20px;border-radius:999px;border:1.5px solid var(--ink);background:var(--bg);color:var(--ink);font:600 16px Manrope,sans-serif;min-width:240px}
-.signup button{cursor:pointer;font-family:inherit;background:var(--ink);color:var(--bg)}
-.getg{margin-top:6px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.getg input[type=email]{flex:1 1 220px;max-width:320px;min-height:52px;padding:0 20px;border-radius:999px;border:1.5px solid var(--ink);background:var(--bg);color:var(--ink);font:600 16px Manrope,sans-serif}
-.getg button{cursor:pointer;font-family:inherit;background:var(--ink);color:var(--bg)}
+/* atmosphere */
+.bgfx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.55}
+.orb.a{width:560px;height:560px;background:radial-gradient(circle,rgba(200,255,61,.55),transparent 65%);top:-160px;right:-120px;animation:drift 18s ease-in-out infinite alternate}
+.orb.b{width:520px;height:520px;background:radial-gradient(circle,rgba(85,232,255,.38),transparent 65%);top:38%;left:-220px;animation:drift 22s ease-in-out infinite alternate-reverse}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse at 50% 0%,#000 30%,transparent 75%)}
+.grain{position:absolute;inset:-50%;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+@keyframes drift{to{transform:translate(-90px,70px) scale(1.12)}}
+
+/* header */
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0}
+.logo{font-family:Unbounded,sans-serif;font-weight:800;font-size:20px;letter-spacing:-.01em}
+.logo span{color:var(--lime)}
+nav{display:flex;align-items:center;gap:26px;font-weight:600;font-size:15px;color:var(--soft)}
+nav a{padding:10px 0;transition:color .2s}
+nav a:hover{color:var(--ink)}
+.pill{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:var(--glass);font-weight:700;font-size:14px;color:var(--ink)}
+.pill:hover{border-color:rgba(200,255,61,.5)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 26px;border-radius:999px;font-weight:800;font-size:16px;border:1px solid var(--line);color:var(--ink);background:var(--glass);transition:transform .2s,box-shadow .25s,border-color .2s;cursor:pointer;font-family:inherit}
+.btn:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.3)}
+.btn.lime{background:var(--lime);color:#0A0C05;border-color:var(--lime);box-shadow:0 0 0 rgba(200,255,61,0)}
+.btn.lime:hover{box-shadow:0 10px 40px rgba(200,255,61,.35)}
+.btn .arr{transition:transform .2s}
+.btn:hover .arr{transform:translateX(4px)}
+.btn.off{opacity:.5;pointer-events:none}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;padding:56px 0 72px}
+.badge{display:inline-flex;align-items:center;gap:10px;padding:8px 14px;border-radius:999px;border:1px solid rgba(200,255,61,.28);background:rgba(200,255,61,.06);font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--lime)}
+.badge i{width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 12px var(--lime);animation:blink 1.6s ease-in-out infinite}
+@keyframes blink{50%{opacity:.25}}
+h1{margin:22px 0 0;font-family:Unbounded,sans-serif;font-weight:800;font-size:clamp(44px,6.4vw,88px);line-height:.96;letter-spacing:-.035em;text-transform:uppercase}
+h1 .chrome{display:block;font-size:1.12em;line-height:.95;margin-top:6px;padding-bottom:.08em}
+.lead{margin:24px 0 0;max-width:500px;font-size:19px;line-height:1.6;color:var(--soft)}
+.hero .btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.hero .note{margin-top:16px;font-size:14px;color:var(--muted)}
+.stage{position:relative;justify-self:center;width:min(330px,100%)}
+.phone{position:relative;border-radius:44px;padding:10px;background:linear-gradient(160deg,#2A2E31,#0D0F10 40%,#1D2124);box-shadow:0 0 0 1px rgba(255,255,255,.08),0 40px 90px rgba(0,0,0,.6),0 0 80px rgba(200,255,61,.18)}
+.phone video,.phone img{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:36px;background:#000}
+.phone:after{content:"";position:absolute;top:20px;left:50%;width:84px;height:22px;margin-left:-42px;border-radius:12px;background:#000}
+.term{position:absolute;left:-84px;bottom:40px;width:262px;border-radius:18px;background:rgba(10,12,13,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.12);box-shadow:0 24px 60px rgba(0,0,0,.55);font:500 12.5px/1.6 'JetBrains Mono',monospace;overflow:hidden}
+.term .bar{display:flex;gap:6px;padding:10px 12px;border-bottom:1px solid var(--line)}
+.term .bar b{width:9px;height:9px;border-radius:50%;background:#3A3F42}
+.term .bar b:first-child{background:#FF5F57}.term .bar b:nth-child(2){background:#FEBC2E}.term .bar b:nth-child(3){background:#28C840}
+.term .body{padding:12px 14px 14px;min-height:118px;color:#D9DED8}
+.term .p{color:var(--lime)}
+.term .typed:after{content:"▍";color:var(--lime);animation:blink 1s steps(1) infinite}
+.term .done .typed:after{content:""}
+.term .prog{margin-top:10px;height:6px;border-radius:4px;background:rgba(255,255,255,.08);overflow:hidden}
+.term .prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--lime));box-shadow:0 0 12px var(--lime)}
+.term .st{margin-top:6px;color:var(--muted)}
+
+/* marquee */
+.marq{position:relative;z-index:2;overflow:hidden;background:var(--lime);color:#0A0C05;transform:rotate(-1.4deg);margin:10px -20px 96px;box-shadow:0 0 60px rgba(200,255,61,.25)}
+.marq .track{display:flex;gap:42px;width:max-content;padding:16px 0;font-family:Unbounded,sans-serif;font-weight:800;font-size:22px;letter-spacing:-.01em;text-transform:uppercase;white-space:nowrap;animation:marq 26s linear infinite}
+.marq .track span:nth-child(even){font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;font-size:28px}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* section heads */
+section{padding-bottom:110px}
+.sh{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px;margin-bottom:34px}
+h2{margin:10px 0 0;font-family:Unbounded,sans-serif;font-weight:800;font-size:clamp(34px,4.6vw,60px);line-height:1;letter-spacing:-.03em;text-transform:uppercase}
+h2 .chrome{font-size:1.1em}
+.sh p{margin:0;max-width:420px;font-size:17px;line-height:1.55;color:var(--soft)}
+
+/* offer cards */
+.offer{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.oc{position:relative;display:flex;flex-direction:column;border-radius:var(--radius);background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015));border:1px solid var(--line);overflow:hidden;transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .35s}
+.oc:hover{transform:translateY(-6px);border-color:rgba(200,255,61,.45);box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 50px rgba(200,255,61,.12)}
+.oc.hot{border-color:rgba(200,255,61,.35);box-shadow:0 0 0 1px rgba(200,255,61,.15),0 0 60px rgba(200,255,61,.10)}
+.oc .im{position:relative;aspect-ratio:4/3;overflow:hidden}
+.oc .im img{width:100%;height:100%;object-fit:cover;object-position:center 32%;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.oc:hover .im img{transform:scale(1.06)}
+.oc .im:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(6,7,8,.85))}
+.oc .tag{position:absolute;left:18px;top:18px;z-index:1;padding:6px 10px;border-radius:999px;background:rgba(6,7,8,.7);border:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--lime)}
+.oc .b{padding:6px 24px 26px;display:flex;flex-direction:column;gap:12px;flex:1}
+.oc h3{margin:0;font-family:Unbounded,sans-serif;font-weight:700;font-size:23px;letter-spacing:-.02em}
+.oc p{margin:0;font-size:16px;line-height:1.55;color:var(--soft);flex:1}
+.oc .btn{align-self:flex-start;min-height:48px;font-size:15px}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:18px;border-radius:var(--radius);border:1px solid var(--line);background:var(--glass)}
+.stats div{padding:26px 26px 24px;border-left:1px solid var(--line)}
+.stats div:first-child{border-left:0}
+.stats b{display:block;font-family:Unbounded,sans-serif;font-weight:800;font-size:46px;letter-spacing:-.03em;line-height:1}
+.stats div:first-child b{color:var(--lime);text-shadow:0 0 24px rgba(200,255,61,.45)}
+.stats span{display:block;margin-top:8px;font-size:14px;color:var(--muted)}
+
+/* showcase */
+.show{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;align-items:start}
+.reel{display:flex;flex-direction:column;gap:16px}
+.reel:nth-child(2){margin-top:56px}
+.reel .phone{border-radius:38px;padding:8px;transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .4s}
+.reel .phone video{border-radius:31px}
+.reel .phone:after{top:16px;width:70px;height:18px;margin-left:-35px}
+.reel:hover .phone{transform:translateY(-8px) rotate(-1.5deg);box-shadow:0 0 0 1px rgba(255,255,255,.1),0 40px 90px rgba(0,0,0,.6),0 0 90px rgba(85,232,255,.22)}
+.reel .k{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.reel h3{margin:0;font-family:Unbounded,sans-serif;font-weight:700;font-size:19px;letter-spacing:-.01em}
+.reel p{margin:0;font-size:15px;line-height:1.5;color:var(--soft)}
+.reel a.go{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);white-space:nowrap}
+.reel a.go:hover{text-shadow:0 0 14px var(--cyan)}
+
+/* code block */
+.code{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.code .card{border-radius:var(--radius);border:1px solid var(--line);background:var(--bg2);padding:28px}
+.code pre{margin:16px 0 0;font:500 14px/1.75 'JetBrains Mono',monospace;color:#D9DED8;white-space:pre-wrap}
+.code pre .c{color:#6C7472}.code pre .k{color:var(--cyan)}.code pre .s{color:var(--lime)}
+.code h3{margin:0;font-family:Unbounded,sans-serif;font-weight:700;font-size:22px}
+.code ol{margin:16px 0 0;padding:0;list-style:none;counter-reset:s}
+.code li{counter-increment:s;position:relative;padding:12px 0 12px 46px;border-top:1px solid var(--line);font-size:16px;line-height:1.5;color:var(--soft)}
+.code li:before{content:counter(s,decimal-leading-zero);position:absolute;left:0;top:12px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--lime)}
+
+/* guides */
+.all{display:grid;grid-template-columns:.8fr 1.2fr;gap:28px;align-items:center;margin-bottom:22px;padding:26px 28px;border-radius:24px;border:1px solid rgba(200,255,61,.35);background:radial-gradient(ellipse at 0% 0%,rgba(200,255,61,.10),transparent 60%),var(--bg2);box-shadow:0 0 60px rgba(200,255,61,.08)}
+.all h3{margin:8px 0 0;font-family:Unbounded,sans-serif;font-weight:800;font-size:24px;line-height:1.15;letter-spacing:-.02em}
+.all .getg{margin-top:0}
+.gl{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.g{display:flex;gap:20px;padding:18px;border-radius:var(--radius);border:1px solid var(--line);background:var(--glass);transition:border-color .3s}
+.g:hover{border-color:rgba(85,232,255,.35)}
+.g img{flex:0 0 110px;width:110px;aspect-ratio:9/16;object-fit:cover;border-radius:16px;background:#000}
+.g .b{flex:1;min-width:0;display:flex;flex-direction:column;gap:9px}
+.g .from{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.g .from b{color:var(--lime)}
+.g h3{margin:0;font-family:Unbounded,sans-serif;font-weight:700;font-size:20px;line-height:1.15;letter-spacing:-.01em}
+.g p{margin:0;font-size:15px;line-height:1.5;color:var(--soft)}
+.getg{margin-top:auto;display:flex;flex-wrap:wrap;gap:8px}
+.getg input[type=email]{flex:1 1 160px;min-width:0;min-height:48px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:rgba(0,0,0,.35);color:var(--ink);font:600 15px Manrope,sans-serif}
+.getg input[type=email]:focus{outline:none;border-color:var(--lime);box-shadow:0 0 0 3px rgba(200,255,61,.15)}
+.getg button{min-height:48px;padding:0 20px;font-size:15px}
 .getg button:disabled{opacity:.5;cursor:wait}
 .getg .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
-.getg .note{flex-basis:100%;margin:0;font-size:13px;line-height:1.45;color:var(--muted)}
-.getg.done .note{font-size:15px;font-weight:700;color:var(--ink)}
+.getg .note{flex-basis:100%;margin:2px 0 0;font-size:12.5px;line-height:1.45;color:var(--muted)}
+.getg.done .note{font-size:14px;font-weight:700;color:var(--lime)}
+
+/* kit */
+.kit{position:relative;border-radius:32px;padding:2px;background:linear-gradient(135deg,var(--lime),rgba(85,232,255,.6) 40%,rgba(255,255,255,.08) 70%,var(--lime));box-shadow:0 0 90px rgba(200,255,61,.14)}
+.kit .in{border-radius:30px;background:radial-gradient(ellipse at 85% 0%,rgba(200,255,61,.12),transparent 55%),var(--bg2);padding:46px;display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+.kit ul{margin:22px 0 0;padding:0;list-style:none}
+.kit li{position:relative;padding:12px 0 12px 34px;border-top:1px solid var(--line);font-size:16px;line-height:1.5;color:var(--soft)}
+.kit li b{color:var(--ink)}
+.kit li:before{content:"";position:absolute;left:2px;top:17px;width:16px;height:16px;border-radius:50%;background:var(--lime);box-shadow:0 0 12px rgba(200,255,61,.6);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat, linear-gradient(#000,#000);-webkit-mask-composite:xor;mask-composite:exclude}
+.kit .buy{display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+.kit .price{font-family:Unbounded,sans-serif;font-weight:800;font-size:84px;line-height:.9;letter-spacing:-.04em}
+.kit .price s{font-size:.5em;color:var(--muted);text-decoration-thickness:4px;text-decoration-color:rgba(200,255,61,.7);vertical-align:.45em;margin-right:6px}
+.getg.wl{width:100%;margin-top:0}
+.getg.wl .mono{flex-basis:100%;color:var(--lime)}
+.getg.wl input[type=text]:not(.hp){flex:1 1 100%;min-width:0;min-height:48px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:rgba(0,0,0,.35);color:var(--ink);font:600 15px Manrope,sans-serif}
+.getg.wl input[type=text]:focus{outline:none;border-color:var(--lime);box-shadow:0 0 0 3px rgba(200,255,61,.15)}
+.getg input:disabled{opacity:.6}
+.kit .price small{display:block;margin-top:10px;font-family:Manrope,sans-serif;font-weight:600;font-size:15px;letter-spacing:0;color:var(--muted)}
+.kit .im{width:100%;border-radius:20px;overflow:hidden;border:1px solid var(--line)}
+.kit .im img{width:100%;aspect-ratio:1160/464;object-fit:cover}
+
+/* hire + me */
+.hire{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;border-radius:32px;border:1px solid var(--line);background:var(--glass);padding:40px}
+.hire video{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:20px;background:#000;box-shadow:0 0 60px rgba(85,232,255,.15)}
+.hire p{margin:16px 0 24px;font-size:17px;line-height:1.6;color:var(--soft)}
+.hire .btns{display:flex;flex-wrap:wrap;gap:10px}
+.me{display:flex;gap:28px;align-items:center}
+.me img{flex:0 0 120px;width:120px;height:120px;border-radius:50%;object-fit:cover;border:2px solid var(--lime);box-shadow:0 0 30px rgba(200,255,61,.3)}
+.me p{margin:0;max-width:640px;font-size:18px;line-height:1.6;color:var(--soft)}
+footer{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;padding:30px 0 46px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+footer a:hover{color:var(--ink)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}
+.load{opacity:0;transform:translateY(22px);animation:up .9s cubic-bezier(.2,.8,.2,1) forwards}
+.load.l2{animation-delay:.12s}.load.l3{animation-delay:.24s}.load.l4{animation-delay:.36s}.load.l5{animation-delay:.5s}
+@keyframes up{to{opacity:1;transform:none}}
+
+@media (max-width:980px){
+ .hero{grid-template-columns:1fr;padding-top:28px}
+ .stage{margin:20px auto 0;width:min(290px,78%)}
+ .term{left:auto;right:58%;bottom:30px;width:260px}
+ .offer,.show{grid-template-columns:1fr}
+ .reel:nth-child(2){margin-top:0}
+ .show{max-width:420px;margin:0 auto}
+ .code,.hire,.kit .in{grid-template-columns:1fr}
+ .gl{grid-template-columns:1fr}
+ .all{grid-template-columns:1fr;gap:16px;padding:22px 20px}
+}
 @media (max-width:640px){
-  .top{padding:28px 0 48px;gap:24px}
-  .top-l{gap:20px}
-  .top-l p{font-size:17px}
-  .top-r{display:none}
-  .g{gap:16px;padding:18px 0}
-  .g img{flex-basis:92px;width:92px;align-self:flex-start;border-radius:12px}
-  .g p{font-size:15px}
-  .g .actions .btn{min-height:46px;padding:0 18px;font-size:15px}
-  .me img{flex-basis:120px;width:120px;height:120px}
-  .me p{font-size:17px}
-  .vrow{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -20px;padding:0 20px 8px}
-  .vrow .vid{flex:0 0 64%;scroll-snap-align:center}
-  .vid h3{font-size:17px}
-  .vid p{font-size:14px}
-  .kit{padding:28px 22px;border-radius:22px;margin-bottom:64px}
-  .kit p{font-size:16px}
-  .hire{padding:28px 22px;border-radius:22px;margin-bottom:48px}
-  .hire p{font-size:16px}
+ .wrap{padding:0 18px}
+ nav{display:none}
+ .lead{font-size:17px}
+ .btn{min-height:50px;padding:0 22px;font-size:15px}
+ .hero .btns .btn{flex:1 1 100%}
+ .term{position:relative;left:auto;right:auto;bottom:auto;width:100%;margin-top:-60px}
+ .stage{width:78%}
+ .marq{margin-bottom:72px}
+ .marq .track{font-size:17px;gap:30px}
+ .marq .track span:nth-child(even){font-size:22px}
+ section{padding-bottom:76px}
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .stats div:nth-child(3){border-left:0}
+ .stats div:nth-child(n+3){border-top:1px solid var(--line)}
+ .stats b{font-size:34px}
+ .oc .im{aspect-ratio:16/9}
+ .g{padding:14px;gap:14px}
+ .g img{flex-basis:86px;width:86px;align-self:flex-start}
+ .kit .in,.hire{padding:26px 20px}
+ .kit .price{font-size:64px}
+ .me{flex-direction:column;align-items:flex-start}
+}
+@media (prefers-reduced-motion:reduce){
+ *,*:before,*:after{animation:none!important;transition:none!important}
+ .rv,.load{opacity:1;transform:none}
+ html{scroll-behavior:auto}
 }
 </style>
 </head>
 <body>
-<div class="wrap" id="top">
-<header>
-<a class="logo" href="#top">veroniixx<span>.ai</span></a>
-<nav><a href="#guides">Guides</a><a href="#me">About me</a><a href="#videos">Videos</a><a href="ru/">RU</a><a class="pill" href="#hire">Order a video</a></nav>
-<a class="tg-pill" href="ru/">RU</a>
+<div class="bgfx" aria-hidden="true"><div class="grid"></div><div class="orb a"></div><div class="orb b"></div><div class="grain"></div></div>
+
+<div class="wrap">
+<header class="load">
+  <a class="logo" href="#top" id="top">veroniixx<span>.ai</span></a>
+  <nav><a href="#reels">Reels</a><a href="#guides">Free guides</a><a href="#kit">The kit</a><a href="#hire">Work with me</a></nav>
+  <a class="pill" href="#kit">Kit · $9 early</a>
 </header>
 
-<div class="top">
-<div class="top-l">
-<div class="mono">AI motion · Claude Code · Remotion</div>
-<h1>I direct reels in words. <i>Code does the rest.</i></h1>
-<p>Motion reels made by talking to Claude Code. Saw a reel and came for the guide? Every guide is step by step, for Windows and Mac, with commands you copy in one click.</p>
-<div class="btns"><a class="btn fill" href="#guides">Get the free guides</a><a class="btn line" href="#hire">Work with me</a></div>
-<div class="proof"><span><b>55K</b> views on one reel</span><span><b>No</b> After Effects, no timeline</span><span><b>Every reel</b> has a free guide</span></div>
+<div class="hero">
+  <div>
+    <div class="badge load l2"><i></i>Made with Claude Code</div>
+    <h1 class="load l3">Make Claude Code <span class="chrome">make your reels.</span></h1>
+    <p class="lead load l4">Motion reels that look expensive, made by talking to Claude Code. No After Effects, no timeline. Start with a free guide, or take my whole setup.</p>
+    <div class="btns load l5"><a class="btn lime" href="#guides">Get a free guide <span class="arr">→</span></a><a class="btn" href="#kit">The kit · $9 early</a></div>
+    <div class="note load l5">55K views on my best reel. Zero frames edited by hand.</div>
+  </div>
+  <div class="stage load l4">
+    <div class="phone"><video data-auto src="media/motion.mp4" poster="media/motion.jpg" muted loop playsinline preload="metadata" aria-label="Motion reel"></video></div>
+    <div class="term" data-lines='["a vertical reel: the word CLAUDE in chrome, the camera flies through a tunnel of cubes", "a blue balloon, a dart 0.4 mm away, filmed by a shaky hand", "every cut lands on a kick of the track, black and yellow"]'><div class="bar"><b></b><b></b><b></b></div><div class="body"><span class="p">&gt; </span><span class="typed"></span><div class="prog"><i></i></div><div class="st"></div></div></div>
+  </div>
 </div>
-<div class="top-r"><video src="media/motion.mp4" poster="media/motion.jpg" autoplay muted loop playsinline preload="metadata" aria-label="It's not you, it's Claude reel"></video></div>
 </div>
 
+<div class="marq" aria-hidden="true"><div class="track"><span>No After Effects</span><span style="font-family:Unbounded;font-style:normal">✦</span><span>just code</span><span style="font-family:Unbounded;font-style:normal">✦</span><span>No timeline</span><span style="font-family:Unbounded;font-style:normal">✦</span><span>made by talking</span><span style="font-family:Unbounded;font-style:normal">✦</span><span>Claude Code</span><span style="font-family:Unbounded;font-style:normal">✦</span><span>Remotion</span><span style="font-family:Unbounded;font-style:normal">✦</span><span>three.js</span><span style="font-family:Unbounded;font-style:normal">✦</span><span>looks expensive</span><span style="font-family:Unbounded;font-style:normal">✦</span><span>No After Effects</span><span style="font-family:Unbounded;font-style:normal">✦</span><span>just code</span><span style="font-family:Unbounded;font-style:normal">✦</span><span>No timeline</span><span style="font-family:Unbounded;font-style:normal">✦</span><span>made by talking</span><span style="font-family:Unbounded;font-style:normal">✦</span><span>Claude Code</span><span style="font-family:Unbounded;font-style:normal">✦</span><span>Remotion</span><span style="font-family:Unbounded;font-style:normal">✦</span><span>three.js</span><span style="font-family:Unbounded;font-style:normal">✦</span><span>looks expensive</span><span style="font-family:Unbounded;font-style:normal">✦</span></div></div>
+
+<div class="wrap">
+<section id="start">
+  <div class="sh rv"><div><div class="mono">Start here</div><h2>Three ways <span class="chrome">in.</span></h2></div><p>Take a free guide, get the whole setup, or have me make a reel for your product.</p></div>
+  <div class="offer">
+    <article class="oc rv"><div class="im"><img src="media/c-motion.jpg" alt="" loading="lazy"><span class="tag">Free</span></div><div class="b"><h3>The guides</h3><p>4 of my reels broken down step by step, with the exact prompts I used.</p><a class="btn" href="#guides">Pick a guide <span class="arr">→</span></a></div></article>
+    <article class="oc hot rv d1"><div class="im"><img src="media/c-kit.jpg" alt="" loading="lazy"><span class="tag">$9 early · list open</span></div><div class="b"><h3>Made by Code Kit</h3><p>5 templates, my CLAUDE.md, a setup guide and a bonus on keeping your Instagram safe.</p><a class="btn lime" href="#kit">See what's inside <span class="arr">→</span></a></div></article>
+    <article class="oc rv d2"><div class="im"><img src="media/c-dart.jpg" alt="" loading="lazy"><span class="tag">For brands</span></div><div class="b"><h3>A reel for your product</h3><p>A short motion video for your app or AI tool, made to order.</p><a class="btn" href="#hire">Tell me about it <span class="arr">→</span></a></div></article>
+  </div>
+  <div class="stats rv">
+    <div><b data-to="55" data-suf="K">55K</b><span>views on my best reel</span></div>
+    <div><b data-to="4">4</b><span>free guides</span></div>
+    <div><b data-to="5">5</b><span>reel templates</span></div>
+    <div><b>0</b><span>editing apps</span></div>
+  </div>
+</section>
+
+<section id="reels">
+  <div class="sh rv"><div><div class="mono">What you'll make</div><h2>Every frame <span class="chrome">is code.</span></h2></div><p>These reels were never edited. I described each scene, Claude Code wrote it, Remotion rendered the MP4.</p></div>
+  <div class="show"><div class="reel rv d0"><div class="phone"><video data-auto src="media/motion.mp4" poster="media/motion.jpg" muted loop playsinline preload="none" aria-label="It's not you, it's Claude reel"></video></div><div class="k"><h3>It's not you, it's Claude</h3><a class="go" href="#g-motion-claude">Get the guide →</a></div><p>A tunnel of 9,000 cubes, chrome letters with physics, 50,000 particles.</p></div><div class="reel rv d1"><div class="phone"><video data-auto src="media/dart.mp4" poster="media/dart.jpg" muted loop playsinline preload="none" aria-label="0.4 mm from the pop reel"></video></div><div class="k"><h3>0.4 mm from the pop</h3><a class="go" href="#g-dart-showreel">Get the guide →</a></div><p>Real 3D: a dart, a balloon and one handheld camera.</p></div><div class="reel rv d2"><div class="phone"><video data-auto src="media/enter.mp4" poster="media/enter.jpg" muted loop playsinline preload="none" aria-label="Cut to the beat reel"></video></div><div class="k"><h3>Cut to the beat</h3><a class="go" href="#g-enter-showreel">Get the guide →</a></div><p>Every cut lands on a kick. Timing measured by code.</p></div></div>
+</section>
+
+<section id="how">
+  <div class="code">
+    <div class="card rv"><div class="mono">You type</div>
+<pre><span class="c"># one sentence is enough to start</span>
+<span class="s">&gt;</span> make the word <span class="k">CLAUDE</span> in chrome,
+  the camera flies through a tunnel of cubes,
+  letters fall with real physics
+
+<span class="c"># then you give notes, like to an editor</span>
+<span class="s">&gt;</span> the letters pop in too hard.
+  make them float in softly.</pre></div>
+    <div class="card rv d1"><div class="mono">Claude Code does</div><h3 style="margin-top:12px">From a sentence to an MP4</h3>
+      <ol><li>Writes the scene in React and three.js: light, materials, camera.</li><li>Times every event to the beat of the track.</li><li>Checks still frames for cut-off or covered text.</li><li>Renders a vertical 1080×1920 MP4, ready for Instagram.</li></ol></div>
+  </div>
+</section>
+
 <section id="guides">
-<h2 class="big">Pick your guide</h2>
-<div class="glist">
-<article class="g"><img src="media/c-motion.jpg" alt="" loading="lazy"><div class="b"><div class="from">From the chrome CLAUDE reel · keyword <b>MOTION</b></div><h3>It's not you. It's Claude.</h3><p>How the motion reel was made with no After Effects: a tunnel of 9,000 cubes, chrome letters with physics, 50,000 particles, a fake crash. My brief and every note from three versions, ready to paste.</p><form class="getg" data-guide="motion-claude"><input type="email" name="email" placeholder="you@email.com" aria-label="Your email" autocomplete="email" required><input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn" type="submit">Send me the guide</button><p class="note" role="status">Free. You also get one short email when a new guide is out. Reply "stop" to unsubscribe.</p></form></div></article>
-<article class="g"><img src="media/c-dart.jpg" alt="" loading="lazy"><div class="b"><div class="from">From the dart and balloon reel · keyword <b>DART</b></div><h3>0.4 mm from the pop.</h3><p>How the Dart reel was made: one continuous handheld camera, real zoom and focus, the scene built from the inside, a slow-motion pop. My full brief and four rounds of notes.</p><form class="getg" data-guide="dart-showreel"><input type="email" name="email" placeholder="you@email.com" aria-label="Your email" autocomplete="email" required><input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn" type="submit">Send me the guide</button><p class="note" role="status">Free. You also get one short email when a new guide is out. Reply "stop" to unsubscribe.</p></form></div></article>
-<article class="g"><img src="media/c-enter.jpg" alt="" loading="lazy"><div class="b"><div class="from">From the black and yellow reel · keyword <b>ENTER</b></div><h3>Cut to the beat. By code.</h3><p>How the Enter reel was made: the track measured frame by frame, every hit on the music, one prompt typed on screen. My full brief and five rounds of notes.</p><form class="getg" data-guide="enter-showreel"><input type="email" name="email" placeholder="you@email.com" aria-label="Your email" autocomplete="email" required><input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn" type="submit">Send me the guide</button><p class="note" role="status">Free. You also get one short email when a new guide is out. Reply "stop" to unsubscribe.</p></form></div></article>
-<article class="g"><img src="media/c-opus.jpg" alt="" loading="lazy"><div class="b"><div class="from">From the pendulum reel · keyword <b>OPUS</b></div><h3>A showreel with no editing</h3><p>How to build a looping video with music by writing text in Claude Code. Inside: my full brief to copy and the notes I used to polish it.</p><form class="getg" data-guide="opus-showreel-en"><input type="email" name="email" placeholder="you@email.com" aria-label="Your email" autocomplete="email" required><input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn" type="submit">Send me the guide</button><p class="note" role="status">Free. You also get one short email when a new guide is out. Reply "stop" to unsubscribe.</p></form></div></article>
-</div>
+  <div class="sh rv"><div><div class="mono">Free</div><h2>Pick your <span class="chrome">guide.</span></h2></div><p>Step by step, for Windows and Mac, with every prompt ready to copy. It lands in your inbox in a minute.</p></div>
+  <div class="all rv"><div class="t"><div class="mono">Want them all?</div><h3>All 4 guides in one email.</h3></div><form class="getg" data-guide="all" data-done="All 4 guides are on the way to {email}. Check Promotions if you use Gmail."><input type="email" name="email" placeholder="you@email.com" aria-label="Your email" autocomplete="email" required><input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn lime" type="submit">Send me all guides <span class="arr">→</span></button><p class="note" role="status">Free. Plus one short email when a new guide is out. Reply "stop" to unsubscribe.</p></form></div>
+  <div class="gl"><article class="g rv d0" id="g-motion-claude"><img src="media/c-motion.jpg" alt="" loading="lazy"><div class="b"><div class="from">From the chrome CLAUDE reel · keyword <b>MOTION</b></div><h3>It's not you. It's Claude.</h3><p>How the motion reel was made with no After Effects: a tunnel of 9,000 cubes, chrome letters with physics, 50,000 particles, a fake crash. My brief and every note from three versions, ready to paste.</p><form class="getg" data-guide="motion-claude"><input type="email" name="email" placeholder="you@email.com" aria-label="Your email" autocomplete="email" required><input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn lime" type="submit">Send it</button><p class="note" role="status">Free. Plus one short email when a new guide is out. Reply "stop" to unsubscribe.</p></form></div></article>
+<article class="g rv d1" id="g-dart-showreel"><img src="media/c-dart.jpg" alt="" loading="lazy"><div class="b"><div class="from">From the dart and balloon reel · keyword <b>DART</b></div><h3>0.4 mm from the pop.</h3><p>How the Dart reel was made: one continuous handheld camera, real zoom and focus, the scene built from the inside, a slow-motion pop. My full brief and four rounds of notes.</p><form class="getg" data-guide="dart-showreel"><input type="email" name="email" placeholder="you@email.com" aria-label="Your email" autocomplete="email" required><input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn lime" type="submit">Send it</button><p class="note" role="status">Free. Plus one short email when a new guide is out. Reply "stop" to unsubscribe.</p></form></div></article>
+<article class="g rv d2" id="g-enter-showreel"><img src="media/c-enter.jpg" alt="" loading="lazy"><div class="b"><div class="from">From the black and yellow reel · keyword <b>ENTER</b></div><h3>Cut to the beat. By code.</h3><p>How the Enter reel was made: the track measured frame by frame, every hit on the music, one prompt typed on screen. My full brief and five rounds of notes.</p><form class="getg" data-guide="enter-showreel"><input type="email" name="email" placeholder="you@email.com" aria-label="Your email" autocomplete="email" required><input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn lime" type="submit">Send it</button><p class="note" role="status">Free. Plus one short email when a new guide is out. Reply "stop" to unsubscribe.</p></form></div></article>
+<article class="g rv d0" id="g-opus-showreel-en"><img src="media/c-opus.jpg" alt="" loading="lazy"><div class="b"><div class="from">From the pendulum reel · keyword <b>OPUS</b></div><h3>A showreel with no editing</h3><p>How to build a looping video with music by writing text in Claude Code. Inside: my full brief to copy and the notes I used to polish it.</p><form class="getg" data-guide="opus-showreel-en"><input type="email" name="email" placeholder="you@email.com" aria-label="Your email" autocomplete="email" required><input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn lime" type="submit">Send it</button><p class="note" role="status">Free. Plus one short email when a new guide is out. Reply "stop" to unsubscribe.</p></form></div></article></div>
+</section>
+
+<section id="kit">
+  <div class="kit rv"><div class="in">
+    <div>
+      <div class="mono">The whole setup · one payment</div>
+      <h2>Made by Code <span class="chrome">Kit.</span></h2>
+      <ul>
+        <li><b>5 reel templates</b> you edit with words: beat cuts, real 3D, an endless shot of 11,808 cubes.</li>
+        <li><b>My CLAUDE.md:</b> my rules for reels that look expensive, not cheap. Claude Code reads it on its own.</li>
+        <li><b>Step-by-step PDF:</b> install on Windows or Mac, your first reel in one evening, the notes I use to fix a reel.</li>
+        <li><b>20+ prompts</b> that work, and a music track you can use.</li>
+        <li><b>Bonus: Instagram without a ban.</b> Tools, cookies, limits, and what to do if you get restricted.</li>
+      </ul>
+    </div>
+    <div class="buy">
+      <div class="im"><img src="media/kit-cover.jpg" alt="Made by Code Kit" loading="lazy"></div>
+      <div class="price"><s>$12</s> $9<small>Early price for the list. Out soon.</small></div>
+      <form class="getg wl" data-guide="kit-waitlist" data-done="You are on the list. When the kit is out, the $9 link goes to {email}."><div class="mono">Get it first · $9 instead of $12</div><input type="text" name="ig" placeholder="@your_instagram" aria-label="Your Instagram (optional)" autocomplete="off" maxlength="40"><input type="email" name="email" placeholder="you@email.com" aria-label="Your email" autocomplete="email" required><input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn lime" type="submit">Get it first <span class="arr">→</span></button><p class="note" role="status">One email when the kit is out, with your $9 link. Instagram is optional. Reply "stop" to unsubscribe.</p></form>
+      <div class="mono" style="letter-spacing:.06em;text-transform:none;font-size:13px">You need a computer and a Claude plan with Claude Code. No coding experience.</div>
+    </div>
+  </div></div>
+</section>
+
+<section id="hire">
+  <div class="hire rv">
+    <div><div class="mono">For brands</div><h2>A reel for <span class="chrome">your product.</span></h2>
+      <p>I make short motion videos for apps and AI tools. Send me a link to your product and tell me what the viewer should remember. I'll reply with how I would show it.</p>
+      <div class="btns"><a class="btn lime" href="https://ig.me/m/veroniixx.ai" target="_blank" rel="noopener">Message me on Instagram</a><a class="btn" href="mailto:veronikachikka24@gmail.com">Email</a><a class="btn" href="https://t.me/veronikachika24" target="_blank" rel="noopener">Telegram</a></div></div>
+    <video data-auto src="media/motion-3d.mp4" poster="media/motion-3d.jpg" muted loop playsinline preload="none" aria-label="Motion reel, wide"></video>
+  </div>
 </section>
 
 <section id="me">
-<h2 class="big">Who makes this</h2>
-<div class="me"><img src="media/veronika.jpg" alt="Veronika"><div class="b"><p>Hi, I'm Veronika. I make videos, bots and AI agents by writing text in Claude Code, with no editing apps. When something works, I write it down as a guide so you can repeat it.</p><p>I also work with a team that builds AI agents for businesses.</p><div class="btns"><a class="btn fill" href="https://instagram.com/veroniixx.ai" target="_blank" rel="noopener">Follow on Instagram</a></div></div></div>
+  <div class="me rv"><img src="media/veronika.jpg" alt="Veronika"><div><div class="mono">Who makes this</div>
+    <p style="margin-top:10px">Hi, I'm Veronika. I make reels, bots and AI agents by talking to Claude Code, with no editing apps. When something works, I turn it into a guide so you can repeat it.</p>
+    <div style="margin-top:16px"><a class="btn" href="https://instagram.com/veroniixx.ai" target="_blank" rel="noopener">Follow on Instagram</a></div></div></div>
 </section>
 
-<section id="videos"><h2 class="big">Videos I made with code</h2><div class="vrow"><div class="vid v"><video src="media/motion.mp4" poster="media/motion.jpg" controls playsinline preload="none"></video><h3 translate="no">It's not you, it's Claude</h3><p>Motion reel on a laptop screen. Tunnel, chrome letters, physics, particles: all code, no After Effects.</p></div><div class="vid v"><video src="media/dart.mp4" poster="media/dart.jpg" controls playsinline preload="none"></video><h3 translate="no">Dart</h3><p>Showreel. A dart, a balloon and one continuous camera. The 3D, the camera moves and the music are all code.</p></div><div class="vid v"><video src="media/tidewell.mp4" poster="media/tidewell.jpg" controls playsinline preload="none"></video><h3 translate="no">Tidewell</h3><p>Concept ad for a made-up scheduling app. Not a real client: I made it to show what a product video from me looks like.</p></div><div class="vid v"><video src="media/hopbox.mp4" poster="media/hopbox.jpg" controls playsinline preload="none"></video><h3 translate="no">Hopbox</h3><p>Concept ad for a made-up order tracking service for online stores. Not a real client either.</p></div><div class="vid v"><video src="media/brewline.mp4" poster="media/brewline.jpg" controls playsinline preload="none"></video><h3 translate="no">Brewline</h3><p>Concept ad for a made-up coffee subscription. Not a real client either.</p></div><div class="vid v"><video src="media/enter.mp4" poster="media/enter.jpg" controls playsinline preload="none"></video><h3 translate="no">Enter</h3><p>Showreel. One prompt, cuts on the beat, no editing app. Shown here without the music.</p></div><div class="vid v"><video src="media/opus.mp4" poster="media/opus.jpg" controls playsinline preload="none"></video><h3 translate="no">Opus</h3><p>Showreel. A seamless loop, 13.9K views on Instagram.</p></div></div><div class="vid h"><video src="media/motion-3d.mp4" poster="media/motion-3d.jpg" controls playsinline preload="none"></video><h3 translate="no">It's not you, it's Claude (full)</h3><p>The same reel in 16:9. 9,000 cubes, 50,000 particles, glass, gold and a fake crash.</p></div><div class="vid h"><video src="media/cubes.mp4" poster="media/cubes.jpg" controls playsinline preload="none"></video><h3 translate="no">A video that never ends</h3><p>11,808 cubes in one endless shot.</p></div></section>
-
-<div class="kit" id="kit"><div class="mono">Coming soon</div><h2>Made by Code Kit</h2><p>5 reel templates, the prompts I use, and a setup video. Change the words, render, post.</p></div>
-
-<div class="hire" id="hire"><h2>Need a video like this for your product?</h2><p>I make short motion videos for apps and AI tools. Send me a link to your product and tell me what the viewer should remember. I will reply with how I would show it.</p><div class="btns"><a class="btn" href="https://ig.me/m/veroniixx.ai" target="_blank" rel="noopener">Message me on Instagram</a><a class="btn ghost" href="mailto:veronikachikka24@gmail.com" translate="no">veronikachikka24@gmail.com</a><a class="btn ghost" href="https://t.me/veronikachika24" target="_blank" rel="noopener">Telegram</a></div></div>
-
-
-
-
-
-<footer><span>veroniixx.ai · 2026</span><span><a href="privacy/">Privacy</a> · <a href="ru/">Русская версия</a></span></footer>
+<footer><span>veroniixx.ai · 2026</span><span><a href="privacy/">Privacy</a></span></footer>
 </div>
 <script>
 document.querySelectorAll('form.getg').forEach(function (f) {
@@ -187,11 +358,12 @@ document.querySelectorAll('form.getg').forEach(function (f) {
     var b = f.querySelector('button'), note = f.querySelector('.note');
     b.disabled = true;
     fetch('https://script.google.com/macros/s/AKfycbz0kpqRsiw_Ti8PCj70TBnDr8u7MIeuk7sRFZoLc_0eu8rKdAaQ6jRDbHIriUkqMz-bow/exec', {method: 'POST', mode: 'no-cors', body: new URLSearchParams({
-      email: f.email.value, guide: f.dataset.guide, website: f.website.value})})
+      email: f.email.value, guide: f.dataset.guide, website: f.website.value, ig: f.ig ? f.ig.value : ''})})
       .then(function () {
         f.classList.add('done');
-        note.textContent = 'Sent to ' + f.email.value + '. Check your inbox, and Promotions if you use Gmail.';
+        note.textContent = (f.dataset.done || 'Sent to {email}. Check your inbox, and Promotions if you use Gmail.').replace('{email}', f.email.value);
         f.email.disabled = true;
+        if (f.ig) f.ig.disabled = true;
       })
       .catch(function () {
         b.disabled = false;
@@ -199,6 +371,50 @@ document.querySelectorAll('form.getg').forEach(function (f) {
       });
   });
 });
+</script>
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // scroll reveals
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.15}) : null;
+  document.querySelectorAll('.rv').forEach(function(el){ io ? io.observe(el) : el.classList.add('in'); });
+  // play videos only while visible
+  if('IntersectionObserver' in window){
+    var vo = new IntersectionObserver(function(es){
+      es.forEach(function(e){ var v=e.target; if(e.isIntersecting){ var p=v.play(); if(p&&p.catch)p.catch(function(){}); } else v.pause(); });
+    },{threshold:.25});
+    document.querySelectorAll('video[data-auto]').forEach(function(v){ vo.observe(v); });
+  }
+  // count-up
+  function count(el){
+    var to=+el.dataset.to, suf=el.dataset.suf||'', t0=null;
+    if(reduce){ el.textContent=to+suf; return; }
+    function f(t){ if(!t0)t0=t; var k=Math.min(1,(t-t0)/1400); k=1-Math.pow(1-k,3); el.textContent=Math.round(to*k)+suf; if(k<1)requestAnimationFrame(f); }
+    requestAnimationFrame(f);
+  }
+  var so = 'IntersectionObserver' in window ? new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ count(e.target); so.unobserve(e.target); } });
+  },{threshold:.6}) : null;
+  document.querySelectorAll('[data-to]').forEach(function(el){ so ? so.observe(el) : count(el); });
+  // typing terminal, loops
+  var term=document.querySelector('.term'); if(!term) return;
+  var typed=term.querySelector('.typed'), bar=term.querySelector('.prog i'), st=term.querySelector('.st');
+  var lines=JSON.parse(term.dataset.lines);
+  if(reduce){ typed.textContent=lines[0]; bar.style.width='100%'; st.textContent='rendered · 1080×1920 · 30 fps'; return; }
+  var li=0;
+  function run(){
+    var s=lines[li%lines.length], i=0; term.classList.remove('done'); bar.style.transition='none'; bar.style.width='0'; st.textContent='';
+    (function type(){ typed.textContent=s.slice(0,++i); if(i<s.length) setTimeout(type, 28+Math.random()*40); else {
+      term.classList.add('done'); st.textContent='rendering…';
+      setTimeout(function(){ bar.style.transition='width 2.2s cubic-bezier(.4,0,.2,1)'; bar.style.width='100%'; },60);
+      setTimeout(function(){ st.textContent='rendered · 1080×1920 · 30 fps'; },2400);
+      setTimeout(function(){ li++; run(); },5200);
+    }})();
+  }
+  setTimeout(run, 900);
+})();
 </script>
 </body>
 </html>
