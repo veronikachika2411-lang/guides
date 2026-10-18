@@ -1,0 +1,26 @@
+{
+ "drop-showreel": {
+  "title": "Wait for the drop.",
+  "pdf": "drop-showreel-guide.pdf"
+ },
+ "thread-showreel": {
+  "title": "One line. No cuts.",
+  "pdf": "thread-showreel-guide.pdf"
+ },
+ "motion-claude": {
+  "title": "It's not you. It's Claude.",
+  "pdf": "motion-claude-guide.pdf"
+ },
+ "dart-showreel": {
+  "title": "0.4 mm from the pop.",
+  "pdf": "dart-showreel-guide.pdf"
+ },
+ "enter-showreel": {
+  "title": "Cut to the beat. By code.",
+  "pdf": "enter-showreel-guide.pdf"
+ },
+ "opus-showreel-en": {
+  "title": "A showreel with no editing",
+  "pdf": "opus-showreel-guide-en.pdf"
+ }
+}

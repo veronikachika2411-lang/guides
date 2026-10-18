@@ -69,6 +69,8 @@ h1 .chrome{display:block;font-size:1.12em;line-height:.95;margin-top:6px;padding
 .stage{position:relative;justify-self:center;width:min(330px,100%)}
 .phone{position:relative;border-radius:44px;padding:10px;background:linear-gradient(160deg,#2A2E31,#0D0F10 40%,#1D2124);box-shadow:0 0 0 1px rgba(255,255,255,.08),0 40px 90px rgba(0,0,0,.6),0 0 80px rgba(200,255,61,.18)}
 .phone video,.phone img{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:36px;background:#000}
+.phone .views{position:absolute;left:50%;top:58px;transform:translateX(-50%);display:flex;align-items:center;gap:8px;white-space:nowrap;padding:9px 14px;border-radius:999px;background:rgba(6,7,8,.78);border:1px solid rgba(200,255,61,.4);font:700 12px 'JetBrains Mono',monospace;letter-spacing:.06em;color:var(--ink);box-shadow:0 0 30px rgba(200,255,61,.2)}
+.phone .views i{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px var(--lime)}
 .phone:after{content:"";position:absolute;top:20px;left:50%;width:84px;height:22px;margin-left:-42px;border-radius:12px;background:#000}
 .term{position:absolute;left:-84px;bottom:40px;width:262px;border-radius:18px;background:rgba(10,12,13,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.12);box-shadow:0 24px 60px rgba(0,0,0,.55);font:500 12.5px/1.6 'JetBrains Mono',monospace;overflow:hidden}
 .term .bar{display:flex;gap:6px;padding:10px 12px;border-bottom:1px solid var(--line)}
@@ -118,20 +120,6 @@ h2 .chrome{font-size:1.1em}
 .stats div:first-child b{color:var(--lime);text-shadow:0 0 24px rgba(200,255,61,.45)}
 .stats span{display:block;margin-top:8px;font-size:14px;color:var(--muted)}
 
-/* showcase */
-.show{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;align-items:start}
-.reel{display:flex;flex-direction:column;gap:16px}
-.reel:nth-child(2){margin-top:56px}
-.reel .phone{border-radius:38px;padding:8px;transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .4s}
-.reel .phone video{border-radius:31px}
-.reel .phone:after{top:16px;width:70px;height:18px;margin-left:-35px}
-@media (hover:hover) and (pointer:fine){.reel:hover .phone{transform:translateY(-8px) rotate(-1.5deg);box-shadow:0 0 0 1px rgba(255,255,255,.1),0 40px 90px rgba(0,0,0,.6),0 0 90px rgba(85,232,255,.22)}}
-.reel .k{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.reel h3{margin:0;font-family:Unbounded,sans-serif;font-weight:700;font-size:19px;letter-spacing:-.01em}
-.reel p{margin:0;font-size:15px;line-height:1.5;color:var(--soft)}
-.reel a.go{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);white-space:nowrap}
-.reel a.go:hover{text-shadow:0 0 14px var(--cyan)}
-
 /* code block */
 .code{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .code .card{border-radius:var(--radius);border:1px solid var(--line);background:var(--bg2);padding:28px}
@@ -142,19 +130,36 @@ h2 .chrome{font-size:1.1em}
 .code li{counter-increment:s;position:relative;padding:12px 0 12px 46px;border-top:1px solid var(--line);font-size:16px;line-height:1.5;color:var(--soft)}
 .code li:before{content:counter(s,decimal-leading-zero);position:absolute;left:0;top:12px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--lime)}
 
-/* guides */
-.all{display:grid;grid-template-columns:.8fr 1.2fr;gap:28px;align-items:center;margin-bottom:22px;padding:26px 28px;border-radius:24px;border:1px solid rgba(200,255,61,.35);background:radial-gradient(ellipse at 0% 0%,rgba(200,255,61,.10),transparent 60%),var(--bg2);box-shadow:0 0 60px rgba(200,255,61,.08)}
-.all h3{margin:8px 0 0;font-family:Unbounded,sans-serif;font-weight:800;font-size:24px;line-height:1.15;letter-spacing:-.02em}
-.all .getg{margin-top:0}
-.gl{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-.g{display:flex;gap:20px;padding:18px;border-radius:var(--radius);border:1px solid var(--line);background:var(--glass);transition:border-color .3s}
-.g:hover{border-color:rgba(85,232,255,.35)}
-.g img{flex:0 0 110px;width:110px;aspect-ratio:9/16;object-fit:cover;border-radius:16px;background:#000}
-.g .b{flex:1;min-width:0;display:flex;flex-direction:column;gap:9px}
-.g .from{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.g .from b{color:var(--lime)}
-.g h3{margin:0;font-family:Unbounded,sans-serif;font-weight:700;font-size:20px;line-height:1.15;letter-spacing:-.01em}
-.g p{margin:0;font-size:15px;line-height:1.5;color:var(--soft)}
+/* guides: picker */
+.gp{border-radius:var(--radius);border:1px solid var(--line);background:var(--glass);padding:22px}
+.sel{display:grid;grid-template-columns:150px 1fr;gap:24px;align-items:stretch;padding:4px 4px 22px;border-bottom:1px solid var(--line)}
+.sel .im{position:relative;width:100%;align-self:start;aspect-ratio:9/16;border-radius:18px;overflow:hidden;background:#000;box-shadow:0 0 50px rgba(200,255,61,.10)}
+.sel .im img{width:100%;height:100%;object-fit:cover}
+.sel .im .ai{display:none;position:absolute;inset:0}
+.sel.isall .im img{display:none}.sel.isall .im .ai{display:flex}
+.sel .b{display:flex;flex-direction:column;gap:10px;min-width:0}
+.sel .from{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.sel .from b{color:var(--lime)}
+.sel h3{margin:0;font-family:Unbounded,sans-serif;font-weight:800;font-size:28px;line-height:1.12;letter-spacing:-.02em}
+.sel p{margin:0;font-size:16px;line-height:1.55;color:var(--soft);max-width:60ch}
+.sel .b>.getg,.sel .b>.btn{margin-top:auto;padding-top:8px}
+.sel .b>.btn{align-self:flex-start}
+.ai{flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 30%,rgba(200,255,61,.25),transparent 70%),#0B0D0F;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.ai b{font-family:Unbounded,sans-serif;font-weight:800;font-size:40px;letter-spacing:-.03em;color:var(--lime);text-shadow:0 0 22px rgba(200,255,61,.45)}
+.gh{display:flex;justify-content:space-between;align-items:center;margin:18px 4px 12px}
+.gh .nav{display:flex;gap:8px}
+.ar{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);font-size:16px;cursor:pointer}
+.ar:hover{border-color:var(--lime);color:var(--lime)}
+.strip{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x proximity;padding:2px 2px 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.strip::-webkit-scrollbar{display:none}
+.gt{flex:0 0 112px;display:flex;flex-direction:column;gap:7px;padding:0;border:0;background:none;color:var(--ink);text-align:left;cursor:pointer;scroll-snap-align:start;font:inherit}
+.gt img,.gt .ai{display:flex;width:112px;aspect-ratio:9/16;object-fit:cover;border-radius:14px;background:#000;border:2px solid transparent;opacity:.62;transition:opacity .25s,border-color .25s,transform .25s}
+.gt .w{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--muted)}
+.gt .n{font-size:12.5px;line-height:1.3;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.gt.on img,.gt.on .ai{opacity:1;border-color:var(--lime);box-shadow:0 0 24px rgba(200,255,61,.25)}
+.gt.on .w{color:var(--lime)}.gt.on .n{color:var(--ink)}
+@media (hover:hover) and (pointer:fine){.gt:hover img,.gt:hover .ai{opacity:1;transform:translateY(-3px)}}
+.gt:focus-visible{outline:none}.gt:focus-visible img,.gt:focus-visible .ai{border-color:var(--cyan)}
 .getg{margin-top:auto;display:flex;flex-wrap:wrap;gap:8px}
 .getg input[type=email]{flex:1 1 160px;min-width:0;min-height:48px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:rgba(0,0,0,.35);color:var(--ink);font:600 15px Manrope,sans-serif}
 .getg input[type=email]:focus{outline:none;border-color:var(--lime);box-shadow:0 0 0 3px rgba(200,255,61,.15)}
@@ -199,7 +204,7 @@ h2 .chrome{font-size:1.1em}
 
 /* hire + me */
 .hire{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;border-radius:32px;border:1px solid var(--line);background:var(--glass);padding:40px}
-.hire video{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:20px;background:#000;box-shadow:0 0 60px rgba(85,232,255,.15)}
+.hire .shot{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:20px;background:#000;box-shadow:0 0 60px rgba(85,232,255,.15)}
 .hire p{margin:16px 0 24px;font-size:17px;line-height:1.6;color:var(--soft)}
 .hire .btns{display:flex;flex-wrap:wrap;gap:10px}
 .me{display:flex;gap:28px;align-items:center}
@@ -220,12 +225,8 @@ footer a:hover{color:var(--ink)}
  .hero{grid-template-columns:1fr;padding-top:28px}
  .stage{margin:20px auto 0;width:min(290px,78%)}
  .term{left:auto;right:58%;bottom:30px;width:260px}
- .offer,.show{grid-template-columns:1fr}
- .reel:nth-child(2){margin-top:0}
- .show{max-width:420px;margin:0 auto}
+ .offer{grid-template-columns:1fr}
  .code,.hire,.kit .in{grid-template-columns:1fr}
- .gl{grid-template-columns:1fr}
- .all{grid-template-columns:1fr;gap:16px;padding:22px 20px}
 }
 @media (max-width:640px){
  .wrap{padding:0 18px}
@@ -244,9 +245,14 @@ footer a:hover{color:var(--ink)}
  .stats div:nth-child(n+3){border-top:1px solid var(--line)}
  .stats b{font-size:34px}
  .oc .im{aspect-ratio:16/9}
- .g{padding:14px;gap:14px}
- .g img{flex-basis:86px;width:86px;align-self:flex-start}
  .kit .in,.hire{padding:26px 20px}
+ .gp{padding:16px}
+ .sel{grid-template-columns:96px 1fr;gap:16px;padding:0 0 18px}
+ .sel h3{font-size:21px}
+ .sel p{font-size:15px}
+ .gh .nav{display:none}
+ .gt{flex-basis:92px}
+ .gt img,.gt .ai{width:92px}
  .kit .price{font-size:64px}
  .me{flex-direction:column;align-items:flex-start}
 }
@@ -255,8 +261,6 @@ footer a:hover{color:var(--ink)}
  .bgfx{background:radial-gradient(ellipse at 100% 0%,rgba(200,255,61,.10),transparent 55%),radial-gradient(ellipse at 0% 45%,rgba(85,232,255,.07),transparent 50%)}
  .term{backdrop-filter:none;-webkit-backdrop-filter:none;background:#0B0D0F}
  .getg input[type=email],.getg.wl input[type=text]:not(.hp){font-size:16px}
- .reel .k{flex-wrap:wrap;align-items:flex-start}
- .reel a.go{display:inline-flex;align-items:center;min-height:44px;white-space:normal}
 }
 a:focus-visible,button:focus-visible{outline:3px solid var(--cyan);outline-offset:4px}
 @media (prefers-reduced-motion:reduce){
@@ -272,7 +276,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--cyan);outline-offse
 <div class="wrap">
 <header class="load">
   <a class="logo" href="#top" id="top">veroniixx<span>.ai</span></a>
-  <nav><a href="#reels">Reels</a><a href="#guides">Free guides</a><a href="#kit">The kit</a><a href="#hire">Work with me</a></nav>
+  <nav><a href="#reels">How it works</a><a href="#guides">Free guides</a><a href="#kit">The kit</a><a href="#hire">Work with me</a></nav>
   <a class="pill" href="#kit">Kit · $9 early</a>
 </header>
 
@@ -282,11 +286,11 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--cyan);outline-offse
     <h1 class="load l3">Make Claude Code <span class="chrome">make your reels.</span></h1>
     <p class="lead load l4">Motion reels that look expensive, made by talking to Claude Code. No After Effects, no timeline. Start with a free guide, or take my whole setup.</p>
     <div class="btns load l5"><a class="btn lime" href="#guides">Get a free guide <span class="arr">→</span></a><a class="btn" href="#kit">The kit · $9 early</a></div>
-    <div class="note load l5">55K views on my best reel. Zero frames edited by hand.</div>
+    <div class="note load l5">65K views on my best reel. Zero frames edited by hand.</div>
   </div>
   <div class="stage load l4">
-    <div class="phone"><video data-auto src="media/motion-preview.mp4" poster="media/motion.jpg" muted loop playsinline preload="metadata" aria-label="Motion reel"></video></div>
-    <div class="term" data-lines='["a vertical reel: the word CLAUDE in chrome, the camera flies through a tunnel of cubes", "a blue balloon, a dart 0.4 mm away, filmed by a shaky hand", "every cut lands on a kick of the track, black and yellow"]'><div class="bar"><b></b><b></b><b></b></div><div class="body"><span class="p">&gt; </span><span class="typed"></span><div class="prog"><i></i></div><div class="st"></div></div></div>
+    <div class="phone"><video data-auto src="media/opus.mp4" poster="media/opus.jpg" muted loop playsinline preload="metadata" aria-label="My best reel, 65K views"></video><span class="views"><i></i>65K views · my best reel</span></div>
+    <div class="term" data-lines='["a looping reel: an orange ball on a pendulum wipes every phrase off the screen", "a vertical reel: the word CLAUDE in chrome, the camera flies through a tunnel of cubes", "a blue balloon, a dart 0.4 mm away, filmed by a shaky hand", "every cut lands on a kick of the track, black and yellow"]'><div class="bar"><b></b><b></b><b></b></div><div class="body"><span class="p">&gt; </span><span class="typed"></span><div class="prog"><i></i></div><div class="st"></div></div></div>
   </div>
 </div>
 </div>
@@ -297,24 +301,20 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--cyan);outline-offse
 <section id="start">
   <div class="sh rv"><div><div class="mono">Start here</div><h2>Three ways <span class="chrome">in.</span></h2></div><p>Take a free guide, get the whole setup, or have me make a reel for your product.</p></div>
   <div class="offer">
-    <article class="oc rv"><div class="im"><img src="media/c-motion.jpg" alt="" loading="lazy"><span class="tag">Free</span></div><div class="b"><h3>The guides</h3><p>5 of my reels broken down step by step, with the exact prompts I used.</p><a class="btn" href="#guides">Pick a guide <span class="arr">→</span></a></div></article>
+    <article class="oc rv"><div class="im"><img src="media/c-motion.jpg" alt="" loading="lazy"><span class="tag">Free</span></div><div class="b"><h3>The guides</h3><p>6 of my reels broken down step by step, with the exact prompts I used.</p><a class="btn" href="#guides">Pick a guide <span class="arr">→</span></a></div></article>
     <article class="oc hot rv d1"><div class="im"><img src="media/c-kit.jpg" alt="" loading="lazy"><span class="tag">$9 early · list open</span></div><div class="b"><h3>Made by Code Kit</h3><p>5 templates, my CLAUDE.md, a setup guide and a bonus on keeping your Instagram safe.</p><a class="btn lime" href="#kit">See what's inside <span class="arr">→</span></a></div></article>
     <article class="oc rv d2"><div class="im"><img src="media/c-dart.jpg" alt="" loading="lazy"><span class="tag">For brands</span></div><div class="b"><h3>A reel for your product</h3><p>A short motion video for your app or AI tool, made to order.</p><a class="btn" href="#hire">Tell me about it <span class="arr">→</span></a></div></article>
   </div>
   <div class="stats rv">
-    <div><b data-to="55" data-suf="K">55K</b><span>views on my best reel</span></div>
-    <div><b data-to="5">5</b><span>free guides</span></div>
-    <div><b data-to="5">5</b><span>reel templates</span></div>
+    <div><b data-to="65" data-suf="K">65K</b><span>views on my best reel</span></div>
+    <div><b data-to="80" data-suf="+">80+</b><span>guides sent this week</span></div>
+    <div><b data-to="6">6</b><span>free guides</span></div>
     <div><b>0</b><span>editing apps</span></div>
   </div>
 </section>
 
 <section id="reels">
-  <div class="sh rv"><div><div class="mono">What you'll make</div><h2>Every frame <span class="chrome">is code.</span></h2></div><p>These reels were never edited. I described each scene, Claude Code wrote it, Remotion rendered the MP4.</p></div>
-  <div class="show"><div class="reel rv d0"><div class="phone"><video data-auto src="media/motion-preview.mp4" poster="media/motion.jpg" muted loop playsinline preload="none" aria-label="It's not you, it's Claude reel"></video></div><div class="k"><h3>It's not you, it's Claude</h3><a class="go" href="#g-motion-claude">Get the guide →</a></div><p>A tunnel of 9,000 cubes, chrome letters with physics, 50,000 particles.</p></div><div class="reel rv d1"><div class="phone"><video data-auto src="media/dart.mp4" poster="media/dart.jpg" muted loop playsinline preload="none" aria-label="0.4 mm from the pop reel"></video></div><div class="k"><h3>0.4 mm from the pop</h3><a class="go" href="#g-dart-showreel">Get the guide →</a></div><p>Real 3D: a dart, a balloon and one handheld camera.</p></div><div class="reel rv d2"><div class="phone"><video data-auto src="media/enter.mp4" poster="media/enter.jpg" muted loop playsinline preload="none" aria-label="Cut to the beat reel"></video></div><div class="k"><h3>Cut to the beat</h3><a class="go" href="#g-enter-showreel">Get the guide →</a></div><p>Every cut lands on a kick. Timing measured by code.</p></div></div>
-</section>
-
-<section id="how">
+  <div class="sh rv"><div><div class="mono">How it works</div><h2>Every frame <span class="chrome">is code.</span></h2></div><p>These reels were never edited. I describe each scene, Claude Code writes it, Remotion renders the MP4.</p></div>
   <div class="code">
     <div class="card rv"><div class="mono">You type</div>
 <pre><span class="c"># one sentence is enough to start</span>
@@ -332,12 +332,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--cyan);outline-offse
 
 <section id="guides">
   <div class="sh rv"><div><div class="mono">Free</div><h2>Pick your <span class="chrome">guide.</span></h2></div><p>Step by step, for Windows and Mac, with every prompt ready to copy. It lands in your inbox in a minute.</p></div>
-  <div class="all rv"><div class="t"><div class="mono">Want them all?</div><h3>All 5 guides in one email.</h3></div><form class="getg" data-guide="all" data-done="All 5 guides are on the way to {email}. Check Promotions if you use Gmail."><input type="email" name="email" placeholder="you@email.com" aria-label="Your email" autocomplete="email" required><input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn lime" type="submit">Send me all guides <span class="arr">→</span></button><p class="note" role="status">Free. Plus one short email when a new guide is out. Reply "stop" to unsubscribe.</p></form></div>
-  <div class="gl"><article class="g rv d0" id="g-thread-showreel"><img src="media/c-thread.jpg" alt="" loading="lazy"><div class="b"><div class="from">From the one line reel · keyword <b>THREAD</b></div><h3>One line. No cuts.</h3><p>How one orange line writes every word, ties a knot and loops forever: the words traced from real font outlines, every pull on the beat, the music written in code. My full brief and notes.</p><form class="getg" data-guide="thread-showreel"><input type="email" name="email" placeholder="you@email.com" aria-label="Your email" autocomplete="email" required><input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn lime" type="submit">Send it</button><p class="note" role="status">Free. Plus one short email when a new guide is out. Reply "stop" to unsubscribe.</p></form></div></article>
-<article class="g rv d1" id="g-motion-claude"><img src="media/c-motion.jpg" alt="" loading="lazy"><div class="b"><div class="from">From the chrome CLAUDE reel · keyword <b>MOTION</b></div><h3>It's not you. It's Claude.</h3><p>How the motion reel was made with no After Effects: a tunnel of 9,000 cubes, chrome letters with physics, 50,000 particles, a fake crash. My brief and every note from three versions, ready to paste.</p><form class="getg" data-guide="motion-claude"><input type="email" name="email" placeholder="you@email.com" aria-label="Your email" autocomplete="email" required><input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn lime" type="submit">Send it</button><p class="note" role="status">Free. Plus one short email when a new guide is out. Reply "stop" to unsubscribe.</p></form></div></article>
-<article class="g rv d2" id="g-dart-showreel"><img src="media/c-dart.jpg" alt="" loading="lazy"><div class="b"><div class="from">From the dart and balloon reel · keyword <b>DART</b></div><h3>0.4 mm from the pop.</h3><p>How the Dart reel was made: one continuous handheld camera, real zoom and focus, the scene built from the inside, a slow-motion pop. My full brief and four rounds of notes.</p><form class="getg" data-guide="dart-showreel"><input type="email" name="email" placeholder="you@email.com" aria-label="Your email" autocomplete="email" required><input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn lime" type="submit">Send it</button><p class="note" role="status">Free. Plus one short email when a new guide is out. Reply "stop" to unsubscribe.</p></form></div></article>
-<article class="g rv d0" id="g-enter-showreel"><img src="media/c-enter.jpg" alt="" loading="lazy"><div class="b"><div class="from">From the black and yellow reel · keyword <b>ENTER</b></div><h3>Cut to the beat. By code.</h3><p>How the Enter reel was made: the track measured frame by frame, every hit on the music, one prompt typed on screen. My full brief and five rounds of notes.</p><form class="getg" data-guide="enter-showreel"><input type="email" name="email" placeholder="you@email.com" aria-label="Your email" autocomplete="email" required><input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn lime" type="submit">Send it</button><p class="note" role="status">Free. Plus one short email when a new guide is out. Reply "stop" to unsubscribe.</p></form></div></article>
-<article class="g rv d1" id="g-opus-showreel-en"><img src="media/c-opus.jpg" alt="" loading="lazy"><div class="b"><div class="from">From the pendulum reel · keyword <b>OPUS</b></div><h3>A showreel with no editing</h3><p>How to build a looping video with music by writing text in Claude Code. Inside: my full brief to copy and the notes I used to polish it.</p><form class="getg" data-guide="opus-showreel-en"><input type="email" name="email" placeholder="you@email.com" aria-label="Your email" autocomplete="email" required><input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn lime" type="submit">Send it</button><p class="note" role="status">Free. Plus one short email when a new guide is out. Reply "stop" to unsubscribe.</p></form></div></article></div>
+  <div class="gp rv"><div class="sel isall" id="gp-sel"><div class="im"><img id="gp-img" src="media/c-drop.jpg" alt=""><span class="ai"><b>6</b>guides</span></div><div class="b"><div class="from" id="gp-from">Everything</div><h3 id="gp-t">All 6 guides in one email.</h3><p id="gp-p">Every guide below with its PDF, in one email. Or tap one cover to get just that guide.</p><form class="getg" data-guide="all" data-done="All the guides are on the way to {email}. Check Promotions if you use Gmail."><input type="email" name="email" placeholder="you@email.com" aria-label="Your email" autocomplete="email" required><input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn lime" type="submit">Send it <span class="arr">→</span></button><p class="note" role="status">Free. Plus one short email when a new guide is out. Reply "stop" to unsubscribe.</p></form></div></div><div class="gh"><span class="mono">6 free guides · tap one</span><span class="nav"><button type="button" class="ar" data-d="-1" aria-label="Scroll left">←</button><button type="button" class="ar" data-d="1" aria-label="Scroll right">→</button></span></div><div class="strip" id="gp-strip"><button type="button" class="gt all on" id="g-all" data-guide="all" data-t="All 6 guides in one email." data-p="Every guide below with its PDF, in one email. Or tap one cover to get just that guide." aria-pressed="true"><span class="ai"><b>6</b>guides</span><span class="w">ALL</span><span class="n">Every guide</span></button><button type="button" class="gt" id="g-drop-showreel" data-guide="drop-showreel" data-img="media/c-drop.jpg" data-reel="the chrome drop reel" data-word="DROP" data-t="Wait for the drop." data-p="How one drop of liquid chrome does every transition: a pendulum that wipes the words, a wireframe, a lens, 180 drops in a spiral, a perfect loop. Real 3D in code, music in code. My full brief and notes." aria-pressed="false"><img src="media/c-drop.jpg" alt="" loading="lazy"><span class="w">DROP</span><span class="n">Wait for the drop.</span></button><button type="button" class="gt" id="g-thread-showreel" data-guide="thread-showreel" data-img="media/c-thread.jpg" data-reel="the one line reel" data-word="THREAD" data-t="One line. No cuts." data-p="How one orange line writes every word, ties a knot and loops forever: the words traced from real font outlines, every pull on the beat, the music written in code. My full brief and notes." aria-pressed="false"><img src="media/c-thread.jpg" alt="" loading="lazy"><span class="w">THREAD</span><span class="n">One line. No cuts.</span></button><button type="button" class="gt" id="g-motion-claude" data-guide="motion-claude" data-img="media/c-motion.jpg" data-reel="the chrome CLAUDE reel" data-word="MOTION" data-t="It's not you. It's Claude." data-p="How the motion reel was made with no After Effects: a tunnel of 9,000 cubes, chrome letters with physics, 50,000 particles, a fake crash. My brief and every note from three versions, ready to paste." aria-pressed="false"><img src="media/c-motion.jpg" alt="" loading="lazy"><span class="w">MOTION</span><span class="n">It's not you. It's Claude.</span></button><button type="button" class="gt" id="g-dart-showreel" data-guide="dart-showreel" data-img="media/c-dart.jpg" data-reel="the dart and balloon reel" data-word="DART" data-t="0.4 mm from the pop." data-p="How the Dart reel was made: one continuous handheld camera, real zoom and focus, the scene built from the inside, a slow-motion pop. My full brief and four rounds of notes." aria-pressed="false"><img src="media/c-dart.jpg" alt="" loading="lazy"><span class="w">DART</span><span class="n">0.4 mm from the pop.</span></button><button type="button" class="gt" id="g-enter-showreel" data-guide="enter-showreel" data-img="media/c-enter.jpg" data-reel="the black and yellow reel" data-word="ENTER" data-t="Cut to the beat. By code." data-p="How the Enter reel was made: the track measured frame by frame, every hit on the music, one prompt typed on screen. My full brief and five rounds of notes." aria-pressed="false"><img src="media/c-enter.jpg" alt="" loading="lazy"><span class="w">ENTER</span><span class="n">Cut to the beat. By code.</span></button><button type="button" class="gt" id="g-opus-showreel-en" data-guide="opus-showreel-en" data-img="media/c-opus.jpg" data-reel="the pendulum reel" data-word="OPUS" data-t="A showreel with no editing" data-p="How to build a looping video with music by writing text in Claude Code. Inside: my full brief to copy and the notes I used to polish it." aria-pressed="false"><img src="media/c-opus.jpg" alt="" loading="lazy"><span class="w">OPUS</span><span class="n">A showreel with no editing</span></button></div></div>
 </section>
 
 <section id="kit">
@@ -367,7 +362,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--cyan);outline-offse
     <div><div class="mono">For brands</div><h2>A reel for <span class="chrome">your product.</span></h2>
       <p>I make short motion videos for apps and AI tools. Send me a link to your product and tell me what the viewer should remember. I'll reply with how I would show it.</p>
       <div class="btns"><a class="btn lime" href="https://ig.me/m/veroniixx.ai" target="_blank" rel="noopener">Message me on Instagram</a><a class="btn" href="mailto:veronikachikka24@gmail.com">Email</a><a class="btn" href="https://t.me/veronikachika24" target="_blank" rel="noopener">Telegram</a></div></div>
-    <video data-auto src="media/motion-3d-preview.mp4" poster="media/motion-3d.jpg" muted loop playsinline preload="none" aria-label="Motion reel, wide"></video>
+    <img class="shot" src="media/motion-3d.jpg" alt="A frame from my motion reel" loading="lazy">
   </div>
 </section>
 
@@ -415,8 +410,8 @@ document.querySelectorAll('form.getg').forEach(function (f) {
   var videos=[].slice.call(document.querySelectorAll('video[data-auto]')), shown=[];
   function syncVideos(){
     videos.forEach(function(v){
-      if(reduce || !('IntersectionObserver' in window)){ v.controls=true; return; }
-      if(shown.indexOf(v)>-1 && !document.hidden){ var p=v.play(); if(p&&p.catch)p.catch(function(){ v.controls=true; }); } else v.pause();
+      if(reduce || !('IntersectionObserver' in window)) return;
+      if(shown.indexOf(v)>-1 && !document.hidden){ var p=v.play(); if(p&&p.catch)p.catch(function(){}); } else v.pause();
     });
   }
   if('IntersectionObserver' in window){
@@ -460,6 +455,43 @@ document.querySelectorAll('form.getg').forEach(function (f) {
     }})();
   }
   setTimeout(run, 900);
+})();
+
+// guide picker: tap a cover -> the panel and the one email form switch to that guide; #g-<slug> picks it too
+(function(){
+  var sel = document.getElementById('gp-sel'), strip = document.getElementById('gp-strip');
+  if (!sel || !strip) return;
+  var f = sel.querySelector('form.getg'), open = document.getElementById('gp-open');
+  var esc = function (t) { var d = document.createElement('div'); d.textContent = t; return d.innerHTML; };
+  function pick(t, scroll) {
+    strip.querySelectorAll('.gt').forEach(function (x) { x.classList.toggle('on', x === t); x.setAttribute('aria-pressed', x === t ? 'true' : 'false'); });
+    var all = t.dataset.guide === 'all';
+    sel.classList.toggle('isall', all);
+    if (!all) document.getElementById('gp-img').src = t.dataset.img;
+    document.getElementById('gp-from').innerHTML = all ? 'Everything' : 'From ' + esc(t.dataset.reel) + (t.dataset.word ? ' · keyword <b>' + esc(t.dataset.word) + '</b>' : '');
+    document.getElementById('gp-t').textContent = t.dataset.t;
+    document.getElementById('gp-p').textContent = t.dataset.p;
+    if (f) {
+      f.dataset.guide = t.dataset.guide;
+      f.dataset.done = all ? 'All the guides are on the way to {email}. Check Promotions if you use Gmail.' : '';
+      if (f.classList.contains('done')) {
+        f.classList.remove('done'); f.email.disabled = false; f.querySelector('button').disabled = false;
+        f.querySelector('.note').textContent = 'Free. Plus one short email when a new guide is out. Reply "stop" to unsubscribe.';
+      }
+    }
+    if (open) open.href = 'guides/' + t.dataset.guide + '/';
+    if (scroll) strip.scrollLeft = t.offsetLeft - strip.offsetLeft - (strip.clientWidth - t.offsetWidth) / 2;
+  }
+  strip.addEventListener('click', function (e) { var t = e.target.closest('.gt'); if (t) pick(t, false); });
+  document.querySelectorAll('.gh .ar').forEach(function (b) {
+    b.addEventListener('click', function () { strip.scrollBy({left: +b.dataset.d * strip.clientWidth * 0.8, behavior: 'smooth'}); });
+  });
+  function fromHash() {
+    var t = location.hash && document.getElementById(location.hash.slice(1));
+    if (t && t.classList.contains('gt')) { pick(t, true); setTimeout(function () { document.querySelector('.gp').scrollIntoView({block: 'start'}); window.scrollBy(0, -16); }, 60); }
+  }
+  window.addEventListener('hashchange', fromHash);
+  fromHash();
 })();
 </script>
 </body>
