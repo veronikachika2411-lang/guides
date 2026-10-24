@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>It's code.</title>
+<style>
+  :root {
+    --dark: #0A0A0C; --cream: #F1E8D6; --accent: #2133FF; --ink: #1A1A1A;
+    --micro: #8A8580; --amber: #FFC266; --paper: #F6F0E4; --line: rgba(26,26,26,.14);
+  }
+  @page { size: 150mm 250mm; margin: 0; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { margin: 0; background: #1b1917; color: var(--ink); font: 500 15.5px/1.6 Manrope, system-ui, sans-serif; }
+  .doc { width: 150mm; margin: 0 auto; background: var(--paper); }
+  section { padding: 15mm 12mm 14mm; break-before: page; position: relative; }
+  .step { break-inside: avoid; }
+  h2, h3, .eyebrow { break-after: avoid; }
+  .pagebreak { break-before: page; padding-top: 15mm; }
+  .mono { font-family: "JetBrains Mono", ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; font-size: 10.5px; font-weight: 700; }
+  .eyebrow { display: flex; justify-content: space-between; color: var(--ink); border-bottom: 2px solid var(--ink); padding-bottom: 8px; margin-bottom: 20px; }
+  .eyebrow b { color: var(--accent); }
+  h1, h2 { font-family: Oswald, Impact, sans-serif; font-weight: 700; text-transform: uppercase; line-height: .98; margin: 0; letter-spacing: -.01em; }
+  h2 { font-size: 46px; margin-bottom: 14px; }
+  h2 i { font-style: normal; color: var(--accent); }
+  h3 { font: 800 17px/1.3 Manrope, sans-serif; margin: 26px 0 8px; display: flex; gap: 10px; align-items: baseline; }
+  h3 .n { font: 800 12px "JetBrains Mono", monospace; color: #fff; background: var(--accent); padding: 3px 7px; border-radius: 4px; flex-shrink: 0; }
+  p { margin: 0 0 12px; }
+  .lead { font-size: 17px; font-weight: 600; line-height: 1.5; }
+  ul, ol { margin: 0 0 12px; padding-left: 20px; }
+  li { margin-bottom: 6px; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  a { color: var(--accent); font-weight: 700; text-decoration: none; }
+  code.i { font: 700 13px "JetBrains Mono", monospace; background: rgba(26,26,26,.08); padding: 1px 6px; border-radius: 4px; white-space: nowrap; }
+
+  /* блок для копирования */
+  .copy { background: var(--dark); border-radius: 14px; margin: 10px 0 16px; overflow: hidden; break-inside: avoid; }
+  .copy.long { break-inside: auto; }
+  .copy .bar { display: flex; justify-content: space-between; align-items: center; padding: 9px 14px; border-bottom: 1px solid rgba(240,232,216,.12); color: var(--micro); }
+  .copy .bar span::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); margin-right: 8px; }
+  .copy button { font: 800 10.5px "JetBrains Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--dark); background: var(--cream); border: 0; border-radius: 20px; padding: 6px 12px; cursor: pointer; }
+  .copy button.ok { background: var(--accent); color: #fff; }
+  .copy pre { margin: 0; padding: 14px; color: var(--cream); font: 500 12.5px/1.6 "JetBrains Mono", monospace; white-space: pre-wrap; word-break: break-word; }
+  .copy.prompt pre { font-size: 12px; }
+
+  .os { display: grid; grid-template-columns: 1fr; gap: 0; }
+  .tag { display: inline-block; font: 800 10.5px "JetBrains Mono", monospace; letter-spacing: .08em; text-transform: uppercase; padding: 4px 9px; border-radius: 4px; margin: 6px 0 2px; }
+  .tag.win { background: var(--ink); color: var(--cream); }
+  .tag.mac { background: var(--cream); color: var(--ink); border: 1.5px solid var(--ink); }
+  .note { border-left: 4px solid var(--accent); background: rgba(232,72,42,.09); padding: 12px 14px; border-radius: 0 10px 10px 0; margin: 12px 0 16px; font-size: 14.5px; break-inside: avoid; }
+  .note b { color: var(--accent); }
+  .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 14px 0; }
+  .card { background: #fff; border: 1.5px solid var(--line); border-radius: 12px; padding: 10px 10px; break-inside: avoid; }
+  .card .big { font: 700 30px/1 Oswald, sans-serif; color: var(--accent); }
+  .card .mono { color: var(--micro); display: block; margin-top: 6px; font-size: 8.5px; line-height: 1.4; }
+  .flowline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 16px 0; }
+  .flowline div { background: var(--dark); color: var(--cream); border-radius: 10px; padding: 10px 8px; font-size: 12.5px; line-height: 1.35; font-weight: 600; }
+  .flowline div b { display: block; font: 800 10px "JetBrains Mono", monospace; color: var(--accent); letter-spacing: .08em; margin-bottom: 4px; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0 16px; font-size: 14px; }
+  th { text-align: left; font: 800 10.5px "JetBrains Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--micro); padding: 6px 8px; border-bottom: 2px solid var(--ink); }
+  td { padding: 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  td.num { font: 700 20px Oswald, sans-serif; color: var(--accent); white-space: nowrap; }
+  .check li { list-style: none; position: relative; padding-left: 4px; }
+  .check { padding-left: 22px; }
+  .check li::before { content: ""; position: absolute; left: -22px; top: 4px; width: 13px; height: 13px; border: 2px solid var(--ink); border-radius: 3px; }
+
+  /* обложка */
+  .cover { background: var(--dark); color: var(--cream); min-height: 250mm; padding: 14mm 12mm; display: flex; flex-direction: column; break-before: auto; }
+  .cover .eyebrow { color: var(--micro); border-color: rgba(240,232,216,.22); }
+  .cover h1 { font-size: 98px; margin-top: 8mm; }
+  .cover h1 i { font-style: normal; color: var(--accent); }
+  .cover .sub { font-size: 17px; font-weight: 600; line-height: 1.45; max-width: 105mm; margin-top: 7mm; color: var(--cream); }
+  .frames { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: auto; }
+  .frames img { width: 100%; display: block; border-radius: 6px; }
+  .cover .foot { display: flex; justify-content: space-between; color: var(--micro); margin-top: 7mm; }
+  .cover .foot b { color: var(--cream); }
+  .end { background: var(--accent); color: var(--ink); border-radius: 16px; padding: 9mm 8mm 7mm; margin-top: 10mm; }
+  .end h2 { font-size: 54px; break-after: auto; }
+  .end .eyebrow { break-after: auto; }
+  .end .eyebrow { border-color: var(--ink); }
+  .end .eyebrow b { color: var(--ink); }
+  .end a { color: var(--ink); text-decoration: underline; }
+
+  @media screen {
+    .doc { margin: 24px auto; border-radius: 18px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.5); }
+    @media (max-width: 620px) { .doc { width: 100%; margin: 0; border-radius: 0; } .cover h1 { font-size: 21vw; } }
+  }
+  @media print { .copy button { display: none; } body { background: var(--paper); } }
+</style>
+<link href="../../fonts/fonts.css" rel="stylesheet"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%2309090B'/%3E%3Ctext x='30' y='46' font-family='Impact,sans-serif' font-size='40' text-anchor='middle' fill='%23F1E8D6'%3EV%3C/text%3E%3Ccircle cx='48' cy='44' r='6' fill='%23FF4A17'/%3E%3C/svg%3E">
+<style>
+  @media screen {
+    body { padding-top: 56px; }
+    .sitebar { position: fixed; top: 0; left: 0; right: 0; z-index: 50; height: 56px; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #060708; border-bottom: 1px solid rgba(255,255,255,.1); font-family: Manrope, system-ui, sans-serif; }
+    .sitebar a { color: #F2F4EC; font-weight: 700; font-size: 14px; text-decoration: none; white-space: nowrap; }
+    .sitebar .back { font-family: Unbounded, sans-serif; font-weight: 800; font-size: 17px; }
+    .sitebar .back i { font-style: normal; color: #C8FF3D; }
+    .sitebar .right { display: flex; gap: 8px; }
+    .sitebar .pill { display: inline-flex; align-items: center; height: 36px; padding: 0 14px; border-radius: 18px; border: 1.5px solid rgba(255,255,255,.25); }
+    .sitebar .pill.fill { background: #C8FF3D; color: #0A0C05; border-color: #C8FF3D; }
+    .cover { min-height: min(250mm, calc(100vh - 56px)); }
+  }
+  @media screen and (max-width: 620px) {
+    section, .cover { padding: 28px 20px 32px; }
+    .cover h1 { font-size: 17vw; margin-top: 20px; }
+    h2 { font-size: 38px; }
+    .end h2 { font-size: 31px; }
+    .cards, .flowline { grid-template-columns: repeat(2, 1fr); }
+    table code.i, li code.i, p code.i { white-space: normal; word-break: break-word; }
+    table { font-size: 13.5px; }
+  }
+  @media print { .sitebar { display: none; } }
+</style>
+</head>
+<body>
+<div class="sitebar"><a class="back" href="../../">← veroniixx<i>.ai</i></a><div class="right"><a class="pill" href="../../pdf/its-code-guide.pdf" target="_blank" rel="noopener">PDF</a><a class="pill fill" href="https://instagram.com/veroniixx.ai">Instagram</a></div></div>
+<div class="doc">
+
+<section class="cover">
+  <div class="mono eyebrow"><span>Guide · 2026</span><span>@veroniixx.ai</span></div>
+  <h1>It’s<br><i>code.</i></h1>
+  <p class="sub">How I made a 19-second showreel where one chrome letter does every transition: the camera flies through the “o”, the “o” becomes a pendulum, then a lamp, then 16 3D worlds flash behind one word. Every transition is a line of code typed on screen. It never ends. No editing app. The full brief, ready to paste. Windows and Mac.</p>
+  <div class="frames"><img src="img/f1.jpg" alt=""><img src="img/f2.jpg" alt=""><img src="img/f3.jpg" alt=""><img src="img/f4.jpg" alt=""><img src="img/f5.jpg" alt=""></div>
+  <div class="mono foot"><span>19 seconds · three.js · Remotion</span><span>@veroniixx.ai</span></div>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>00</b> · Inside</span><span>2 min read</span></div>
+  <h2>What you <i>get</i></h2>
+  <p class="lead">A fast kinetic typography reel with one hero: a chrome “o” in real 3D, sitting inside flat words. Claude writes the typography, the 3D, the timing and the music. You write the words.</p>
+  <div class="cards">
+    <div class="card"><div class="big">1</div><span class="mono">chrome “o”, the only hero</span></div>
+    <div class="card"><div class="big">5</div><span class="mono">lines of code on screen</span></div>
+    <div class="card"><div class="big">16</div><span class="mono">3D worlds in the drop</span></div>
+    <div class="card"><div class="big">∞</div><span class="mono">no ending, a perfect loop</span></div>
+  </div>
+  <h3>What you need</h3>
+  <ul>
+    <li>A Windows 10/11 or macOS computer. Any graphics card helps: 3D renders are heavy.</li>
+    <li>A Claude plan that includes Claude Code.</li>
+    <li>Your words: a hook, three short words with an “o” in them, three questions for the pendulum, your handle.</li>
+  </ul>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>01</b> · The method</span><span>The main part</span></div>
+  <h2>Why it <i>works</i></h2>
+  <div class="flowline">
+    <div><b>01 · A claim</b>“This video has no editor. It’s code.” The viewer stays to check if it is true</div>
+    <div><b>02 · One hero</b>The chrome “o” makes every transition: a door, a pendulum, a lamp. The eye never gets lost</div>
+    <div><b>03 · Code on screen</b>Every transition is typed as a line of code and fires on “Enter”. The claim proves itself</div>
+    <div><b>04 · No ending</b>The camera flies through the last “o” into the first frame. People watch it twice without noticing</div>
+  </div>
+  <h3>The one trick behind it</h3>
+  <p>The words are flat and the “o” is real 3D, drawn on a transparent canvas on top. To fly through a letter, the flat words scale up around the hole and the 3D camera moves toward the torus at the same speed. The next word is clipped inside the hole, already waiting. When the hole fills the screen, the next word is the new frame.</p>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>02</b> · Install</span><span>15–20 minutes</span></div>
+  <h2>Install the <i>tools</i></h2>
+  <div class="step"><h3><span class="n">1</span>Open a terminal</h3>
+  <p><span class="tag win">Windows</span> Press Win, type <code class="i">PowerShell</code>, open it.<br><span class="tag mac">Mac</span> Press Cmd + Space, type <code class="i">Terminal</code>, open it.</p></div>
+  <div class="step"><h3><span class="n">2</span>Node.js, Git, Python and ffmpeg</h3>
+  <p><span class="tag win">Windows</span> Paste one line at a time. Answer <code class="i">Y</code> when asked.</p>
+  <div class="copy"><div class="bar mono"><span>PowerShell</span><button>Copy</button></div><pre>winget install -e --id OpenJS.NodeJS.LTS
+winget install -e --id Git.Git
+winget install -e --id Python.Python.3.13
+winget install -e --id Gyan.FFmpeg</pre></div>
+  <p><span class="tag mac">Mac</span> Homebrew first, it will ask for your password. At the end it prints two lines under “Next steps”: run them, then run the second command.</p>
+  <div class="copy"><div class="bar mono"><span>Terminal · step 1</span><button>Copy</button></div><pre>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</pre></div>
+  <div class="copy"><div class="bar mono"><span>Terminal · step 2</span><button>Copy</button></div><pre>brew install node git python ffmpeg</pre></div>
+  <div class="note"><b>Important.</b> Close the terminal and open it again after installing, or it will not see the new programs.</div></div>
+  <div class="step"><h3><span class="n">3</span>Claude Code</h3>
+  <div class="copy"><div class="bar mono"><span>Terminal</span><button>Copy</button></div><pre>npm install -g @anthropic-ai/claude-code</pre></div>
+  <p>Prefer an app to a terminal? Install Claude from <a href="https://claude.ai/download">claude.ai/download</a>, it has a Code tab that does the same thing.</p></div>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>03</b> · Project</span><span>5 minutes</span></div>
+  <h2>Folder and <i>setup</i></h2>
+  <div class="step"><h3><span class="n">1</span>Create a folder and start Claude</h3>
+  <div class="copy"><div class="bar mono"><span>Terminal</span><button>Copy</button></div><pre>mkdir code-reel\ncd code-reel\nclaude</pre></div></div>
+  <div class="step"><h3><span class="n">2</span>Setup</h3>
+  <div class="copy prompt"><div class="bar mono"><span>Prompt · setup</span><button>Copy</button></div><pre>Set up a motion project in this folder.
+
+1. Install Remotion (React 18 + TypeScript) with @remotion/three, three and @react-three/fiber.
+2. Check that Python has numpy, scipy, soundfile and pyloudnorm. Install what is missing.
+3. Check that ffmpeg works from the terminal.
+4. Build a test composition, 1080x1920, 60 fps: a word in a heavy font on a cream background, and on top of it a transparent three.js canvas with one chrome torus (metalness 1, roughness 0.12) lit by an environment map. Render one frame to PNG with the GL backend set to "angle" and show me the path.
+
+If something is missing, install it yourself and tell me what you installed. If something fails, find the cause and fix it.</pre></div></div>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>04</b> · The brief</span><span>Copy all of it</span></div>
+  <h2>The reel <i>brief</i></h2>
+  <p>Words in square brackets are mine: put your own. Words for the fly-through need an “o” and must be short, or they run off the frame.</p>
+  <div class="copy prompt"><div class="bar mono"><span>Prompt · reel brief</span><button>Copy</button></div><pre>Build a vertical kinetic typography showreel in Remotion, with three.js for the 3D. 1080x1920, 60 fps, 19.2 seconds, a seamless loop with no ending. All text in English. Keep text out of the top 220 px and the bottom 380 px (the Instagram interface).
+
+THE HERO
+The letter "o" made of chrome. It is a real 3D torus (metalness 1, roughness about 0.12, an environment map for reflections) drawn on a transparent canvas over flat typography. It sits exactly where the "o" would be in a heavy font (I used Outfit 900), so the word reads normally. The same "o" does every transition in the reel.
+
+THE GIMMICK
+Before every transition a line of code types itself on screen in a dark pill with a mono font, then turns blue on "Enter" and the transition fires exactly on that frame:
+[fly.through("o")] / [swing(24)] / [light.on()] / [drop()] / [loop()]
+The viewer sees that every transition is one line.
+
+THE TIMELINE (150 BPM: one beat = 12 frames at 30 fps; work in 30 fps units and render at 60 fps; every event on a beat or half beat)
+1. HOOK (0-1.4 s). One word every half beat, the background flips between black, cream and blue on every word, each word lands with a short scale punch: [this / video / has / no / editor. / it's]
+2. THE WORD (1.4-2.4 s). [code.] on cream. The "o" is the chrome torus and spins once. Inside its hole you can already see the next word, tiny.
+3. FLY THROUGH (2.4-4.4 s). The camera flies into the hole of the "o". The next word is inside, with its own "o", and the camera flies through that one too: [code.] -&gt; [zero] -&gt; [tools.]. Every word is centered, so the camera also slides sideways to the next "o" while it flies. The 3D torus and the 2D words must stay locked together during the flight (mind the parallax).
+4. PENDULUM (4.4-9.2 s). The "o" pops out of [tools.] and becomes the weight of a pendulum on a thin rod. Five swings. Each swing is fast through the middle and hangs at the edge (a quintic ease). The rod wipes the old page and leaves the new one behind it, every page its own color:
+   [YOU THINK / THIS IS / EDITED?] -&gt; [IT'S A / FUNCTION.] -&gt; [EVERY / SWING?] -&gt; [ONE / LINE.] -&gt; the last swing wipes everything into darkness.
+5. LAMP (9.2-12.8 s). The "o" breaks off the rod, flies to the top and lights up like a ring light. A cone of light comes in from the left, opens on [LIGHT?] so the whole word is lit, swings away, comes back on [ALSO / CODE.], then the light opens to the full frame. [ALSO] flies up and [CODE.] slides into the exact place where the word of the next scene stands.
+6. DROP (12.8-16 s). The word [code] stays still in the middle. Behind it a new 3D world every half beat, 16 cuts: a liquid chrome blob, a blue metal wave, a pit of glossy balls, a tunnel of rings, a particle vortex, a chrome ball over a neon grid, a helix of rings, an equalizer of bars. The word bounces a little on every cut.
+7. END (16-19.2 s). [made with / claude] on cream, then [you just / watched / code.] on black with the chrome "o" slamming into the word.
+8. LOOP. [loop()] types and fires. The camera flies through the "o" of [code.] and comes out on the very first frame: [this] on black. The last frame must be the first frame.
+
+STYLE
+Few colors: black, cream and one electric blue (#2133FF), plus real chrome. No blur and no shake on text. Every word stands still and whole for at least a few frames.
+
+SOUND (synthesize in numpy, no samples)
+Something new, not a breakbeat and not trap: a straight four-on-the-floor kick at 150 BPM, an acid bass in D minor, 8-bit square-wave notes. Key clicks for every character of every code line and an "Enter" thock when it fires. A metal ring for the chrome "o", a whoosh into every fly-through, a sub drop when you land inside a letter, a whoosh on every swing, a switch click and a hum for the lamp, a riser and a clap roll into the drop, a glitch on every cut. Loop the tails into the start. Master to -14 LUFS, peak below -1 dBTP.
+
+CHECK BEFORE YOU SAY DONE
+1. Render storyboard strips first: 6 real frames per transition, from the code, not mockups.
+2. Then a draft at 540x960, 60 fps, with sound.
+3. Check: no word is cut off by the frame edge, the code pill never covers text, the 3D "o" sits exactly in the word in every frame of the fly-through.
+4. Compare the first and the last frame: the loop must not jump.
+5. Then the final 1080x1920. Tell me what you checked and what I should watch for in motion.</pre></div>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>05</b> · Notes</span><span>In plain words</span></div>
+  <h2>How to fix it with <i>notes</i></h2>
+  <p>Watch the draft on your phone, on repeat. Then send notes like these. The first four are almost word for word what I wrote while making this reel.</p>
+  <div class="copy prompt"><div class="bar mono"><span>More intensity</span><button>Copy</button></div><pre>It looks nice but there is not enough intensity. Put everything on the beat, a word every half beat, a punch on every event, and add real 3D.</pre></div><div class="copy prompt"><div class="bar mono"><span>Transitions through an object</span><button>Copy</button></div><pre>I want transitions through an object, like a lamp or a pendulum, not just cuts. One object should carry the viewer from scene to scene.</pre></div><div class="copy prompt"><div class="bar mono"><span>Text inside a letter</span><button>Copy</button></div><pre>Make the next word appear inside a letter of the current one and fly the camera through it.</pre></div><div class="copy prompt"><div class="bar mono"><span>No ending</span><button>Copy</button></div><pre>The video should not end. The last frame must lead straight into the first one, the viewer should not notice where it loops.</pre></div><div class="copy prompt"><div class="bar mono"><span>A word does not fit</span><button>Copy</button></div><pre>A word in the fly-through runs off the edge of the frame. Pick a shorter word or center each word and move the camera to its letter.</pre></div><div class="copy prompt"><div class="bar mono"><span>Your own words</span><button>Copy</button></div><pre>Replace the words with mine: [your hook], [your three words with an o], [your pendulum questions], [your handle]. Keep one word per half beat.</pre></div>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>06</b> · Honest</span><span>What to know</span></div>
+  <h2>What <i>broke</i> for me</h2>
+  <ul>
+    <li><b>My first test had no intensity.</b> Five nice transitions, three seconds each, felt calm. Everything moved to the beat, a word every half beat, and real 3D came in.</li>
+    <li><b>The word “motion” did not fit.</b> In the fly-through the letter has to be in the middle of the screen, so long words ran off the edge. I switched to “zero” and centered every word.</li>
+    <li><b>The 3D “o” slid away from the word.</b> When the camera moved sideways, the torus and the flat words drifted apart. The fix: shift the torus by its depth, so both move together.</li>
+    <li><b>The lamp hid the word.</b> A narrow beam never showed “LIGHT?” whole. The beam now stops and opens on the word before it moves on.</li>
+    <li><b>Claude cannot hear or see motion.</b> It checks still frames and numbers. Whether it feels fast and hits the beat is your job: watch the draft before the final.</li>
+  </ul>
+  <div class="mono eyebrow" style="margin-top:34px"><span><b>07</b> · Questions</span><span>Short</span></div>
+  <h2>Common <i>questions</i></h2>
+  <div class="step"><h3>Can I make it about my brand?</h3>
+  <p>Yes. Change the words and the three colors. The chrome letter can be any letter with a hole: o, a, e, d, the 0 in a number.</p></div>
+  <div class="step"><h3>Do I need to know code or 3D?</h3>
+  <p>No. You need to know what you want to see and say it clearly. Claude builds the words, the chrome letter, the worlds and the music from code.</p></div>
+  <div class="step"><h3>The terminal shows a red error. Now what?</h3>
+  <p>Copy it and paste it to Claude with the words “here is the error, fix it and continue”.</p></div>
+  <div class="end">
+    <div class="mono eyebrow"><span><b>08</b> · Next</span><span>@veroniixx.ai</span></div>
+    <h2>Built yours? Show me</h2>
+    <p class="lead">Tag <a href="https://instagram.com/veroniixx.ai">@veroniixx.ai</a> and I will share it in stories.</p>
+  </div>
+</section>
+
+</div>
+<script>
+  document.querySelectorAll('.copy button').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = btn.closest('.copy').querySelector('pre').innerText;
+      var done = function () {
+        btn.textContent = 'Copied';
+        btn.classList.add('ok');
+        setTimeout(function () { btn.textContent = 'Copy'; btn.classList.remove('ok'); }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () {});
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch (e) {}
+        document.body.removeChild(ta);
+      }
+    });
+  });
+</script>
+</body>
+</html>
