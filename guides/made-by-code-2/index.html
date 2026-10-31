@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Made by code. 2</title>
+<style>
+  :root {
+    --dark: #09090B; --cream: #F1E8D6; --accent: #FF4A17; --ink: #1A1A1A;
+    --micro: #8A8580; --amber: #FFC266; --paper: #F6F0E4; --line: rgba(26,26,26,.14);
+  }
+  @page { size: 150mm 250mm; margin: 0; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { margin: 0; background: #1b1917; color: var(--ink); font: 500 15.5px/1.6 Manrope, system-ui, sans-serif; }
+  .doc { width: 150mm; margin: 0 auto; background: var(--paper); }
+  section { padding: 15mm 12mm 14mm; break-before: page; position: relative; }
+  .step { break-inside: avoid; }
+  h2, h3, .eyebrow { break-after: avoid; }
+  .pagebreak { break-before: page; padding-top: 15mm; }
+  .mono { font-family: "JetBrains Mono", ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; font-size: 10.5px; font-weight: 700; }
+  .eyebrow { display: flex; justify-content: space-between; color: var(--ink); border-bottom: 2px solid var(--ink); padding-bottom: 8px; margin-bottom: 20px; }
+  .eyebrow b { color: var(--accent); }
+  h1, h2 { font-family: Oswald, Impact, sans-serif; font-weight: 700; text-transform: uppercase; line-height: .98; margin: 0; letter-spacing: -.01em; }
+  h2 { font-size: 46px; margin-bottom: 14px; }
+  h2 i { font-style: normal; color: var(--accent); }
+  h3 { font: 800 17px/1.3 Manrope, sans-serif; margin: 26px 0 8px; display: flex; gap: 10px; align-items: baseline; }
+  h3 .n { font: 800 12px "JetBrains Mono", monospace; color: #fff; background: var(--accent); padding: 3px 7px; border-radius: 4px; flex-shrink: 0; }
+  p { margin: 0 0 12px; }
+  .lead { font-size: 17px; font-weight: 600; line-height: 1.5; }
+  ul, ol { margin: 0 0 12px; padding-left: 20px; }
+  li { margin-bottom: 6px; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  a { color: var(--accent); font-weight: 700; text-decoration: none; }
+  code.i { font: 700 13px "JetBrains Mono", monospace; background: rgba(26,26,26,.08); padding: 1px 6px; border-radius: 4px; white-space: nowrap; }
+
+  /* блок для копирования */
+  .copy { background: var(--dark); border-radius: 14px; margin: 10px 0 16px; overflow: hidden; break-inside: avoid; }
+  .copy.long { break-inside: auto; }
+  .copy .bar { display: flex; justify-content: space-between; align-items: center; padding: 9px 14px; border-bottom: 1px solid rgba(240,232,216,.12); color: var(--micro); }
+  .copy .bar span::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); margin-right: 8px; }
+  .copy button { font: 800 10.5px "JetBrains Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--dark); background: var(--cream); border: 0; border-radius: 20px; padding: 6px 12px; cursor: pointer; }
+  .copy button.ok { background: var(--accent); color: #fff; }
+  .copy pre { margin: 0; padding: 14px; color: var(--cream); font: 500 12.5px/1.6 "JetBrains Mono", monospace; white-space: pre-wrap; word-break: break-word; }
+  .copy.prompt pre { font-size: 12px; }
+
+  .os { display: grid; grid-template-columns: 1fr; gap: 0; }
+  .tag { display: inline-block; font: 800 10.5px "JetBrains Mono", monospace; letter-spacing: .08em; text-transform: uppercase; padding: 4px 9px; border-radius: 4px; margin: 6px 0 2px; }
+  .tag.win { background: var(--ink); color: var(--cream); }
+  .tag.mac { background: var(--cream); color: var(--ink); border: 1.5px solid var(--ink); }
+  .note { border-left: 4px solid var(--accent); background: rgba(232,72,42,.09); padding: 12px 14px; border-radius: 0 10px 10px 0; margin: 12px 0 16px; font-size: 14.5px; break-inside: avoid; }
+  .note b { color: var(--accent); }
+  .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 14px 0; }
+  .card { background: #fff; border: 1.5px solid var(--line); border-radius: 12px; padding: 10px 10px; break-inside: avoid; }
+  .card .big { font: 700 30px/1 Oswald, sans-serif; color: var(--accent); }
+  .card .mono { color: var(--micro); display: block; margin-top: 6px; font-size: 8.5px; line-height: 1.4; }
+  .flowline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 16px 0; }
+  .flowline div { background: var(--dark); color: var(--cream); border-radius: 10px; padding: 10px 8px; font-size: 12.5px; line-height: 1.35; font-weight: 600; }
+  .flowline div b { display: block; font: 800 10px "JetBrains Mono", monospace; color: var(--accent); letter-spacing: .08em; margin-bottom: 4px; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0 16px; font-size: 14px; }
+  th { text-align: left; font: 800 10.5px "JetBrains Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--micro); padding: 6px 8px; border-bottom: 2px solid var(--ink); }
+  td { padding: 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  td.num { font: 700 20px Oswald, sans-serif; color: var(--accent); white-space: nowrap; }
+  .check li { list-style: none; position: relative; padding-left: 4px; }
+  .check { padding-left: 22px; }
+  .check li::before { content: ""; position: absolute; left: -22px; top: 4px; width: 13px; height: 13px; border: 2px solid var(--ink); border-radius: 3px; }
+
+  /* обложка */
+  .cover { background: var(--dark); color: var(--cream); min-height: 250mm; padding: 14mm 12mm; display: flex; flex-direction: column; break-before: auto; }
+  .cover .eyebrow { color: var(--micro); border-color: rgba(240,232,216,.22); }
+  .cover h1 { font-size: 98px; margin-top: 8mm; }
+  .cover h1 i { font-style: normal; color: var(--accent); }
+  .cover .sub { font-size: 17px; font-weight: 600; line-height: 1.45; max-width: 105mm; margin-top: 7mm; color: var(--cream); }
+  .frames { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: auto; }
+  .frames img { width: 100%; display: block; border-radius: 6px; }
+  .cover .foot { display: flex; justify-content: space-between; color: var(--micro); margin-top: 7mm; }
+  .cover .foot b { color: var(--cream); }
+  .end { background: var(--accent); color: var(--ink); border-radius: 16px; padding: 9mm 8mm 7mm; margin-top: 10mm; }
+  .end h2 { font-size: 54px; break-after: auto; }
+  .end .eyebrow { break-after: auto; }
+  .end .eyebrow { border-color: var(--ink); }
+  .end .eyebrow b { color: var(--ink); }
+  .end a { color: var(--ink); text-decoration: underline; }
+
+  @media screen {
+    .doc { margin: 24px auto; border-radius: 18px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.5); }
+    @media (max-width: 620px) { .doc { width: 100%; margin: 0; border-radius: 0; } .cover h1 { font-size: 21vw; } }
+  }
+  @media print { .copy button { display: none; } body { background: var(--paper); } }
+</style>
+<link href="../../fonts/fonts.css" rel="stylesheet"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%2309090B'/%3E%3Ctext x='30' y='46' font-family='Impact,sans-serif' font-size='40' text-anchor='middle' fill='%23F1E8D6'%3EV%3C/text%3E%3Ccircle cx='48' cy='44' r='6' fill='%23FF4A17'/%3E%3C/svg%3E">
+<style>
+  @media screen {
+    body { padding-top: 56px; }
+    .sitebar { position: fixed; top: 0; left: 0; right: 0; z-index: 50; height: 56px; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #060708; border-bottom: 1px solid rgba(255,255,255,.1); font-family: Manrope, system-ui, sans-serif; }
+    .sitebar a { color: #F2F4EC; font-weight: 700; font-size: 14px; text-decoration: none; white-space: nowrap; }
+    .sitebar .back { font-family: Unbounded, sans-serif; font-weight: 800; font-size: 17px; }
+    .sitebar .back i { font-style: normal; color: #C8FF3D; }
+    .sitebar .right { display: flex; gap: 8px; }
+    .sitebar .pill { display: inline-flex; align-items: center; height: 36px; padding: 0 14px; border-radius: 18px; border: 1.5px solid rgba(255,255,255,.25); }
+    .sitebar .pill.fill { background: #C8FF3D; color: #0A0C05; border-color: #C8FF3D; }
+    .cover { min-height: min(250mm, calc(100vh - 56px)); }
+  }
+  @media screen and (max-width: 620px) {
+    section, .cover { padding: 28px 20px 32px; }
+    .cover h1 { font-size: 17vw; margin-top: 20px; }
+    h2 { font-size: 38px; }
+    .end h2 { font-size: 31px; }
+    .cards, .flowline { grid-template-columns: repeat(2, 1fr); }
+    table code.i, li code.i, p code.i { white-space: normal; word-break: break-word; }
+    table { font-size: 13.5px; }
+  }
+  @media print { .sitebar { display: none; } }
+</style>
+</head>
+<body>
+<div class="sitebar"><a class="back" href="../../">← veroniixx<i>.ai</i></a><div class="right"><a class="pill" href="../../pdf/made2-guide.pdf" target="_blank" rel="noopener">PDF</a><a class="pill fill" href="https://instagram.com/veroniixx.ai">Instagram</a></div></div>
+<div class="doc">
+
+<section class="cover">
+  <div class="mono eyebrow"><span>Guide · 2026</span><span>@veroniixx.ai</span></div>
+  <h1>Made by<br><i>code. 2</i></h1>
+  <p class="sub">How I made a 19-second showreel where one red ball does every transition: a Newton’s cradle that flips the words, a dive through a letter, dominoes, a page flip, liquid, glass, an eclipse, 14 3D worlds behind one word. It never ends. No editing app, even the music is code. The full brief, ready to paste. Windows and Mac.</p>
+  <div class="frames"><img src="img/f1.jpg" alt=""><img src="img/f2.jpg" alt=""><img src="img/f3.jpg" alt=""><img src="img/f4.jpg" alt=""><img src="img/f5.jpg" alt=""></div>
+  <div class="mono foot"><span>19 seconds · three.js · Remotion</span><span>@veroniixx.ai</span></div>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>00</b> · Inside</span><span>2 min read</span></div>
+  <h2>What you <i>get</i></h2>
+  <p class="lead">The sequel to my reel that hit 100K. Same red ball, same typography, all new transitions in real 3D: chrome, glass, liquid, light. Claude writes the typography, the 3D, the timing and the music. You write the words.</p>
+  <div class="cards">
+    <div class="card"><div class="big">1</div><span class="mono">red ball, the only hero</span></div>
+    <div class="card"><div class="big">11</div><span class="mono">transitions through it</span></div>
+    <div class="card"><div class="big">14</div><span class="mono">3D worlds in the drop</span></div>
+    <div class="card"><div class="big">∞</div><span class="mono">no ending, a perfect loop</span></div>
+  </div>
+  <h3>What you need</h3>
+  <ul>
+    <li>A Windows 10/11 or macOS computer. Any graphics card helps: 3D renders are heavy.</li>
+    <li>A Claude plan that includes Claude Code.</li>
+    <li>Your words: six short words for the cradle, one word with an “o”, three scene words, your comment word.</li>
+  </ul>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>01</b> · The method</span><span>The main part</span></div>
+  <h2>Why it <i>works</i></h2>
+  <div class="flowline">
+    <div><b>01 · A claim</b>“No camera. No blender. Just words.” The viewer stays to check if it is true</div>
+    <div><b>02 · One hero</b>The red ball makes every transition. The eye follows it and never gets lost</div>
+    <div><b>03 · Physics you feel</b>A cradle, dominoes, a splash, glass. Real 3D that reacts on the beat</div>
+    <div><b>04 · No ending</b>The ball flies back into the cradle. People watch it twice without noticing</div>
+  </div>
+  <h3>The one trick behind it</h3>
+  <p>Every transition is a wave or a hole. On each click of the cradle the next page is clipped inside a growing circle that starts exactly at the contact point. For the dive, the blue page has a real hole cut in the “o”, and the next 3D scene is already rendered under it. The camera never cuts, it goes through.</p>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>02</b> · Install</span><span>15–20 minutes</span></div>
+  <h2>Install the <i>tools</i></h2>
+  <div class="step"><h3><span class="n">1</span>Open a terminal</h3>
+  <p><span class="tag win">Windows</span> Press Win, type <code class="i">PowerShell</code>, open it.<br><span class="tag mac">Mac</span> Press Cmd + Space, type <code class="i">Terminal</code>, open it.</p></div>
+  <div class="step"><h3><span class="n">2</span>Node.js, Git, Python and ffmpeg</h3>
+  <p><span class="tag win">Windows</span> Paste one line at a time. Answer <code class="i">Y</code> when asked.</p>
+  <div class="copy"><div class="bar mono"><span>PowerShell</span><button>Copy</button></div><pre>winget install -e --id OpenJS.NodeJS.LTS
+winget install -e --id Git.Git
+winget install -e --id Python.Python.3.13
+winget install -e --id Gyan.FFmpeg</pre></div>
+  <p><span class="tag mac">Mac</span> Homebrew first, it will ask for your password. At the end it prints two lines under “Next steps”: run them, then run the second command.</p>
+  <div class="copy"><div class="bar mono"><span>Terminal · step 1</span><button>Copy</button></div><pre>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</pre></div>
+  <div class="copy"><div class="bar mono"><span>Terminal · step 2</span><button>Copy</button></div><pre>brew install node git python ffmpeg</pre></div>
+  <div class="note"><b>Important.</b> Close the terminal and open it again after installing, or it will not see the new programs.</div></div>
+  <div class="step"><h3><span class="n">3</span>Claude Code</h3>
+  <div class="copy"><div class="bar mono"><span>Terminal</span><button>Copy</button></div><pre>npm install -g @anthropic-ai/claude-code</pre></div>
+  <p>Prefer an app to a terminal? Install Claude from <a href="https://claude.ai/download">claude.ai/download</a>, it has a Code tab that does the same thing.</p></div>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>03</b> · Project</span><span>5 minutes</span></div>
+  <h2>Folder and <i>setup</i></h2>
+  <div class="step"><h3><span class="n">1</span>Create a folder and start Claude</h3>
+  <div class="copy"><div class="bar mono"><span>Terminal</span><button>Copy</button></div><pre>mkdir ball-reel\ncd ball-reel\nclaude</pre></div></div>
+  <div class="step"><h3><span class="n">2</span>Setup</h3>
+  <div class="copy prompt"><div class="bar mono"><span>Prompt · setup</span><button>Copy</button></div><pre>Set up a motion project in this folder.
+
+1. Install Remotion (React 18 + TypeScript) with @remotion/three, three and @react-three/fiber.
+2. Check that Python has numpy and scipy. Install what is missing.
+3. Check that ffmpeg works from the terminal.
+4. Build a test composition, 1080x1920, 60 fps: a word in a heavy font on a cream background, and on top of it a transparent three.js canvas with one glossy red ball and one chrome ball, lit by an environment map. Render one frame to PNG with the GL backend set to "angle" and show me the path.
+
+If something is missing, install it yourself and tell me what you installed. If something fails, find the cause and fix it.</pre></div></div>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>04</b> · The brief</span><span>Copy all of it</span></div>
+  <h2>The reel <i>brief</i></h2>
+  <p>Words in square brackets are mine: put your own. The word for the dive needs an “o” (or any letter with a hole).</p>
+  <div class="copy prompt"><div class="bar mono"><span>Prompt · reel brief</span><button>Copy</button></div><pre>Build a vertical kinetic typography showreel in Remotion, with three.js for every 3D object. 1080x1920, 60 fps, 19.2 seconds, a seamless loop with no ending. All text in English. Keep text out of the top 220 px and the bottom 380 px (the Instagram interface).
+
+THE HERO
+One small glossy red ball. It goes through the whole reel and every transition happens through it. Palette: black #09090B, cream #F1E8D6, red #FF4A17, electric blue #2133FF, plus real chrome and real glass. Font: Outfit 900 for words, Anton for the big word in the drop.
+
+THE RULE
+No cuts that come from nowhere. Every scene must turn into the next one through the ball or through the object on screen. If a transition can only be a cut, it lands on a hard beat with a short flash.
+
+THE TIMELINE (150 BPM: one beat = 12 frames at 30 fps; work in 30 fps units and render at 60 fps)
+1. NEWTON'S CRADLE (0-2.8 s). Five balls on strings under a chrome bar, the right one is the red ball. Every click of the cradle is a beat. On every click a circular wave spreads from the contact point; inside the circle the background flips (cream / black) and the next word is already there: [no / camera. / no / blender. / just / words.]. A thin red ring rides the edge of the wave. The swinging ball leaves a short ghost trail. A warm lamp glow behind the cradle, darker corners.
+2. LAUNCH (2.8-3.3 s). The last click is too hard: the red ball tears off its string and flies up. The cradle slides out of frame upward. A blue wave opens [opus 5.5], where the "o" is a ring.
+3. DIVE (3.3-4.2 s). The ball falls exactly into the hole of the "o". The camera dives after it. Through the hole you already see the next 3D scene, alive, so the dive lands inside it.
+4. PHYSICS (4.2-6.8 s). 3D letters [PHYSICS.] stand on a dark floor under a warm spotlight. The ball drops in, rolls along the word and knocks the letters over one by one like dominoes, with a small bounce. A red light moves with the ball and tints the letters. The camera rises until it looks straight down and the fallen letters read [PHYSICS.] on the floor.
+5. PAGE FLIP (6.8-7.4 s). The floor is a sheet of paper: it flips over on a hinge at its left edge, with the letters on it. Under it there is milky liquid.
+6. LIQUID (7.4-9.0 s). The ball falls into the liquid with rings that spread over the word [LIQUID.] printed on the surface, so the letters wobble with the waves. The camera tilts down to a low angle.
+7. GLASS (9.0-10.4 s). The ball comes back up made of glass and flies straight into the camera. It lands in front of the word [GLASS.] and the word behind it bends and flips upside down, real refraction. The background light fades to black before the next scene.
+8. ECLIPSE (10.4-12.8 s). The ball lights up like a sun. A black disc slides over it, a corona of rays bursts out and the text appears: [LIGHT / IS STILL / MATH.]. The disc grows to fill the frame on the last beat before the drop.
+9. DROP (12.8-15.6 s). The word [claude] stands still in the middle. Behind it a new 3D world every half beat, 14 cuts, and the red ball is in each one: a planet with chrome rings, a pit of glossy balls, a glass ball over stripes, chrome pipes the ball rolls through, a wide shot of the cradle, a wave of spheres, balls orbiting a red sun. The word flips white / black on every cut and bounces a little.
+10. MIRROR (15.6-16.4 s). The word shrinks into the center and a chrome ball grows out of it. In its reflection you read [OPUS 5.5]. The camera flies into the reflection.
+11. CUBES (16.4-17.6 s). [OPUS 5.5] stands built from cubes, exactly as it was in the reflection. The camera pulls back, a wave runs through the cubes, then they burst toward the camera and the blue background goes black.
+12. END (17.6-19.2 s). The red ball pops in. [made by / claude opus / 5.5], and a comment field types [your word]. Then a cream circle opens from the ball and the ball flies back to its place in the cradle: the last frame is the first frame.
+
+STYLE
+On every hit the whole frame punches in by 3-4% and settles, no shake. No blur on text. Every word stands still and whole for at least a few frames.
+
+SOUND (synthesize in numpy, no samples, no tracks)
+Mesmerizing and calm before the drop, heavy on the drop. F sharp minor, 150 BPM, chords F#m / D / A / E, one bar each, so 19.2 s is exactly 3 rounds and loops. The cradle clicks are tuned steel bells, each click a note of the theme. Under them a swaying marimba arpeggio on eighths with a dotted echo, a soft pad, a warm sub. Sound effects on the exact frames: string snap, whoosh, a soft tock into the letter, a riser into the dive, wooden clacks for each falling letter, a paper whoosh for the flip, a splash and an underwater bloop, a glass ting, a warm whoomp for the sun, a shimmer for the corona, a riser and a cut to silence before the drop. On the drop: a punchy kick that you can hear on a phone (body around 58 Hz, plus distortion), bass, claps, hats, sidechain the pad. The cradle theme comes back quietly at the end so the loop is seamless. Reverb by convolution with decaying noise, normalized. Master to -14 LUFS, peak below -1 dB.
+
+CHECK BEFORE YOU SAY DONE
+1. Storyboard first: real frames from the code, 3-5 per transition.
+2. A draft at 540x960 with sound.
+3. Check the difference between neighbouring frames: any big jump that is not on a beat is a broken transition. Fix it.
+4. Compare the first and the last frame: the loop must not jump.
+5. Then the final 1080x1920. Tell me what you checked and what I should watch for in motion.</pre></div>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>05</b> · Notes</span><span>In plain words</span></div>
+  <h2>How to fix it with <i>notes</i></h2>
+  <p>Watch the draft on your phone, on repeat. Then send notes like these. The first four are almost word for word what I wrote while making this reel.</p>
+  <div class="copy prompt"><div class="bar mono"><span>More intensity and light</span><button>Copy</button></div><pre>Yes, but the transitions and the light must be really intense and beautiful, especially the cradle. The sound must be mesmerizing, so people want to watch it again.</pre></div><div class="copy prompt"><div class="bar mono"><span>Illogical transitions</span><button>Copy</button></div><pre>Some transitions do not make sense. Every scene must turn into the next one through the ball or the object on screen. No cut from nowhere.</pre></div><div class="copy prompt"><div class="bar mono"><span>The big word</span><button>Copy</button></div><pre>The word in the middle of the drop is always white. Make it flip white and black on every cut.</pre></div><div class="copy prompt"><div class="bar mono"><span>A dead black screen</span><button>Copy</button></div><pre>Before the drop there is half a second of plain black. Remove it: the black disc should fill the frame on the very last beat.</pre></div><div class="copy prompt"><div class="bar mono"><span>Your own words</span><button>Copy</button></div><pre>Replace the words with mine: [your cradle words], [your word with an o], [your scene words], [your comment word]. Keep one word per beat.</pre></div>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>06</b> · Honest</span><span>What to know</span></div>
+  <h2>What <i>broke</i> for me</h2>
+  <ul>
+    <li><b>The reverb drowned everything.</b> The echo was hundreds of times louder than the music, so no change to the drums was audible. The fix: normalize the reverb before mixing.</li>
+    <li><b>The kick was silent on a phone.</b> At 42 Hz a phone speaker plays nothing. Moving the body up to 58 Hz and adding distortion made it hit.</li>
+    <li><b>Glow washed out the light scenes.</b> Bloom on a cream background turned it to milk. Glow stays only in dark scenes.</li>
+    <li><b>Some cuts came from nowhere.</b> The fix was the rule above: every scene turns into the next one through the ball. Checking the difference between neighbouring frames finds the cuts you missed.</li>
+    <li><b>Claude cannot hear or see motion.</b> It checks still frames and numbers. Whether it feels intense and hits the beat is your job: watch the draft before the final.</li>
+  </ul>
+  <div class="mono eyebrow" style="margin-top:34px"><span><b>07</b> · Questions</span><span>Short</span></div>
+  <h2>Common <i>questions</i></h2>
+  <div class="step"><h3>Can I make it about my brand?</h3>
+  <p>Yes. Change the words and the colors. The ball can be your product: a coffee bean, a pill, a button.</p></div>
+  <div class="step"><h3>Do I need to know code or 3D?</h3>
+  <p>No. You need to know what you want to see and say it clearly. Claude builds the words, the 3D, the worlds and the music from code.</p></div>
+  <div class="step"><h3>The terminal shows a red error. Now what?</h3>
+  <p>Copy it and paste it to Claude with the words “here is the error, fix it and continue”.</p></div>
+  <div class="end">
+    <div class="mono eyebrow"><span><b>08</b> · Next</span><span>@veroniixx.ai</span></div>
+    <h2>Built yours? Show me</h2>
+    <p class="lead">Tag <a href="https://instagram.com/veroniixx.ai">@veroniixx.ai</a> and I will share it in stories.</p>
+  </div>
+</section>
+
+</div>
+<script>
+  document.querySelectorAll('.copy button').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = btn.closest('.copy').querySelector('pre').innerText;
+      var done = function () {
+        btn.textContent = 'Copied';
+        btn.classList.add('ok');
+        setTimeout(function () { btn.textContent = 'Copy'; btn.classList.remove('ok'); }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () {});
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch (e) {}
+        document.body.removeChild(ta);
+      }
+    });
+  });
+</script>
+</body>
+</html>
