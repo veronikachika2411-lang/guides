@@ -14,7 +14,7 @@
   html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   body { margin: 0; background: #1b1917; color: var(--ink); font: 500 15.5px/1.6 Manrope, system-ui, sans-serif; }
   .doc { width: 150mm; margin: 0 auto; background: var(--paper); }
-  section { padding: 15mm 12mm 14mm; break-before: page; position: relative; }
+  section { padding: 15mm 12mm 0; break-before: page; position: relative; }
   .step { break-inside: avoid; }
   h2, h3, .eyebrow { break-after: avoid; }
   .pagebreak { break-before: page; padding-top: 15mm; }
@@ -120,9 +120,9 @@
 <section class="cover">
   <div class="mono eyebrow"><span>Guide · 2026</span><span>@veroniixx.ai</span></div>
   <h1>It's not you.<br>It's <i>Claude.</i></h1>
-  <p class="sub">How I made an 80-second 3D motion reel in Claude Code: a fall through a tunnel of 9,000 cubes, chrome letters with real physics, a chain, liquid metal, 50,000 particles, and a laptop shot where a letter falls out of the screen. No After Effects. From install to a finished mp4. Windows and Mac.</p>
+  <p class="sub">This guide builds the 80-second horizontal film (1920x1080) that plays inside the laptop. The 12-second vertical version in the Reel Studio library is a separate short edit of it, see step 05. The long film has: a fall through a tunnel of 9,000 cubes, chrome letters with real physics, a chain, liquid metal, 50,000 particles, and a laptop shot where a letter falls out of the screen. No After Effects. From install to a finished mp4. Windows and Mac.</p>
   <div class="frames"><img src="img/f1.jpg" alt=""><img src="img/f2.jpg" alt=""><img src="img/f3.jpg" alt=""><img src="img/f4.jpg" alt=""><img src="img/f5.jpg" alt=""></div>
-  <div class="mono foot"><span>80 seconds · three.js · Remotion</span><span>@veroniixx.ai</span></div>
+  <div class="mono foot"><span>80 seconds horizontal + 12 seconds vertical · three.js · Remotion</span><span>@veroniixx.ai</span></div>
 </section>
 
 <section>
@@ -162,6 +162,7 @@
 
 <section>
   <div class="mono eyebrow"><span><b>02</b> · Install</span><span>15–20 minutes</span></div>
+  <div class="note"><b>Reel Studio buyers:</b> skip this section. The folder name, the install and the first Claude launch below are the steps I took when I built this reel on a clean computer. You already work in <code class="i">My-Reel-Studio</code>, so open it and start from <code class="i">FIRST-REEL.md</code>.</div>
   <h2>Install the <i>tools</i></h2>
   <div class="step"><h3><span class="n">1</span>Open a terminal</h3>
   <p><span class="tag win">Windows</span> Press Win, type <code class="i">PowerShell</code>, open it.<br><span class="tag mac">Mac</span> Press Cmd + Space, type <code class="i">Terminal</code>, open it.</p></div>
@@ -233,6 +234,7 @@ We will not copy it. We take the level and make our own story.</pre></div></div>
   <div class="mono eyebrow"><span><b>04</b> · The brief</span><span>Copy all of it</span></div>
   <h2>The reel <i>brief</i></h2>
   <p>Replace what is in square brackets with your own word, colour, videos and handle. The rest can stay.</p>
+  <div class="note"><b>Which reel is this?</b> The brief below makes the 80-second horizontal film. The 12-second vertical reel in the library is a short cut of it that opens on the laptop. Make the long film first, then use the 12-second prompt in step 05.</div>
   <div class="copy prompt"><div class="bar mono"><span>Prompt · reel brief</span><button>Copy</button></div><pre>Build a 3D motion reel in three.js inside Remotion. 1920x1080, 30 fps, about 80 seconds, H.264 CRF 18, yuv420p. All text in English.
 
 LOOK
@@ -288,6 +290,13 @@ Do not stop until there is a finished mp4.</pre></div>
 5. At the end, at the exact frame where the letter rolls out of the bottom of the reel, a real 3D chrome letter flies out of that corner of the laptop screen, falls on the laptop with 3-4 bounces and settles. Match its camera to the photo pixels so it sits in the picture. A soft shadow under it.
 6. The camera zooms in on the letter in two handheld jerks, focus misses for a moment. Voice: "[Oh... oops. Okay… Claude, we're fixing that.]" Metal clank on every bounce, quieter each time.
 7. Render a few frames from the start, the middle and the end, check them, then the final.</pre></div>
+  <div class="copy prompt"><div class="bar mono"><span>Prompt · the 12-second vertical version</span><button>Copy</button></div><pre>Make a 12-second vertical cut of the finished reel, 1080x1920, 30 fps, with my voice line. Do not render a new film.
+
+1. From the first frame a chrome CLAUDE fills the screen. The camera pulls back and it is the laptop screen.
+2. The letters fall out of the screen onto the keyboard and slide out of the bottom of the frame.
+3. The screen bursts into the tunnel, then play the best moments of the long reel about twice as fast: the chain, the liquid metal, the particles.
+4. Short captions of my own, no blur and no shake. Light in the room changes colour per scene.
+5. Show a storyboard of real frames first and wait for my yes.</pre></div>
 </section>
 
 <section>

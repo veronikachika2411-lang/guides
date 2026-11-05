@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fly softer.</title>
+<style>
+  :root {
+    --dark: #14213D; --cream: #FFFDE6; --accent: #9E1B32; --ink: #1A1A1A;
+    --micro: #8A8580; --amber: #FFC266; --paper: #F6F0E4; --line: rgba(26,26,26,.14);
+  }
+  @page { size: 150mm 250mm; margin: 0; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { margin: 0; background: #1b1917; color: var(--ink); font: 500 15.5px/1.6 Manrope, system-ui, sans-serif; }
+  .doc { width: 150mm; margin: 0 auto; background: var(--paper); }
+  section { padding: 15mm 12mm 14mm; break-before: page; position: relative; }
+  .step { break-inside: avoid; }
+  h2, h3, .eyebrow { break-after: avoid; }
+  .pagebreak { break-before: page; padding-top: 15mm; }
+  .mono { font-family: "JetBrains Mono", ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; font-size: 10.5px; font-weight: 700; }
+  .eyebrow { display: flex; justify-content: space-between; color: var(--ink); border-bottom: 2px solid var(--ink); padding-bottom: 8px; margin-bottom: 20px; }
+  .eyebrow b { color: var(--accent); }
+  h1, h2 { font-family: Oswald, Impact, sans-serif; font-weight: 700; text-transform: uppercase; line-height: .98; margin: 0; letter-spacing: -.01em; }
+  h2 { font-size: 46px; margin-bottom: 14px; }
+  h2 i { font-style: normal; color: var(--accent); }
+  h3 { font: 800 17px/1.3 Manrope, sans-serif; margin: 26px 0 8px; display: flex; gap: 10px; align-items: baseline; }
+  h3 .n { font: 800 12px "JetBrains Mono", monospace; color: #fff; background: var(--accent); padding: 3px 7px; border-radius: 4px; flex-shrink: 0; }
+  p { margin: 0 0 12px; }
+  .lead { font-size: 17px; font-weight: 600; line-height: 1.5; }
+  ul, ol { margin: 0 0 12px; padding-left: 20px; }
+  li { margin-bottom: 6px; }
+  li::marker { color: var(--accent); font-weight: 800; }
+  a { color: var(--accent); font-weight: 700; text-decoration: none; }
+  code.i { font: 700 13px "JetBrains Mono", monospace; background: rgba(26,26,26,.08); padding: 1px 6px; border-radius: 4px; white-space: nowrap; }
+
+  /* блок для копирования */
+  .copy { background: var(--dark); border-radius: 14px; margin: 10px 0 16px; overflow: hidden; break-inside: avoid; }
+  .copy.long { break-inside: auto; }
+  .copy .bar { display: flex; justify-content: space-between; align-items: center; padding: 9px 14px; border-bottom: 1px solid rgba(240,232,216,.12); color: var(--micro); }
+  .copy .bar span::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); margin-right: 8px; }
+  .copy button { font: 800 10.5px "JetBrains Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--dark); background: var(--cream); border: 0; border-radius: 20px; padding: 6px 12px; cursor: pointer; }
+  .copy button.ok { background: var(--accent); color: #fff; }
+  .copy pre { margin: 0; padding: 14px; color: var(--cream); font: 500 12.5px/1.6 "JetBrains Mono", monospace; white-space: pre-wrap; word-break: break-word; }
+  .copy.prompt pre { font-size: 12px; }
+
+  .os { display: grid; grid-template-columns: 1fr; gap: 0; }
+  .tag { display: inline-block; font: 800 10.5px "JetBrains Mono", monospace; letter-spacing: .08em; text-transform: uppercase; padding: 4px 9px; border-radius: 4px; margin: 6px 0 2px; }
+  .tag.win { background: var(--ink); color: var(--cream); }
+  .tag.mac { background: var(--cream); color: var(--ink); border: 1.5px solid var(--ink); }
+  .note { border-left: 4px solid var(--accent); background: rgba(232,72,42,.09); padding: 12px 14px; border-radius: 0 10px 10px 0; margin: 12px 0 16px; font-size: 14.5px; break-inside: avoid; }
+  .note b { color: var(--accent); }
+  .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 14px 0; }
+  .card { background: #fff; border: 1.5px solid var(--line); border-radius: 12px; padding: 10px 10px; break-inside: avoid; }
+  .card .big { font: 700 30px/1 Oswald, sans-serif; color: var(--accent); }
+  .card .mono { color: var(--micro); display: block; margin-top: 6px; font-size: 8.5px; line-height: 1.4; }
+  .flowline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 16px 0; }
+  .flowline div { background: var(--dark); color: var(--cream); border-radius: 10px; padding: 10px 8px; font-size: 12.5px; line-height: 1.35; font-weight: 600; }
+  .flowline div b { display: block; font: 800 10px "JetBrains Mono", monospace; color: var(--accent); letter-spacing: .08em; margin-bottom: 4px; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0 16px; font-size: 14px; }
+  th { text-align: left; font: 800 10.5px "JetBrains Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--micro); padding: 6px 8px; border-bottom: 2px solid var(--ink); }
+  td { padding: 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  td.num { font: 700 20px Oswald, sans-serif; color: var(--accent); white-space: nowrap; }
+  .check li { list-style: none; position: relative; padding-left: 4px; }
+  .check { padding-left: 22px; }
+  .check li::before { content: ""; position: absolute; left: -22px; top: 4px; width: 13px; height: 13px; border: 2px solid var(--ink); border-radius: 3px; }
+
+  /* обложка */
+  .cover { background: var(--dark); color: var(--cream); min-height: 250mm; padding: 14mm 12mm; display: flex; flex-direction: column; break-before: auto; }
+  .cover .eyebrow { color: var(--micro); border-color: rgba(240,232,216,.22); }
+  .cover h1 { font-size: 98px; margin-top: 8mm; }
+  .cover h1 i { font-style: normal; color: var(--accent); }
+  .cover .sub { font-size: 17px; font-weight: 600; line-height: 1.45; max-width: 105mm; margin-top: 7mm; color: var(--cream); }
+  .frames { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: auto; }
+  .frames img { width: 100%; display: block; border-radius: 6px; }
+  .cover .foot { display: flex; justify-content: space-between; color: var(--micro); margin-top: 7mm; }
+  .cover .foot b { color: var(--cream); }
+  .end { background: var(--accent); color: var(--ink); border-radius: 16px; padding: 9mm 8mm 7mm; margin-top: 10mm; }
+  .end h2 { font-size: 54px; break-after: auto; }
+  .end .eyebrow { break-after: auto; }
+  .end .eyebrow { border-color: var(--ink); }
+  .end .eyebrow b { color: var(--ink); }
+  .end a { color: var(--ink); text-decoration: underline; }
+
+  @media screen {
+    .doc { margin: 24px auto; border-radius: 18px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.5); }
+    @media (max-width: 620px) { .doc { width: 100%; margin: 0; border-radius: 0; } .cover h1 { font-size: 21vw; } }
+  }
+  @media print { .copy button { display: none; } body { background: var(--paper); } }
+
+  h1, h2 { font-family: "Instrument Serif", Georgia, serif !important; font-style: italic; text-transform: none !important; font-weight: 400 !important; letter-spacing: -.01em; }
+  h2 { font-size: 50px; }
+  .cover { background: linear-gradient(180deg, #8FB6E3 0%, #C9DCF1 55%, #F4F1E8 100%) !important; }
+  .cover h1, .cover .sub, .cover .eyebrow, .cover .foot { color: #14213D !important; }
+  .cover h1 i { color: #9E1B32 !important; font-style: italic !important; }
+  .flowline { grid-template-columns: 1fr !important; }
+  .flowline b { color: #FEFFAF !important; }
+  .end a { color: #FEFFAF !important; }
+</style>
+<link href="../../fonts/fonts.css" rel="stylesheet"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%2309090B'/%3E%3Ctext x='30' y='46' font-family='Impact,sans-serif' font-size='40' text-anchor='middle' fill='%23F1E8D6'%3EV%3C/text%3E%3Ccircle cx='48' cy='44' r='6' fill='%23FF4A17'/%3E%3C/svg%3E">
+<style>
+  @media screen {
+    body { padding-top: 56px; }
+    .sitebar { position: fixed; top: 0; left: 0; right: 0; z-index: 50; height: 56px; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #060708; border-bottom: 1px solid rgba(255,255,255,.1); font-family: Manrope, system-ui, sans-serif; }
+    .sitebar a { color: #F2F4EC; font-weight: 700; font-size: 14px; text-decoration: none; white-space: nowrap; }
+    .sitebar .back { font-family: Unbounded, sans-serif; font-weight: 800; font-size: 17px; }
+    .sitebar .back i { font-style: normal; color: #C8FF3D; }
+    .sitebar .right { display: flex; gap: 8px; }
+    .sitebar .pill { display: inline-flex; align-items: center; height: 36px; padding: 0 14px; border-radius: 18px; border: 1.5px solid rgba(255,255,255,.25); }
+    .sitebar .pill.fill { background: #C8FF3D; color: #0A0C05; border-color: #C8FF3D; }
+    .cover { min-height: min(250mm, calc(100vh - 56px)); }
+  }
+  @media screen and (max-width: 620px) {
+    section, .cover { padding: 28px 20px 32px; }
+    .cover h1 { font-size: 17vw; margin-top: 20px; }
+    h2 { font-size: 38px; }
+    .end h2 { font-size: 31px; }
+    .cards, .flowline { grid-template-columns: repeat(2, 1fr); }
+    table code.i, li code.i, p code.i { white-space: normal; word-break: break-word; }
+    table { font-size: 13.5px; }
+  }
+  @media print { .sitebar { display: none; } }
+</style>
+</head>
+<body>
+<div class="sitebar"><a class="back" href="../../">← veroniixx<i>.ai</i></a><div class="right"><a class="pill" href="../../pdf/fly-guide.pdf" target="_blank" rel="noopener">PDF</a><a class="pill fill" href="https://instagram.com/veroniixx.ai">Instagram</a></div></div>
+<div class="doc">
+
+<section class="cover">
+  <div class="mono eyebrow"><span>Guide · 2026</span><span>@veroniixx.ai</span></div>
+  <h1>Fly<br><i>softer.</i></h1>
+  <p class="sub">How I made a 15-second airline ad where you see the whole booking: search, a city, a date, a seat, “Booked”. Then the boarding pass tears and folds into a paper plane. Every cut is on the beat. No editing app. The full brief, ready to paste. Windows and Mac.</p>
+  <div class="frames"><img src="img/f1.jpg" alt=""><img src="img/f2.jpg" alt=""><img src="img/f3.jpg" alt=""><img src="img/f4.jpg" alt=""><img src="img/f5.jpg" alt=""></div>
+  <div class="mono foot"><span>15 seconds · Remotion · 120 BPM</span><span>@veroniixx.ai</span></div>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>00</b> · Inside</span><span>2 min read</span></div>
+  <h2>What you <i>get</i></h2>
+  <p class="lead">An ad that sells a product by showing it working. Claude builds the interface, the cursor, the transitions, the paper plane and the music. You bring a few photos and your brand.</p>
+  <div class="cards">
+    <div class="card"><div class="big">15</div><span class="mono">seconds, cut on every beat</span></div>
+    <div class="card"><div class="big">3</div><span class="mono">taps from search to ticket</span></div>
+    <div class="card"><div class="big">7</div><span class="mono">worlds, one per scene</span></div>
+    <div class="card"><div class="big">1</div><span class="mono">ticket that becomes a plane</span></div>
+  </div>
+  <h3>What you need</h3>
+  <ul>
+    <li>A Windows 10/11 or macOS computer.</li>
+    <li>A Claude plan that includes Claude Code.</li>
+    <li>6 to 8 photos from Pinterest (the list is in step 03). Reel Studio does not include them. Minimum 1080 x 1920 px each, vertical, saved as <code class="i">window.jpg</code>, <code class="i">sky.jpg</code> and <code class="i">city-1.jpg</code> to <code class="i">city-5.jpg</code>. Only use photos you may use; the Instrument Serif and Geist font files are not included either.</li>
+  </ul>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>01</b> · The method</span><span>The main part</span></div>
+  <h2>Why it <i>works</i></h2>
+  <div class="flowline">
+    <div><b>01 · A question</b>“The best part of your trip?” The viewer answers in their head and stays</div>
+    <div><b>02 · The product</b>The whole booking happens on screen with a cursor. People see how easy it is instead of being told</div>
+    <div><b>03 · Benefits on the beat</b>“Any day.” “Every seat is a window.” “Booked in 3 taps.” One per scene, never a list</div>
+    <div><b>04 · A turn</b>The ticket tears and becomes a paper plane. The thing you bought is the thing that flies</div>
+    <div><b>05 · The why</b>“Because the flight is part of the trip.” Then the tagline</div>
+  </div>
+  <h3>The one trick behind it</h3>
+  <p>Nothing fades. The cloud becomes the search bar, the card flips into the calendar, the days fly into seats, the button becomes the ring, the ring opens into the city, the stub folds into the plane. The eye always has one thing to follow, so the cuts feel fast but never lost.</p>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>02</b> · Install</span><span>15–20 minutes</span></div>
+  <div class="note"><b>Reel Studio buyers:</b> skip this section. The folder name, the install and the first Claude launch below are the steps I took when I built this reel on a clean computer. You already work in <code class="i">My-Reel-Studio</code>, so open it and start from <code class="i">FIRST-REEL.md</code>.</div>
+  <h2>Install the <i>tools</i></h2>
+  <div class="step"><h3><span class="n">1</span>Open a terminal</h3>
+  <p><span class="tag win">Windows</span> Press Win, type <code class="i">PowerShell</code>, open it.<br><span class="tag mac">Mac</span> Press Cmd + Space, type <code class="i">Terminal</code>, open it.</p></div>
+  <div class="step"><h3><span class="n">2</span>Node.js, Git, Python and ffmpeg</h3>
+  <p><span class="tag win">Windows</span> Paste one line at a time. Answer <code class="i">Y</code> when asked.</p>
+  <div class="copy"><div class="bar mono"><span>PowerShell</span><button>Copy</button></div><pre>winget install -e --id OpenJS.NodeJS.LTS
+winget install -e --id Git.Git
+winget install -e --id Python.Python.3.13
+winget install -e --id Gyan.FFmpeg</pre></div>
+  <p><span class="tag mac">Mac</span> Homebrew first, it will ask for your password. At the end it prints two lines under “Next steps”: run them, then run the second command.</p>
+  <div class="copy"><div class="bar mono"><span>Terminal · step 1</span><button>Copy</button></div><pre>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</pre></div>
+  <div class="copy"><div class="bar mono"><span>Terminal · step 2</span><button>Copy</button></div><pre>brew install node git python ffmpeg</pre></div>
+  <div class="note"><b>Important.</b> Close the terminal and open it again after installing, or it will not see the new programs.</div></div>
+  <div class="step"><h3><span class="n">3</span>Claude Code</h3>
+  <div class="copy"><div class="bar mono"><span>Terminal</span><button>Copy</button></div><pre>npm install -g @anthropic-ai/claude-code</pre></div>
+  <p>Prefer an app to a terminal? Install Claude from <a href="https://claude.ai/download">claude.ai/download</a>, it has a Code tab that does the same thing.</p></div>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>03</b> · Project</span><span>10 minutes</span></div>
+  <h2>Folder and <i>photos</i></h2>
+  <div class="step"><h3><span class="n">1</span>Create a folder and start Claude</h3>
+  <div class="copy"><div class="bar mono"><span>Terminal</span><button>Copy</button></div><pre>mkdir fly-ad
+cd fly-ad
+claude</pre></div></div>
+  <div class="step"><h3><span class="n">2</span>Setup</h3>
+  <div class="copy prompt"><div class="bar mono"><span>Prompt · setup</span><button>Copy</button></div><pre>Set up a motion project in this folder.
+
+1. Install Remotion (React 18 + TypeScript).
+2. Check that Python has numpy, scipy and soundfile. Install what is missing.
+3. Check that ffmpeg works from the terminal.
+4. Make a folder public/photos. I will put my background photos there.
+5. Build a test composition, 1080x1920, 30 fps: one of my photos as a full-screen background and on top of it a frosted glass card (backdrop blur, a thin white border, a soft shadow) with one line of text in an italic serif. Render one frame to PNG and show me the path.
+
+If something is missing, install it yourself and tell me what you installed. If something fails, find the cause and fix it.</pre></div></div>
+  <div class="step"><h3><span class="n">3</span>Photos</h3>
+  <div class="copy prompt"><div class="bar mono"><span>Your shopping list</span><button>Copy</button></div><pre>Find on Pinterest (add "photography" or "wallpaper" to the search, not "poster"), vertical, no text, no logos, no watermarks:
+- an airplane window from inside, with clouds outside
+- a bright blue sky with soft white clouds
+- exactly 5 cities at golden hour (I used New York, Bali, the Colosseum, the Taj Mahal and a Chinese pagoda)
+That makes seven pictures in total: window.jpg, sky.jpg and city-1.jpg to city-5.jpg, each at least 1080 x 1920 px, from sources you may use. Put them in public/photos, show me a contact sheet and reject any with text, logos, watermarks or mismatched cities before the storyboard. Only backgrounds are photos. Everything else in the reel is code.</pre></div>
+  <div class="note"><b>Why photos.</b> My first versions drew the sky, clouds and cities in code. They looked like an illustration, not an ad. A real photo behind glass is what makes it look expensive.</div></div>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>04</b> · The brief</span><span>Copy all of it</span></div>
+  <h2>The ad <i>brief</i></h2>
+  <p>Words in square brackets are mine: put your own brand, tagline and benefits.</p>
+  <div class="copy prompt long"><div class="bar mono"><span>Prompt · ad brief</span><button>Copy</button></div><pre>Build a vertical ad for a made-up airline in Remotion. 1080x1920, 30 fps, 15 seconds. All text in English. Keep text out of the top 220 px and the bottom 380 px (the Instagram interface).
+
+THE BRAND
+[Aurelle]. Tagline: [Fly softer.] The idea: the flight is part of the trip, not the boring bit before it.
+
+THE RHYTHM
+120 BPM: one beat = 15 frames. Every cut lands on a beat. No shot stays longer than about 1.5 seconds. The camera never stands still: a tiny punch-in on every beat (scale 1.0 to 1.012 and back, no shake).
+
+THE RULE FOR TRANSITIONS
+No crossfades. Every transition is an element of one scene turning into the next scene, so the eye always has something to follow. Each scene also has its own background world: grey cabin, blue sky, vanilla, soft blue, warm cream, blurred city, sky again.
+
+THE STORY (show the whole booking, like a real app, with a mouse cursor)
+1. HOOK (0-1 s). The airplane window photo. Italic serif in burgundy: [The best part / of your trip?] The camera rushes into the window with a speed ramp and blur on the photo only.
+2. SEARCH (1-2 s). A white cloud in the sky photo shrinks into a frosted glass search bar. The cursor clicks it and types [New York], then clicks "Search".
+3. CITY (2-3.5 s). The bar slides up and becomes a header, a vanilla background rises from below. A cover-flow carousel of my city photos whips in with horizontal motion blur and lands on New York. Click. A dark pill pops up: "Selected" with a check.
+4. DATE (3.5-4.5 s). The New York card flips in 3D. Its back is a glass calendar for October. Headline [Any day.] Click on 25: it fills burgundy, "Selected".
+5. SEAT (4.5-6 s). A soft blue background opens as a circle from the 25. The calendar cells fly into the shape of seats in a cabin, and the 25 becomes seat 1A in gold. A small window next to every seat. Headline [Every seat is a window.] Click on 1A: "1A · Window".
+6. BOOK (6-7.5 s). A warm sheet slides up: Destination, Date, Seat. Click "Book". The button shrinks into a circle, a ring fills, a check pops. Headline [Booked in 3 taps.]
+7. TICKET (7.5-10 s). The circle opens into the New York photo, blurred. A frosted glass boarding pass rises: brand on a burgundy strip, DXB to JFK, date, gate, seat 1A glowing. Headline [Sleep the whole way.] Then the pass TEARS along the perforation, and the stub with the barcode folds itself into a paper plane (animate the corner points of three triangles from the stub rectangle into the plane).
+8. FLY (10-12.5 s). The plane cuts a circle into the blur and the sky opens behind it. It loops and the brand name is revealed right behind it, in a huge burgundy italic serif.
+9. WHY (12.5-15 s). Small caps [WHY AURELLE?], then [Because the flight / is part of the trip.], then [Fly softer.]
+
+STYLE
+Palette: vanilla #F4F1E8, burgundy #9E1B32, ink #14213D, a pale yellow #FEFFAF for selection, plus the photos. Fonts: Instrument Serif italic for headlines, Geist for the interface. Frosted glass with real backdrop blur. A light film grain over everything. No decoration that means nothing: no bubbles, no confetti, no sparkles. No blur and no shake on text: text slides in from behind a mask.
+
+SOUND (synthesize in numpy, no samples)
+120 BPM, premium and punchy: a riser for the first second, then a deep kick on every beat, claps on 2 and 4, hats, a warm bass, chord stabs on the cuts. Sounds for everything that happens: key ticks while typing, a whoosh on the carousel, clicks, a two-note chime on "Booked", a paper tear and a paper fold, a big drop when the plane cuts the sky, a breath on "Why", a final chord on the tagline. Master to about -11 LUFS, peak below -1 dBTP.
+
+CHECK BEFORE YOU SAY DONE
+1. Render storyboard strips first: 5 real frames per scene, from the code, not mockups.
+2. Check that no headline sits on top of the interface and no text is cut by the frame edge.
+3. Then the full render with sound. Tell me what you checked and what I should watch for in motion.</pre></div>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>05</b> · Notes</span><span>In plain words</span></div>
+  <h2>How to fix it with <i>notes</i></h2>
+  <p>Watch the draft on your phone. Then send notes like these. The first four are almost word for word what I wrote while making this ad.</p>
+  <div class="copy prompt"><div class="bar mono"><span>It looks cheap</span><button>Copy</button></div><pre>It looks cheap. Use my photos as backgrounds instead of drawing the sky in code, put frosted glass on top, and remove every decoration that means nothing.</pre></div><div class="copy prompt"><div class="bar mono"><span>All on one background</span><button>Copy</button></div><pre>Everything is on one background. Give every scene its own world: a new background color or photo on every cut.</pre></div><div class="copy prompt"><div class="bar mono"><span>No intensity</span><button>Copy</button></div><pre>There is no intensity and the transitions get lost. Cut on every beat, no shot longer than 1.5 seconds, and make each element turn into the next scene instead of fading.</pre></div><div class="copy prompt"><div class="bar mono"><span>Show the product</span><button>Copy</button></div><pre>Show the whole process like a real app: the cursor picks a city, a date, a seat, books, and a ticket comes out. Add the benefits and why this brand.</pre></div><div class="copy prompt"><div class="bar mono"><span>Your own brand</span><button>Copy</button></div><pre>Replace the brand with mine: [name], [tagline], [three benefits], [destination]. Keep the same rhythm.</pre></div>
+</section>
+
+<section>
+  <div class="mono eyebrow"><span><b>06</b> · Honest</span><span>What to know</span></div>
+  <h2>What <i>broke</i> for me</h2>
+  <ul>
+    <li><b>It took nine versions.</b> Skies, globes and cities drawn in code looked cheap. Real photos as backgrounds fixed it.</li>
+    <li><b>One background is boring.</b> When the whole ad sat on the same sky, it felt like one long slide. A new world on every cut fixed it.</li>
+    <li><b>Decoration looks cheap.</b> Glass bubbles floating around added nothing. They are gone.</li>
+    <li><b>Fades lose the eye.</b> Slow crossfades and things flying in from nowhere felt boring. Each element now becomes the next scene.</li>
+    <li><b>Photos with text.</b> The best Pinterest finds were posters with words, prices and logos baked in. Look for “photography”, not “poster”. Never remove stock watermarks.</li>
+    <li><b>Claude cannot hear or see motion.</b> It checks still frames and numbers. Whether it hits the beat is your job: watch the draft before the final.</li>
+  </ul>
+  <div class="mono eyebrow" style="margin-top:34px"><span><b>07</b> · Questions</span><span>Short</span></div>
+  <h2>Common <i>questions</i></h2>
+  <div class="step"><h3>Can I use a real airline?</h3>
+  <p>For a concept, I would not. Their logo and slogan belong to them, and the style may not match. A made-up brand is free to look exactly how you want.</p></div>
+  <div class="step"><h3>Will it work for another product?</h3>
+  <p>Yes. Keep the structure: a question, the product used on screen, one benefit per beat, a turn, the why. Swap the booking for your own flow.</p></div>
+  <div class="step"><h3>The terminal shows a red error. Now what?</h3>
+  <p>Copy it and paste it to Claude with the words “here is the error, fix it and continue”.</p></div>
+  <div class="end">
+    <div class="mono eyebrow"><span><b>08</b> · Next</span><span>@veroniixx.ai</span></div>
+    <h2>Built yours? Show me</h2>
+    <p class="lead">Tag <a href="https://instagram.com/veroniixx.ai">@veroniixx.ai</a> and I will share it in stories.</p>
+  </div>
+</section>
+
+</div>
+<script>
+  document.querySelectorAll('.copy button').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = btn.closest('.copy').querySelector('pre').innerText;
+      var done = function () {
+        btn.textContent = 'Copied';
+        btn.classList.add('ok');
+        setTimeout(function () { btn.textContent = 'Copy'; btn.classList.remove('ok'); }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () {});
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch (e) {}
+        document.body.removeChild(ta);
+      }
+    });
+  });
+</script>
+</body>
+</html>

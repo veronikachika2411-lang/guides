@@ -1,4 +1,32 @@
 {
+ "google-translate-ad": {
+  "title": "Stay close. In any language.",
+  "pdf": "translate-guide.pdf"
+ },
+ "director-prompt": {
+  "title": "The Director Prompt.",
+  "pdf": "director-prompt-guide.pdf"
+ },
+ "made-by-code-3": {
+  "title": "Made by code. 3",
+  "pdf": "made3-guide.pdf"
+ },
+ "duolingo-en": {
+  "title": "Duolingo, in English.",
+  "pdf": "duolingo-en-prompt-guide.pdf"
+ },
+ "strava-clear-head-run": {
+  "title": "A clear-head run.",
+  "pdf": "strava-guide.pdf"
+ },
+ "mcdonalds-concept": {
+  "title": "From arches to appetite.",
+  "pdf": "mcdonalds-guide.pdf"
+ },
+ "fly-softer": {
+  "title": "Fly softer.",
+  "pdf": "fly-guide.pdf"
+ },
  "made-by-code-2": {
   "title": "Made by code. 2",
   "pdf": "made2-guide.pdf"
