@@ -1,4 +1,16 @@
 {
+ "roadster-loop": {
+  "title": "How the Roadster holds on.",
+  "pdf": "roadster-guide.pdf"
+ },
+ "time-stops": {
+  "title": "Pull the crown. Time stops.",
+  "pdf": "time-stops-guide.pdf"
+ },
+ "five-worlds": {
+  "title": "Five worlds. Five prompts. One tool.",
+  "pdf": "worlds-guide.pdf"
+ },
  "raycast-ad": {
   "title": "Raycast ad: the prompt and the code.",
   "pdf": "raycast-guide.pdf"
