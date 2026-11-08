@@ -1,0 +1,101 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Raycast ad: the prompt and the code | Reel guide</title><style>@page{size:150mm 250mm;margin:0}*{box-sizing:border-box}html{-webkit-print-color-adjust:exact;print-color-adjust:exact}body{margin:0;background:#24211f;color:#1a1a1a;font:14px/1.45 Arial,sans-serif}.doc{width:150mm;margin:auto;background:#f6f0e4}section{width:150mm;height:250mm;padding:14mm 12mm;break-before:page;overflow:hidden;position:relative}section:first-child{break-before:auto}.cover{background:#09090b;color:#f1e8d6;display:flex;flex-direction:column}.eyebrow{font:700 10px/1.4 monospace;letter-spacing:.12em;text-transform:uppercase;border-bottom:2px solid currentColor;padding-bottom:9px;margin-bottom:18px}.accent{color:#ff4a17}h1,h2{font-family:Impact,'Arial Narrow',Arial,sans-serif;text-transform:uppercase;line-height:1.02;letter-spacing:-.02em;margin:0 0 18px}h1{font-size:78px;margin-top:14mm}h2{font-size:43px}h3{font-size:17px;margin:18px 0 7px}p{margin:0 0 9px}.lead{font-size:18px;font-weight:700;line-height:1.4}ul,ol{padding-left:20px;margin:8px 0 12px}li{margin:0 0 6px}li::marker{color:#ff4a17}.foot{margin-top:auto;border-top:1px solid #776d65;padding-top:10px;font:700 10px monospace;letter-spacing:.08em;text-transform:uppercase}.card{border-left:4px solid #ff4a17;background:#eee2d4;padding:11px 13px;margin:13px 0;font-size:13px}.copy{background:#101014;color:#f1e8d6;border-radius:12px;margin:10px 0;padding:13px 15px}.copy .label{font:700 10px monospace;letter-spacing:.12em;text-transform:uppercase;color:#ff754e;border-bottom:1px solid #424044;padding-bottom:8px}.copy pre{white-space:pre-wrap;overflow-wrap:anywhere;font:11px/1.38 Consolas,'Courier New',monospace;margin:10px 0 0}.timeline{width:100%;border-collapse:collapse;font-size:13px}.timeline td{vertical-align:top;border-bottom:1px solid #d5c8b8;padding:7px 4px}.timeline td:first-child{font:700 12px monospace;color:#c83d18;width:84px}.small{font-size:12px;color:#514a43}.end{background:#ff4a17;color:#160d0b;padding:14px;border-radius:12px;margin-top:20px}.end h2{font-size:32px;margin:0 0 8px}@media screen{.doc{box-shadow:0 25px 70px #0008;margin:25px auto}section{border-bottom:1px solid #ddd}}@media print{body{background:#fff}.doc{margin:0}}
+</style><style>.doc section{height:auto;min-height:250mm;overflow:visible}.doc .copy pre{font-size:10px;line-height:1.35}.doc code{font-family:Consolas,monospace}a{color:inherit;text-decoration:underline}@media print{.doc section{height:250mm;min-height:0;overflow:hidden}}</style><link href="../../fonts/fonts.css" rel="stylesheet"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%2309090B'/%3E%3Ctext x='30' y='46' font-family='Impact,sans-serif' font-size='40' text-anchor='middle' fill='%23F1E8D6'%3EV%3C/text%3E%3Ccircle cx='48' cy='44' r='6' fill='%23FF4A17'/%3E%3C/svg%3E">
+<style>
+  @media screen {
+    body { padding-top: 56px; }
+    .sitebar { position: fixed; top: 0; left: 0; right: 0; z-index: 50; height: 56px; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #060708; border-bottom: 1px solid rgba(255,255,255,.1); font-family: Manrope, system-ui, sans-serif; }
+    .sitebar a { color: #F2F4EC; font-weight: 700; font-size: 14px; text-decoration: none; white-space: nowrap; }
+    .sitebar .back { font-family: Unbounded, sans-serif; font-weight: 800; font-size: 17px; }
+    .sitebar .back i { font-style: normal; color: #C8FF3D; }
+    .sitebar .right { display: flex; gap: 8px; }
+    .sitebar .pill { display: inline-flex; align-items: center; height: 36px; padding: 0 14px; border-radius: 18px; border: 1.5px solid rgba(255,255,255,.25); }
+    .sitebar .pill.fill { background: #C8FF3D; color: #0A0C05; border-color: #C8FF3D; }
+    .cover { min-height: min(250mm, calc(100vh - 56px)); }
+  }
+  @media screen and (max-width: 620px) {
+    section, .cover { padding: 28px 20px 32px; }
+    .cover h1 { font-size: 17vw; margin-top: 20px; }
+    h2 { font-size: 38px; }
+    .end h2 { font-size: 31px; }
+    .cards, .flowline { grid-template-columns: repeat(2, 1fr); }
+    table code.i, li code.i, p code.i { white-space: normal; word-break: break-word; }
+    table { font-size: 13.5px; }
+  }
+  @media print { .sitebar { display: none; } }
+</style>
+</head><body>
+<div class="sitebar"><a class="back" href="../../">← veroniixx<i>.ai</i></a><div class="right"><a class="pill" href="../../pdf/raycast-guide.pdf" target="_blank" rel="noopener">PDF</a><a class="pill fill" href="https://instagram.com/veroniixx.ai">Instagram</a></div></div><main class="doc">
+<section class="cover"><div class="eyebrow">Reel Studio / premium ad guide</div><h1>Raycast ad:<br><span class="accent">the prompt<br>and the code.</span></h1><div class="card" style="background:#201b1c;color:#f1e8d6"><b>Inside:</b> the actual scene structure, a prompt for Claude Code, selected code from my Remotion build, and the mistakes that changed the result. This is a method, not a copy of my video. Your assets and decisions will make your own result.</div><p class="lead">A question, a shortcut, eight real features, a 3D camera, and sound placed on the frame of each action.</p><p>Unofficial concept ad by Veronika. Not commissioned by, sponsored by, or affiliated with Raycast.</p><div class="foot">Claude Code / Remotion / 1920 x 1080 / 30 fps / 680 frames</div></section>
+<section><div class="eyebrow">01 / what came out</div><h2>One key. Every tool.</h2><p class="lead">The 22.7 second wide ad begins with “How many apps did you open today?” App icons fill the depth behind the question. A shortcut brings them into one search bar.</p><table class="timeline"><tr><td>0 to 100</td><td>Question, 3D icon field, then Open / Search / Switch / Copy / Paste / Repeat.</td></tr><tr><td>100 to 155</td><td>Option + Space, the one-key moment, and a Raycast search bar.</td></tr><tr><td>155 to 416</td><td>Eight real features. Each card reveals its input and result in layers.</td></tr><tr><td>416 to 482</td><td>Three phone mockups with real iOS screens.</td></tr><tr><td>482 to 556</td><td>Extension icons fly into one panel.</td></tr><tr><td>556 to 680</td><td>Logo ribbon, wordmark, and Raycast's slogan.</td></tr></table><p>A separate vertical “desk” version places the finished ad on a monitor and an edit timeline on a laptop. It uses a photographed workspace and perspective-mapped screens. This guide describes how to build that with your own photograph.</p><div class="card"><b>The rule that changed the reel:</b> use real product material. The first draft used invented interface windows and icons. The result was hard to understand.</div></section>
+<section><div class="eyebrow">02 / collect materials</div><h2>Start with the brand</h2><p class="lead">Study the official product site and press kit before asking Claude Code to animate anything.</p><ol><li>Open <a href="https://www.raycast.com/press">raycast.com/press</a> for logos, colors, app icons and product screenshots. The press page specifies red <code>#FF6363</code> and preferred dark background <code>#151515</code>.</li><li>Open <a href="https://www.raycast.com/">raycast.com</a> for actual feature cards, extension examples and interface language. Save the assets you choose in your own project folder, then map each asset path in the scene data.</li><li>Download <a href="https://rsms.me/inter/">Inter from its official site</a>, or choose another font you have rights to use. Match the brand's weight and spacing. Check the license before publishing.</li><li>Choose your own licensed sound effects. Make folders for impacts, whooshes, clicks and rises. Put their paths in your own audio script. Use your own desk photograph if you want the vertical version.</li></ol><div class="card"><b>Nothing to download from this guide:</b> no Raycast asset files, sound packs, SF Pro or Coolvetica font files, or desk photograph are included. Official pages can change. Recheck current brand assets and usage terms before making your version.</div><p>Keep a small asset manifest: scene, source URL, local file, crop coordinates, usage rights. For cards, crop the relevant UI from a real screenshot before rendering. A huge image in every frame slows Remotion down.</p></section>
+<section><div class="eyebrow">03 / ready prompt</div><h2>Paste into Claude Code</h2><div class="copy"><div class="label">Claude Code / start prompt</div><pre>Make an unofficial premium concept ad for &lt;BRAND&gt; in Remotion,
+1920 x 1080, 30 fps, with a separate vertical desk presentation.
+First study the brand's official site and press kit. Make an asset
+manifest with source URLs. Use only real product UI, icons and claims.
+Ask me for my motion reference, licensed SFX and desk photo.
+Write a frame-based scene plan before coding. Open with a question to
+the viewer. Bring scattered app icons into one shortcut. Show eight
+real features as cards: reveal input, then result. Use an inner camera
+that follows the typing and an outer 3D camera that arcs around cards.
+Then show phone screens, tools converging into one panel, and the logo.
+Use CSS perspective and preserve-3d. Keep text sharp and readable.
+At 120 BPM and 30 fps, a quarter-note beat is 15 frames. Place each
+sound's peak on the action frame using my licensed SFX files. Leave
+space for short voice lines at the beginning of scenes. No music.
+Render the opening first, then the full ad. Review a frame sheet and
+watch the motion and listen to the mix before calling it finished.
+Label the result "Concept ad, not affiliated with &lt;BRAND&gt;."</pre></div><p>Give Claude Code your chosen asset paths, frame plan and the exact crop of each real UI card. The prompt is a starting brief. It cannot reproduce my edit by itself.</p><div class="card"><b>Setup:</b> Install Node.js, create a Remotion project, put your own licensed assets in its <code>public/</code> folder, and paste this prompt into Claude Code in that project. Detailed setup will be in the paid guides.</div></section>
+<section><div class="eyebrow">04 / code: source, hook, clock</div><h2>Make the frames explicit</h2><p>Selected, shortened code from <code>kit.tsx</code>, <code>scenes.tsx</code> and <code>Ad.tsx</code>. Replace every asset path with your own files.</p><div class="copy"><div class="label">kit.tsx / palette and dimensions</div><pre>export const W = 1920;
+export const H = 1080;
+export const RED = '#FF6363';
+export const INK = '#151515';</pre></div><div class="copy"><div class="label">scenes.tsx / one timeline in frames</div><pre>export const T = {hook: 0, key: 100, calc: 155,
+  trans: 192, file: 227, win: 260, shot: 292,
+  emoji: 323, ai: 353, notes: 386,
+  phones: 416, ext: 482, final: 556, end: 680};
+const WORDS = [{t:'Open.',f:60},{t:'Search.',f:67},
+  {t:'Switch.',f:74},{t:'Copy.',f:81},
+  {t:'Paste.',f:88},{t:'Repeat.',f:95}];</pre></div><p>The hook uses <code>perspective: 1100</code>. Each icon has its own <code>translateZ</code>; the distant icons soften, and icons under the question are dimmed for readability. The question sits on a plane that rotates from <code>rotateX(22deg)</code> toward zero.</p><div class="copy"><div class="label">Ad.tsx / scene selection and camera kick</div><pre>const kick = KICKS.reduce((s, k) =>
+  s + (g >= k ? Math.exp(-(g-k)/5) : 0), 0);
+let cur = SC[0];
+SC.forEach(sc => { if (g >= sc.from) cur = sc; });
+&lt;AbsoluteFill style={{transform:
+  `scale(${1 + Math.min(kick,1.4)*0.024})`}}&gt;
+  {cur.render(g - cur.from)}
+&lt;/AbsoluteFill&gt;</pre></div><p>A ribbon crosses each scene boundary over 12 frames. The scene switches at the exact timeline frame while the ribbon masks the cut.</p></section>
+<section><div class="eyebrow">05 / code: feature cards</div><h2>Print a real card</h2><p class="lead">One source image becomes three reveals. The asset is never redrawn as a fake interface.</p><div class="copy"><div class="label">scenes.tsx / Feature, simplified from the build</div><pre>const type = p(f, tAt, tDur, eOut);
+const res = p(f, tAt+tDur+1, ft.resDur ?? 8, eOut);
+const layer = (key, clip) =&gt; (
+  &lt;div key={key} style={{position:'absolute',
+    width:w, height:h, clipPath:clip}}&gt;
+    &lt;Img src={ft.src} style={{position:'absolute',
+      left:-cx*s, top:-cy*s, width:ft.iw*s,
+      height:ft.ih*s, maxWidth:'none'}} /&gt;
+  &lt;/div&gt;
+);
+const layers = [
+  layer('ribbon', `polygon(0 0, ${620*s}px 0,
+    0 ${380*s}px)`),
+  layer('input', `inset(${rt}px ${(1-type)*w}px
+    ${h-re}px 0)`),
+  layer('result', `inset(${re}px 0
+    ${(1-res)*(h-re)}px 0)`)
+];</pre></div><p>The input reveal reduces the right inset, so it appears to type from left to right. The result rises from the lower crop. The input begins around feature frame 3; the result follows around frame 11.</p><div class="copy"><div class="label">scenes.tsx / two cameras</div><pre>const tx = clampN(w/2-z*Tx, w-z*w, 0);
+const ty = clampN(h/2-z*Ty, h-z*h, 0);
+const camY = dir*lerp(-20, 9, arc);
+const camZ = lerp(-380, 80, p(f,0,12,eExp));
+// inner: translate(tx,ty) scale(z) inside card
+// outer: perspective 2400, preserve-3d,
+//        translateZ(camZ) rotateY(camY)</pre></div><p>Clamp the inner camera so the screenshot never exposes an empty card edge. Neighboring cards sit behind it at negative Z with lower opacity.</p></section>
+<section><div class="eyebrow">06 / code: sound and voice</div><h2>Land on the action</h2><p>My <code>make-audio2.py</code> loads my own licensed SFX, converts them to stereo at 48 kHz and places each effect by frame. Use your own pack names and paths.</p><div class="copy"><div class="label">make-audio2.py / the placement idea</div><pre>SR, FPS, FRAMES = 48000, 30, 680
+def put(rel, frame, db, at_peak=True, end=False):
+    a = load(rel)  # replace with your licensed file
+    if end:
+        i = int(frame/FPS*SR) - len(a)
+    elif at_peak:
+        i = int(frame/FPS*SR) - peak_of(a)
+    else:
+        i = int(frame/FPS*SR)
+    a *= 10 ** (db/20)
+    mix[i:i+len(a)] += a</pre></div><p><code>at_peak</code> aligns the loudest moment with the visible action. <code>end</code> lets a rise finish exactly on a cut. For the final mix, layer an impact, a whoosh and a click only where the picture needs them. The source mix also uses light panning, short reverb tails and loudness normalization. There is no music.</p><p>The voice was generated separately in ElevenLabs, then split by pauses and aligned to the starts of scenes. The very fast Open-to-Repeat montage stays unvoiced. Feature voice lines are one word each. Duck effects under speech and listen to the final mix; a contact sheet cannot tell you whether a voice is audible.</p></section>
+<section><div class="eyebrow">07 / desk and fixes</div><h2>Put the ad on a desk</h2><p>Use your own desk photograph. Mask the monitor, mark its four corners, and perspective-map the video into that quadrilateral. Add your own laptop screen with scene thumbnails, timeline tracks and a playhead. A softened copy of the video can cast colored light over the wall and desk. Use slow camera drift, not text shake. The vertical presentation in this project lives in <code>Desk.tsx</code>; its photo, mask and font files are not supplied here.</p><h3>What went wrong</h3><ul><li>Invented product windows made the first version unclear. Use real screenshots and accurate feature names.</li><li>White type on Raycast red had weak contrast. Dark type on red read better.</li><li>White flashes on dark frames made a gray veil. Use a faint warm flash.</li><li>The first frame looked empty. Start some icons immediately.</li><li>A glowing line through the entire ad competed with the product. The final edit removed it.</li><li>A serif headline did not fit the rest of the design. The final ad uses Inter.</li><li>Long voice phrases could not keep up with short feature scenes. Use a word at the start of each scene.</li><li>Large PNGs slowed rendering. Crop before using them in frame-by-frame composition.</li></ul><div class="end"><h2>Make your version.</h2><p>This guide gives you the method, prompt and selected code. Your video will look different. Reel Studio contains the exact templates behind my videos, so you can build them one to one. Join the early list on my site.</p></div></section>
+</main></body></html>
